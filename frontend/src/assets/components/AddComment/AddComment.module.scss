@@ -1,0 +1,76 @@
+@import '../../scss/utils/mixins';
+
+.add {
+	width: 100%;
+	position: relative;
+	border-top: 1px solid rgba(0, 0, 0, 0.137254902);
+	padding: 20px 0;
+
+	@include vp-1023 {
+		padding: 10px 0 ;
+	}
+
+	input {
+		width: 100%;
+		background-color: transparent;
+		border: none;
+		outline: none;
+		padding-left: 20px;
+		padding-right: 90px;
+		font-size: 16px;
+	}
+	button {
+		bottom: 20px;
+		right: 10px;
+		position: absolute;
+		background-color: transparent;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		color: #7a4ad8;
+		font-size: 16px;
+
+		@include vp-1023 {
+			bottom: 10px;
+		}
+	}
+}
+
+.manage {
+	border-top: 1px solid rgba(0, 0, 0, 0.137254902);
+	width: 100%;
+	padding: 5px 15px;
+	height: 90px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	@include vp-1023 {
+		height: auto;
+		padding: 5px 20px;
+	}
+}
+
+.icons {
+	display: flex;
+	justify-content: space-between;
+	svg {
+		width: auto;
+		height: 30px;
+	}
+}
+
+.group {
+	display: flex;
+	gap: 5px;
+}
+
+.text {
+	display: flex;
+	flex-direction: column;
+}
+
+.likes {
+	font-size: 14px;
+	font-weight: 600;
+}

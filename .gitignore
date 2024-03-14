@@ -1,0 +1,62 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Django settings
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+
+# База данных
+db.sqlite3
+*.db
+
+# Виртуальная среда
+env/
+venv/
+.venv/
+.python-version
+
+# Откомпилированные файлы
+*.mo
+*.pyc
+*.pyo
+
+# Отладочные файлы и журналы
+.pytest_cache/
+.coverage
+.DS_Store
+nosetests.xml
+
+# IDE и системные файлы
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+
+# Документация
+docs/_build/
+media

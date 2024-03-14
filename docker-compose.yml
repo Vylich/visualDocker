@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  frontend:
+    container_name: "frontend"
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      VITE_APP_API_URL: "http://localhost:8000"
+    ports:
+      - "80:8010"
+      - "3000:3000"
+    depends_on:
+      - api
+    networks:
+      - visual
+  api:
+    container_name: "backend"
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - visual
+
+  redis:
+    container_name: "visual-redis"
+    image: redis
+    restart: always
+    ports:
+      - '6379:6379'
+    networks:
+      - visual
+
+networks:
+  visual:
+    driver: bridge

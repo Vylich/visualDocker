@@ -1,0 +1,119 @@
+@import '../../../scss/utils/mixins';
+
+.root {
+	display: flex;
+	margin-bottom: 80px;
+	button {
+		transition: all 0.3s;
+
+		@include hover-focus {
+			color: #ffffff;
+			background-color: #7a4ad8;
+		}
+	}
+
+	input[type='text'], textarea, input[type='date'], select {
+		transition: all 0.3s;
+
+		@include hover-focus {
+			border: #7a4ad8 2px solid;
+			background-color: #794ad823;
+		}
+	}
+
+	@include vp-1023 {
+		justify-content: center;
+	}
+}
+
+.buttonsWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 15px;
+	position: fixed;
+	bottom: 0;
+	background-color: #ffffff;
+	width: 100%;
+	-webkit-box-shadow: 0px -5px 5px -5px rgba(34, 60, 80, 0.6);
+	-moz-box-shadow: 0px -5px 5px -5px rgba(34, 60, 80, 0.6);
+	box-shadow: 0px -5px 5px -5px rgba(34, 60, 80, 0.6);
+	height: 80px;
+
+	@include vp-1023 {
+		position: relative;
+		margin-bottom: 90px;
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+	}
+
+	button {
+		height: 40px;
+		padding: 8px 12px;
+		border-radius: 20px;
+		border: none;
+		cursor: pointer;
+		font-weight: 600;
+		font-size: 16px;
+		transition: all 0.3s;
+
+		@include hover-focus {
+			opacity: 0.5;
+		}
+	}
+
+	button:nth-child(2) {
+		background-color: #7a4ad8;
+		color: #ffffff;
+	}
+}
+
+
+.titleWrapper {
+	display: none;
+	width: 100%;
+	padding: 15px 20px;
+
+	h2 {
+		margin: 0;
+	}
+
+	@include vp-1023 {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	a {
+		position: absolute;
+		left: 20px;
+
+	}
+}
+
+.visible {
+	display: flex;
+}
+
+.notVisible {
+	display: none;
+}
+
+.backBtn {
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	color: #7a4ad8;
+	border: 1px solid #7a4ad8;
+	background-color: #ffffff;
+	transition: all 0.5s;
+
+	@include hover-focus {
+		color: #ffffff;
+		background-color: #7a4ad8;
+	}
+}

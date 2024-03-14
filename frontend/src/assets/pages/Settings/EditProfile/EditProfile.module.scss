@@ -1,0 +1,121 @@
+@import '../../../scss/utils/mixins';
+
+.root {
+	width: 100%;
+	max-width: 500px;
+	margin-top: 30px;
+
+	@include vp-1023 {
+		margin-top: 0;
+		padding: 0 20px;
+	}
+}
+
+.header {
+	h2 {
+		margin: 0;
+
+		@include vp-1023 {
+			font-size: 20px;
+		}
+	}
+
+	p {
+		margin: 0;
+		margin-top: 10px;
+
+		@include vp-1023 {
+			font-size: 14px;
+		}
+	}
+}
+
+.wrapper {
+	margin-top: 20px;
+
+	img {
+		object-fit: cover;
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+	}
+	label {
+		font-size: 12px;
+		margin-bottom: 7px;
+	}
+}
+
+.imageBlock {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	margin-top: 7px;
+
+	button {
+		height: 40px;
+		padding: 8px 12px;
+		border-radius: 20px;
+		border: none;
+		cursor: pointer;
+		font-weight: 600;
+		font-size: 16px;
+
+		@include vp-1023 {
+			font-size: 14px;
+		}
+	}
+}
+
+.name {
+	display: flex;
+	width: 100%;
+	gap: 20px;
+	margin-top: 15px;
+
+	@include vp-1023 {
+		flex-direction: column;
+	}
+}
+
+.fields {
+	width: 100%;
+	margin-top: 15px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.field {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	input {
+		height: 48px;
+		border-radius: 15px;
+		outline: none;
+		border: 2px solid #e1e1e1;
+		padding-left: 20px;
+		font-size: 16px;
+
+		@include vp-1023 {
+			font-size: 14px;
+		}
+	}
+
+	textarea {
+		margin: 0;
+		padding: 0;
+		border-radius: 20px;
+		width: 100%;
+		outline: none;
+		border: 2px solid #e1e1e1;
+		padding-left: 20px;
+		font-size: 16px;
+		padding-top: 10px;
+		resize: none;
+
+		@include vp-1023 {
+			font-size: 14px;
+		}
+	}
+}

@@ -1,0 +1,106 @@
+@import '../../scss/utils/mixins';
+
+.root {
+	width: auto;
+	cursor: pointer;
+	height: 207px;
+	width: 100%;
+	overflow: hidden;
+	border-radius: 13px;
+	display: flex;
+	align-items: center;
+	transition: all 0.3s;
+	position: relative;
+	user-select: none;
+
+	@include hover {
+		box-shadow: 0 0 10px 5px #00000054;
+	}
+}
+
+.loading {
+	width: 100%;
+	height: 300px;
+	position: relative;
+}
+
+.rootFull {
+	width: 82%;
+	height: auto;
+	display: flex;
+	align-items: flex-start;
+	border-radius: 0;
+	border-top-left-radius: 30px;
+	border-bottom-left-radius: 30px;
+
+
+	@include hover {
+		box-shadow: none;
+		cursor:auto;
+	}
+
+	@include vp-1023 {
+		max-height: 80vh;
+		width: 100%;
+		border-radius: 0;
+	}
+
+	.imageFull {
+		height: auto;
+		width: 100%;
+		object-fit: cover;
+		border-top-left-radius: 30px;
+		border-bottom-left-radius: 30px;
+
+		@include vp-1023 {
+			width: 100%;
+			height: auto;
+			object-fit: cover;
+		}
+	}
+}
+
+.video {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+.rootHome {
+	width: 100%;
+	height: auto;
+	border-radius: 13px;
+
+	@include vp-767 {
+		width: 100%;
+	}
+
+	.imageHome {
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+		display: block;
+	}
+}
+
+.image {
+	width: 100%;
+	object-fit: cover;
+	overflow: hidden;
+	height: 100%;
+	object-position: top;
+}
+
+.link {
+	display: block;
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+
+	@include vp-1023 {
+		width: 100%;
+		height: auto;
+	}
+}

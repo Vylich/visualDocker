@@ -1,0 +1,73 @@
+@import '../../scss/utils/mixins';
+
+.root {
+	width: 100%;
+	height: auto;
+	margin-top: 20px;
+
+	p {
+		margin: 0;
+	}
+	@include vp-1023 {
+		border-radius: 16px;
+		background-color: #e1e1e1;
+		padding: 20px;
+		height: auto;
+		width: 100%;
+		margin-top: 0;
+	}
+}
+
+.header {
+	display: flex;
+	align-items: start;
+	gap: 10px;
+	@include vp-1023 {
+		display: flex;
+		align-items: start;
+		gap: 5px;
+	}
+}
+
+.avatar {
+	border-radius: 50%;
+	width: 70px;
+	height: 70px;
+	flex-shrink: 0;
+
+	@include vp-1023 {
+		border-radius: 50%;
+		width: 50px;
+		height: 50px;
+		flex-shrink: 0;
+		object-fit: cover;
+		overflow: hidden;
+	}
+}
+
+.username,
+.titlePost {
+	font-weight: 600;
+}
+
+.postImg {
+	width: 100%;
+	height: auto;
+	max-height: 300px;
+	border-radius: 16px;
+	object-fit: cover;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 20px;
+
+	img {
+		width: 100%;
+		height: auto;
+	}
+
+	@include vp-1023 {
+		max-height: 150px;
+	}
+}

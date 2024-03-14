@@ -1,0 +1,145 @@
+@import "../../scss/utils/mixins";
+
+.container {
+	max-width: 450px;
+	width: 450px;
+	margin: auto auto;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+
+	@include vp-1023 {
+		height: 100dvh;
+		width: 100%;
+		gap: 0;
+		justify-content: space-between;
+	}
+
+	&__block {
+		border: 1px solid #c2c2c2;
+		padding: 20px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		border-radius: 3px;
+
+		@include vp-1023 {
+			border: none;
+		}
+	}
+
+	&__header {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	&__form {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		gap: 15px;
+
+		input[type="text"],
+		input[type="password"] {
+			box-sizing: border-box;
+			height: 36px;
+			width: 100%;
+			border-radius: 7px;
+			outline: none;
+			border: 2px solid #c2c2c2;
+			background-color: #ffffff;
+			padding: 10px 20px 10px 8px;
+			transition: all 0.3s;
+
+			@include hover-focus {
+				border: 2px solid #7a4ad8;
+				background-color: #794ad823;
+			}
+
+			@include vp-1023 {
+				height: 48px;
+				border-radius: 13px;
+			}
+		}
+	}
+
+	&__login {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+
+		p {
+			margin: 0;
+		}
+
+		a {
+			text-decoration: none;
+			color: #7a4ad8;
+		}
+	}
+}
+
+.error {
+	padding: 0;
+	margin: 0;
+	font-size: 12px;
+	position: absolute;
+	bottom: -15px;
+	left: 0;
+}
+
+.field {
+	width: 100%;
+	position: relative;
+}
+
+.btnReg {
+	height: 36px;
+	cursor: pointer;
+	outline: none;
+	border-radius: 13px;
+	border: 1px solid #7a4ad8;
+	background-color: #7a4ad8;
+	color: #ffffff;
+	font-size: 14px;
+	margin-top: 20px;
+	transition: all 0.3s;
+
+	@include hover-focus {
+		opacity: 0.5;
+	}
+
+	@include vp-1023 {
+		height: 48px;
+		border-radius: 13px;
+	}
+}
+
+.disabled {
+	background-color: #c2c2c2 !important;
+	border-color: #c2c2c2 !important;
+	pointer-events: none;
+	height: 36px;
+	outline: none;
+	border-radius: 13px;
+	border: 1px solid;
+}
+
+.showPass {
+	border-radius: 50%;
+	background-color: transparent;
+	width: 30px;
+	height: 30px;
+	outline: none;
+	border: none;
+	cursor: pointer;
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+
+	svg {
+		color: #7a4ad8;
+	}
+}

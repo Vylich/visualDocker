@@ -1,0 +1,58 @@
+@import "../../scss/utils/mixins";
+
+.root {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	position: relative;
+
+	@include vp-1023 {
+		padding: 0;
+		padding-bottom: 80px;
+	}
+}
+
+.backBtn {
+	position: absolute;
+	left: 40px;
+	top: 0;
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+	transition: all 0.3s;
+
+	svg {
+		height: 24px;
+		width: auto;
+	}
+
+	@include hover {
+		background-color: #e1e1e1;
+	}
+}
+
+.wrapper {
+	display: flex;
+	align-items: stretch;
+	background-color: #ffffff;
+	margin: 30px 30px;
+	width: 1000px;
+	min-height: 80vh;
+	max-height: 768px;
+	border-radius: 30px;
+	-webkit-box-shadow: 0px 0px 19px -6px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0px 0px 19px -6px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 0px 19px -6px rgba(0, 0, 0, 0.5);
+
+	@include vp-1023 {
+		flex-direction: column;
+		width: 100%;
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+		margin: 0;
+	}
+}

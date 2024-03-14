@@ -1,0 +1,65 @@
+@import '../../../scss/utils/mixins';
+
+.root {
+	width: 100%;
+	max-width: 500px;
+
+	@include vp-1023 {
+		padding: 0 20px;
+	}
+
+	h2,
+	h4 {
+		margin: 0;
+	}
+	p {
+		margin: 0;
+		margin-bottom: 10px;
+
+		@include vp-1023 {
+			font-size: 14px;
+		}
+	}
+
+	h2 {
+		margin-bottom: 10px;
+
+		@include vp-1023 {
+			font-size: 20px;
+		}
+	}
+
+	h4 {
+		margin-bottom: 5px;
+
+		@include vp-1023 {
+			font-size: 16px;
+		}
+	}
+
+	button {
+		height: 48px;
+		padding: 8px 12px;
+		border-radius: 25px;
+		border: none;
+		cursor: pointer;
+		font-weight: 600;
+		font-size: 16px;
+		white-space: nowrap;
+
+		@include vp-1023 {
+			width: 100%;
+		}
+	}
+}
+.fieldBusiness {
+	display: flex;
+	align-items: center;
+	gap: 30px;
+
+	@include vp-1023 {
+		flex-direction: column;
+		gap: 0;
+		margin-top: 15px;
+	}
+}

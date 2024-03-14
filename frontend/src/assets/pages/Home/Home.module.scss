@@ -1,0 +1,34 @@
+@import '../../scss/utils/mixins';
+
+.root {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 236px);
+	margin: 0 auto;
+	grid-gap: 10px;
+	width: 100%;
+	height: 100%;
+	padding: 10px 3vw;
+	justify-content: center;
+	grid-template-rows: masonry;
+	position: relative;
+
+	@include vp-1023 {
+		grid-template-columns: repeat(auto-fit, 30.788530466%);
+		padding: 0 2.840909091%;
+		padding-top: 10px;
+		padding-bottom: 90px;
+	}
+
+	@include vp-767 {
+		grid-template-columns: repeat(auto-fit, 47.75%);
+		padding: 0 2.840909091%;
+		padding-top: 10px;
+		padding-bottom: 90px;
+	}
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
