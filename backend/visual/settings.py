@@ -120,9 +120,17 @@ AUTH_USER_MODEL = 'accounts.Account'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydatabase',
+        'USER': 'myuser',
+        'PASSWORD': 'mypassword',
+        'HOST': '172.18.0.3',
+        'PORT': '5432',
     }
 }
 
@@ -180,13 +188,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Daphne
 ASGI_APPLICATION = 'visual.asgi.application'
 CHANNEL_LAYERS = {
-    # 'default': {
-    #     'BACKEND': 'channels_redis.core.RedisChannelLayer',
-    #     'CONFIG': {
-    #         "hosts": [('127.0.0.1', 6379)],
-    #     },
-    # },
-  'default': {
-    'BACKEND': 'channels.layers.InMemoryChannelLayer'
-  },
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('172.18.0.2', 6379)],
+        },
+    },
+#   'default': {
+#     'BACKEND': 'channels.layers.InMemoryChannelLayer'
+#   },
 }

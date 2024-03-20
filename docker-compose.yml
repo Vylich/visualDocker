@@ -22,6 +22,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
+    depends_on:
+      - db
     networks:
       - visual
 
@@ -31,6 +33,19 @@ services:
     restart: always
     ports:
       - '6379:6379'
+    networks:
+      - visual
+
+  db:
+    container_name: "postgres-db"
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    ports:
+      - "5432:5432"
     networks:
       - visual
 

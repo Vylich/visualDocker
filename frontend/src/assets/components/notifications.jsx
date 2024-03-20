@@ -2,11 +2,13 @@ import React, { useEffect, useState, useRef } from 'react';
 import styles from '../components/Messages/Messages.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  addNotificationsCount,
   addUnreadCount,
   addUnreadMessage,
   incrementUnreadCount,
   updateUnreadCount,
 } from '../../redux/slices/notification';
+import axios from '../../axios'
 
 const WebSocketComponent = () => {
   const wsRef = useRef(null);
@@ -65,7 +67,15 @@ const WebSocketComponent = () => {
       clearInterval(interval);
       wsRef.current?.close();
     };
-  }, []); // Выполнится один раз при монтировании
+  }, []);
+
+  useEffect(() => {
+    axios.get('/notifications/').then(res => {
+      console.log(res.data.count_notification)
+      dispatch(addNotificationsCount(res.data.count_notification));
+    })
+
+  }, []) // Выполнится один раз при монтировании
 
   return (
     <>

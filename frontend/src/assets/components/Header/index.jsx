@@ -42,6 +42,8 @@ function Header() {
 		isUserDataLoaded(state) ? state.auth.data.user : null
 	)
 	const unreadCount = useSelector(state => state.notif.unreadCount)
+	const unreadNotifCount = useSelector(state => state.notif.notificationsCount)
+
 
 	const refs = [
 		useOnclickOutside(() => setNotificationsOpened(false)),
@@ -198,7 +200,7 @@ function Header() {
 									<FontAwesomeIcon icon={faMessage} />
 								</span>
 								<span>Входящие</span>
-								{<Notif unreadCount={unreadCount} />}
+								{<Notif unreadCount={unreadCount + unreadNotifCount} />}
 							</NavLink>
 							<NavLink
 								className={({ isActive }) =>
@@ -264,6 +266,7 @@ function Header() {
 									className={styles.iconNotification}
 									icon={faBell}
 								/>
+								{<Notif unreadCount={unreadNotifCount} />}
 							</button>
 							<button ref={refs[1]} onClick={handleMessages}>
 								<FontAwesomeIcon

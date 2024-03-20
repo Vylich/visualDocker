@@ -5,9 +5,12 @@ import Notifications from '../../components/Notifications'
 import Messages from '../../components/Messages'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchLogin } from '../../../redux/slices/auth'
+import Notif from '../../components/Notif/Notif'
 
 const Nav = () => {
 	const unreadCount = useSelector(state => state.notif.unreadCount)
+	const unreadNotifCount = useSelector(state => state.notif.notificationsCount)
+
 
 	return (
 		<div className={styles.nav}>
@@ -18,6 +21,7 @@ const Nav = () => {
 				to='notices'
 			>
 				Уведомления
+				{unreadNotifCount > 0 && (<Notif isTab unreadCount={unreadNotifCount} />)}
 			</NavLink>
 			<NavLink
 				className={({ isActive }) =>
@@ -26,7 +30,7 @@ const Nav = () => {
 				to='messages'
 			>
 				Сообщения
-				{unreadCount > 0 && (<div className={styles.notif}><span>{unreadCount}</span></div>)}
+				{unreadCount > 0 && (<Notif isTab unreadCount={unreadCount} />)}
 			</NavLink>
 		</div>
 	)
