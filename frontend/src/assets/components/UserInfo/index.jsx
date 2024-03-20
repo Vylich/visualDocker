@@ -113,13 +113,13 @@ function UserInfo({
 			{!isProfile && !isSmall ? (
 				<Link to={`/profile/${userId}`}>
 					<img
-						src={avatar ? `http://127.0.0.1:8000${avatar}` : avatarDefault}
+						src={avatar ? `${import.meta.env.VITE_APP_API_URL}${avatar}` : avatarDefault}
 						alt={`Аватар пользователя ${fullname}`}
 					/>
 				</Link>
 			) : (
 				<img
-					src={avatar ? `http://127.0.0.1:8000${avatar}` : avatarDefault}
+					src={avatar ? `${import.meta.env.VITE_APP_API_URL}${avatar}` : avatarDefault}
 					alt={`Аватар пользователя ${fullname}`}
 				/>
 			)}

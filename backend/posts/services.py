@@ -1,13 +1,17 @@
 from accounts.models import Account
 from django.contrib.contenttypes.models import ContentType
+from notifications.models import Notification
+from accounts.serializers import AccountSerializer
 from .models import Like
 
 
 def add_like(obj, user):
     """Лайк"""
     obj_type = ContentType.objects.get_for_model(obj)
+    author = obj.author
+    notification = Notification.objects.create(user=author)
     like, is_created = Like.objects.get_or_create(
-        content_type=obj_type, object_id=obj.id, user=user)
+        content_type=obj_type, object_id=obj.id, user=user, notification_id=notification.id)
     return like
 
 
@@ -31,5 +35,7 @@ def is_like(obj, user):
 def get_likes(obj):
     """Получаем всех пользователей, которые лайкнули obj"""
     obj_type = ContentType.objects.get_for_model(obj)
-    return Account.objects.filter(
+    users = Account.objects.filter(
         likes__content_type=obj_type, likes__object_id=obj.id)
+    return AccountSerializer(instance=users, many=True).data
+

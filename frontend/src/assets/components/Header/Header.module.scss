@@ -169,6 +169,7 @@ a.logo {
 		border: none;
 		outline: none;
 		transition: all 0.3s;
+		position: relative;
 
 		@include hover {
 			background-color: #e1e1e1;
@@ -210,6 +211,7 @@ a.logo {
 	border:1px solid #ffffff;
 	transition: all 0.5s;
 	user-select: none;
+	position: relative;
 
 	@include vp-1023 {
 		padding: 5px;
@@ -270,4 +272,8 @@ a.linkMobile {
 	@include vp-1023 {
 		display: flex;
 	}
+}
+
+.ava {
+	border-radius: 50%;
 }

@@ -1,0 +1,42 @@
+.prev,
+.next {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background-color: #7a4ad8;
+  position: absolute;
+  z-index: 1000;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.prev svg,
+.next svg {
+  color: #ffffff;
+}
+@media (hover: hover) {
+  .prev:hover,
+  .next:hover {
+    transform: scale(1.2);
+  }
+}
+
+.prev {
+  top: 50%;
+  left: 5px;
+}
+
+.next {
+  top: 50%;
+  right: 5px;
+}
+
+.swiper-slide {
+  max-height: 0;
+  transition: all 0.3s;
+}
+
+.swiper-slide.swiper-slide-active {
+  max-height: 100% !important;
+  transition: all 0.3s;
+}/*# sourceMappingURL=slider.css.map */

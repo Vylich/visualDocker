@@ -1,0 +1,160 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.root img {
+  width: 300px;
+  height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+@media (max-width: 1024px) {
+  .root img {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.rootContinue {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+.rootContinue img {
+  width: 30px;
+  height: 30px;
+}
+.rootContinue .userName {
+  font-size: 16px;
+}
+.rootContinue .userDetails {
+  margin: 0;
+}
+
+.rootSmall {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  gap: 10px;
+}
+.rootSmall img {
+  width: 60px;
+  height: 60px;
+}
+.rootSmall .email {
+  padding: 0;
+  color: #5f5f5f;
+}
+.rootSmall .userName {
+  align-self: start;
+  padding: 0;
+}
+.rootSmall .userDetails {
+  height: 60px;
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.rootSmall a {
+  height: auto;
+  padding: 0 !important;
+}
+
+.rootFull {
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  padding: 15px;
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.137254902);
+  position: relative;
+}
+@media (max-width: 1024px) {
+  .rootFull {
+    padding: 8px 20px;
+  }
+}
+.rootFull .additionals {
+  display: none;
+}
+.rootFull .userName {
+  font-size: 16px;
+}
+.rootFull .userDetails {
+  margin-top: 0;
+}
+.rootFull img {
+  width: 50px;
+  height: 50px;
+}
+
+.userName {
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+@media (max-width: 1024px) {
+  .userDetails {
+    margin-top: 15px;
+  }
+}
+.userDetails a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.additionals {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  font-size: 20px;
+}
+@media (max-width: 1024px) {
+  .additionals {
+    gap: 15px;
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+}
+
+.manageBtns {
+  position: absolute;
+  right: 20px;
+  bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: end;
+}
+
+.btnSub {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+
+.btnManage a,
+.btnManage button {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #7a4ad8;
+  outline: none;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 30px;
+  cursor: pointer;
+}/*# sourceMappingURL=UserInfo.module.css.map */

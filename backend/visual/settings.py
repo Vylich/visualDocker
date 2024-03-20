@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'posts',
     'taggit',
     'chat',
+    'notifications',
+    'followers'
 ]
 
 MIDDLEWARE = [
@@ -65,11 +67,12 @@ MIDDLEWARE = [
 LOGIN_URL = "api/auth/login"
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60*8),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=2),
 }
 
 CORS_ORIGIN_WHITELIST = ["http://localhost:3000", "http://127.0.0.1:3000", "http://192.168.217.49:3000"]
+CORS_ORIGIN_ALLOW_ALL = True
 # конец настроек JWT токена
 
 
@@ -172,19 +175,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-CORS_ORIGIN_ALLOW_ALL = True 
 
 
 # Daphne
 ASGI_APPLICATION = 'visual.asgi.application'
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-        },
-    },
-  # 'default': {
-  #   'BACKEND': 'channels.layers.InMemoryChannelLayer'
-  #
+    # 'default': {
+    #     'BACKEND': 'channels_redis.core.RedisChannelLayer',
+    #     'CONFIG': {
+    #         "hosts": [('127.0.0.1', 6379)],
+    #     },
+    # },
+  'default': {
+    'BACKEND': 'channels.layers.InMemoryChannelLayer'
+  },
 }

@@ -1,0 +1,50 @@
+.root {
+  width: 100%;
+  height: 100%;
+  padding-bottom: 20px;
+}
+@media (max-width: 1024px) {
+  .root {
+    position: relative;
+    width: 100%;
+    top: auto;
+    right: auto;
+    z-index: 1;
+    height: auto;
+    padding-bottom: 80px;
+    box-shadow: none;
+    padding-top: 0;
+    margin-top: 10px;
+  }
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  height: 100%;
+  overflow-y: scroll;
+  box-shadow: 0px 0px 19px -6px rgba(0, 0, 0, 0.5);
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 16px;
+}
+@media (max-width: 1024px) {
+  .wrapper {
+    padding: 0;
+    margin-top: 20px;
+    gap: 20px;
+    height: 100%;
+  }
+}
+.wrapper h3 {
+  font-size: 16px;
+  margin: 0;
+}
+@media (max-width: 1024px) {
+  .wrapper h3 {
+    display: none;
+  }
+}/*# sourceMappingURL=Notification.module.css.map */

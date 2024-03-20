@@ -1,0 +1,161 @@
+.root {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 30px;
+}
+@media (max-width: 1024px) {
+  .root {
+    padding: 0 20px;
+    margin-top: 0;
+  }
+}
+.root h2, .root h3, .root h4, .root p {
+  margin: 0;
+}
+.root h2, .root h3 {
+  margin-bottom: 10px;
+}
+.root h3 {
+  margin-top: 15px;
+}
+@media (max-width: 1024px) {
+  .root h3 {
+    font-size: 16px;
+  }
+}
+.root h4 {
+  margin-bottom: 5px;
+}
+@media (max-width: 1024px) {
+  .root h2 {
+    font-size: 20px;
+  }
+}
+.root button {
+  height: 48px;
+  padding: 8px 12px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.fields {
+  width: 100%;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+@media (max-width: 1024px) {
+  .fields {
+    gap: 10px;
+  }
+}
+
+.field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.field input[type=text],
+.field input[type=date],
+.field select {
+  height: 48px;
+  border-radius: 15px;
+  outline: none;
+  border: 2px solid #e1e1e1;
+  padding-left: 20px;
+  font-size: 16px;
+  background-color: #ffffff;
+}
+@media (max-width: 1024px) {
+  .field input[type=text],
+  .field input[type=date],
+  .field select {
+    font-size: 14px;
+    width: 100%;
+  }
+}
+
+.labelText {
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+
+.fieldPass {
+  display: flex;
+  align-items: flex-end;
+  gap: 30px;
+}
+@media (max-width: 1024px) {
+  .fieldPass {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+.fieldBusiness {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+@media (max-width: 1024px) {
+  .fieldBusiness {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+  }
+}
+
+.blockWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+@media (max-width: 1024px) {
+  .blockWrap {
+    gap: 10px;
+  }
+}
+
+.blockWrapDelete {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+@media (max-width: 1024px) {
+  .blockWrapDelete {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    align-items: start;
+  }
+  .blockWrapDelete button {
+    width: 100%;
+  }
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+}
+
+.radioInput {
+  display: flex;
+  justify-content: space-between;
+}
+.radioInput input {
+  margin: 0;
+  padding: 0;
+}
+
+.inputItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}/*# sourceMappingURL=ManageAccount.module.css.map */

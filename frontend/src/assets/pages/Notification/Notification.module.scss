@@ -1,22 +1,53 @@
+@import '../../scss/utils/mixins';
+
 .root {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 	align-items: center;
 	padding: 20px;
+	padding-bottom: 0;
 	height: 100%;
-	margin-bottom: 80px;
+	max-height: calc(100% - 79px);
+}
+
+.notif {
+	display: none;
+	@include vp-1023 {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		top: 0;
+		right: 2px;
+		background-color: #7a4ad8;
+		border-radius: 50%;
+		width: 15px;
+		height: 15px;
+		position: absolute;
+		top: -5px;
+		right: -16px;
+		color: #ffffff;
+		font-size: 12px;
+	}
+}
+
+.wrap {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
 }
 
 .nav {
 	display: flex;
 	gap: 30px;
+	margin-bottom: 20px;
 }
 
 .link {
 	text-decoration: none;
 	color: #333333;
 	font-weight: 600;
+	position: relative;
 }
 
 .isActive {

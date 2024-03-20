@@ -41,7 +41,6 @@ function UserProfile() {
 	const { id } = useParams();
 
 	useEffect(() => {
-		dispatch(fetchLogin());
 		dispatch(fetchUserPosts(id));
 		dispatch(fetchOtherUser(id));
 		dispatch(fetchSubscriptions(id));

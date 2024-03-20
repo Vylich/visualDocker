@@ -42,13 +42,13 @@ const Search = ({ items, onDelete, onClickSearch, isNavVisible, searchedItems })
 			<div className={styles.wrapper}>
 				<h3>Идеи для вас</h3>
 				<div className={styles.cards}>
-					{searchedItems()}
+					{searchedItems && searchedItems()}
 				</div>
 			</div>
 			<div className={styles.wrapper}>
 				<h3>Популярное</h3>
 				<div className={styles.cards}>
-				{searchedItems()}
+				{searchedItems && searchedItems()}
 				</div>
 			</div>
 		</div>

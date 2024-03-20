@@ -11,7 +11,9 @@ import {
 import { useState } from 'react'
 import axios from '../../../axios'
 import UserInfo from '../UserInfo'
-import UserMessage from '../UserInfo/UserMessage';
+import UserMessage from '../UserInfo/UserMessage'
+import { useDispatch, useSelector } from 'react-redux'
+// import { removeReadMessage } from '../../../redux/slices/notification'
 
 const Messages = ({ id }) => {
 	const [isMessaging, setIsMessaging] = useState(false)
@@ -28,12 +30,15 @@ const Messages = ({ id }) => {
 		interlocutor: 'none',
 	})
 	const [talkers, setTalkers] = useState([])
+	const [idReceiver, setIdReceiver] = useState('')
+	// const notif = useSelector(state => state.notif.unreadMessages)
+	const dispatch = useDispatch()
+
 	const socketRef = useRef()
 
-	const filterTalkers = (arrConvers) => {
-		for(let i = 0; i < arrConvers.length; i++) {
-			console.log(arrConvers[i])
-			if(arrConvers[i].initiator.id !== id) {
+	const filterTalkers = arrConvers => {
+		for (let i = 0; i < arrConvers.length; i++) {
+			if (arrConvers[i].initiator.id !== id) {
 				const obj = {
 					user: arrConvers[i].initiator,
 					lastMessage: arrConvers[i].last_message,
@@ -50,21 +55,29 @@ const Messages = ({ id }) => {
 	}
 
 	useEffect(() => {
-		axios.get('conversations/').then(res => {
-			console.log(res.data)
-			filterTalkers(res.data)
-		})
-	}, [])
+		if (id) {
+			axios.get('conversations/').then(res => {
+				filterTalkers(res.data)
+				console.log(id)
+			})
+		}
+	}, [id])
 
 	useEffect(() => {
-
 		if (idRoom) {
 			socketRef.current = new WebSocket(
-				`ws://127.0.0.1:8000/ws/chat/${idRoom}/?token=${window.localStorage.getItem(
-					'access'
-				)}`
+				`${
+					import.meta.env.VITE_APP_WS_URL
+				}/ws/chat/${idRoom}/?token=${window.localStorage.getItem('access')}`
 			)
 
+			socketRef.current.addEventListener('open', event => {
+				const objRead = {
+					type: 'read_message',
+					receiver: idReceiver
+				}
+				socketRef.current.send(JSON.stringify(objRead))
+			})
 			socketRef.current.addEventListener('message', event => {
 				const data = delDuplicate(JSON.parse(event.data))
 				setHistory(prev => [data, ...prev])
@@ -85,7 +98,12 @@ const Messages = ({ id }) => {
 
 	const sendMessage = e => {
 		e.preventDefault()
-		socketRef.current.send(JSON.stringify({ message }))
+		const obj = {
+			type: 'chat_message',
+			receiver: idReceiver,
+			message: message,
+		}
+		socketRef.current.send(JSON.stringify(obj))
 		setMessage('')
 	}
 
@@ -109,7 +127,6 @@ const Messages = ({ id }) => {
 				}
 			}
 		}
-		console.log(result)
 		return result
 	}
 
@@ -117,9 +134,10 @@ const Messages = ({ id }) => {
 		const obj = {
 			username: username,
 		}
+		setIsStartChat(true)
+		setIsMessaging(false)
 
 		await axios.post('conversations/start/', obj).then(res => {
-			console.log(delDuplicate(res.data.message_set))
 			const obj = {
 				me: 'none',
 				interlocutor: 'none',
@@ -136,39 +154,15 @@ const Messages = ({ id }) => {
 			setIdRoom(res.data.id)
 			setHistory(delDuplicate(res.data.message_set))
 
-			setIsStartChat(true)
-			setIsMessaging(false)
+
+
+
 		})
-	}
-
-	const sendFirstMessage = () => {
-		startChat(searchValue)
-
-		socketRef.current.send(JSON.stringify({ message }))
-		setMessage('')
 	}
 
 	const handleClick = () => {
 		setIsStartChat(false)
-	}
-
-	// const startChat2 = () => {
-	// 	const obj = {
-	// 		username: 'Vylich',
-	// 	}
-
-	// 	axios.post('conversations/start/', obj).then(res => {
-	// 		console.log(res.data)
-	// 		setIdRoom(res.data.id)
-
-	// 	})
-
-	// }
-
-	const send = () => {
-		axios.get(`conversations/${idRoom}/`).then(res => {
-			console.log(res.data)
-		})
+		socketRef.current.close()
 	}
 
 	return (
@@ -184,7 +178,10 @@ const Messages = ({ id }) => {
 							/>
 							<input
 								type='text'
-								onClick={() => setIsMessaging(true)}
+								onClick={() => {
+									setIsMessaging(true)
+
+								}}
 								name='search'
 								placeholder='Поиск по имени или эл. адресу'
 							/>
@@ -201,15 +198,24 @@ const Messages = ({ id }) => {
 						<div className={styles.talkers}>
 							{!!talkers &&
 								talkers.map((talker, i) => (
-									<div className={styles.talker} onClick={() => {
-										setSearchValue(talker.user.username)
-										startChat(talker.user.username)
-									}} key={i}>
+									<div
+										className={styles.talker}
+										onClick={() => {
+											setSearchValue(talker.user.username)
+											setIdReceiver(talker.user.id)
+											startChat(talker.user.username)
+										}}
+										key={i}
+									>
 										<UserMessage
-										username={talker.user.username}
-										avatar={talker.user.avatar}
-										text={talker.lastMessage.sender === id ? `Вы: ${talker.lastMessage.text}` : talker.lastMessage.text}
-									/>
+											username={talker.user.username}
+											avatar={talker.user.avatar}
+											text={
+												talker.lastMessage.sender === id
+													? `Вы: ${talker.lastMessage.text}`
+													: talker.lastMessage.text
+											}
+										/>
 									</div>
 								))}
 						</div>

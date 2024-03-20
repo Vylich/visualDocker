@@ -1,0 +1,76 @@
+.add {
+  width: 100%;
+  position: relative;
+  border-top: 1px solid rgba(0, 0, 0, 0.137254902);
+  padding: 20px 0;
+}
+@media (max-width: 1024px) {
+  .add {
+    padding: 10px 0;
+  }
+}
+.add input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding-left: 20px;
+  padding-right: 90px;
+  font-size: 16px;
+}
+.add button {
+  bottom: 20px;
+  right: 10px;
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #7a4ad8;
+  font-size: 16px;
+}
+@media (max-width: 1024px) {
+  .add button {
+    bottom: 10px;
+  }
+}
+
+.manage {
+  border-top: 1px solid rgba(0, 0, 0, 0.137254902);
+  width: 100%;
+  padding: 5px 15px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+@media (max-width: 1024px) {
+  .manage {
+    height: auto;
+    padding: 5px 20px;
+  }
+}
+
+.icons {
+  display: flex;
+  justify-content: space-between;
+}
+.icons svg {
+  width: auto;
+  height: 30px;
+}
+
+.group {
+  display: flex;
+  gap: 5px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+}
+
+.likes {
+  font-size: 14px;
+  font-weight: 600;
+}/*# sourceMappingURL=AddComment.module.css.map */

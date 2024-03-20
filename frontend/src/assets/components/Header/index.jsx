@@ -24,6 +24,8 @@ import { fetchPosts } from '../../../redux/slices/posts'
 import Card from '../SearchigCard'
 import { fetchLogin, selectIsAuth } from '../../../redux/slices/auth'
 import useOnclickOutside from 'react-cool-onclickoutside'
+import WebSocketComponent from '../notifications'
+import Notif from '../Notif/Notif'
 
 function Header() {
 	const [searchedText, setSearchedText] = useState('')
@@ -39,8 +41,7 @@ function Header() {
 	const userdata = useSelector(state =>
 		isUserDataLoaded(state) ? state.auth.data.user : null
 	)
-
-
+	const unreadCount = useSelector(state => state.notif.unreadCount)
 
 	const refs = [
 		useOnclickOutside(() => setNotificationsOpened(false)),
@@ -62,34 +63,8 @@ function Header() {
 		dispatch(fetchLogin())
 	}, [])
 
-	// useEffect(() => {
-	// 	if (userdata) {
-	// 		socketRef.current = new WebSocket(
-	// 			`ws://127.0.0.1:8000/notifications/?token=${window.localStorage.getItem(
-	// 				'access'
-	// 			)}`
-	// 		)
-
-	// 		socketRef.current.addEventListener('message', event => {
-	// 			const data = delDuplicate(JSON.parse(event.data))
-	// 			setHistory(prev => [data, ...prev])
-	// 		})
-
-	// 		return () => {
-	// 			socketRef.current.close()
-	// 		}
-	// 	}
-	// }, [userdata])
-
 	const handleSettings = () => {
-		if (settingsOpened === true) {
-			setSettingsOpened(false)
-		} else {
-			setSettingsOpened(true)
-			setMessagesOpened(false)
-			setNotificationsOpened(false)
-			setSearchOpened(false)
-		}
+		setSettingsOpened(!settingsOpened)
 	}
 
 	const handleMessages = () => {
@@ -104,7 +79,6 @@ function Header() {
 		setSearchOpened(!searchOpened)
 		hideNavOnClick()
 	}
-
 
 	const onClickSearch = obj => {
 		setSearchedText(obj)
@@ -197,43 +171,57 @@ function Header() {
 						</span>
 						<span>Поиск</span>
 					</NavLink>
-					<NavLink
-						className={({ isActive }) =>
-							isActive
-								? `${styles.link} ${styles.isActive}`
-								: `${styles.link} ${styles.create}`
-						}
-						to={'/post-add'}
-					>
-						<span className={styles.iconMobile}>
-							<FontAwesomeIcon icon={faSquarePlus} />
-						</span>
-						<span>Создать</span>
-					</NavLink>
-					<NavLink
-						className={({ isActive }) =>
-							isActive
-								? `${styles.link} ${styles.isActive} ${styles.linkMobile}`
-								: `${styles.link} ${styles.linkMobile}`
-						}
-						to={'/notification/notices'}
-					>
-						<span className={styles.iconMobile}>
-							<FontAwesomeIcon icon={faMessage} />
-						</span>
-						<span>Входящие</span>
-					</NavLink>
-					<NavLink
-						className={({ isActive }) =>
-							isActive
-								? `${styles.link} ${styles.isActive} ${styles.linkMobile}`
-								: `${styles.link} ${styles.linkMobile}`
-						}
-						to={'/profile'}
-					>
-						<img src={avatar} width={20} alt='Логотип' />
-						<span>Профиль</span>
-					</NavLink>
+					{userdata && (
+						<>
+							<NavLink
+								className={({ isActive }) =>
+									isActive
+										? `${styles.link} ${styles.isActive}`
+										: `${styles.link} ${styles.create}`
+								}
+								to={'/post-add'}
+							>
+								<span className={styles.iconMobile}>
+									<FontAwesomeIcon icon={faSquarePlus} />
+								</span>
+								<span>Создать</span>
+							</NavLink>
+							<NavLink
+								className={({ isActive }) =>
+									isActive
+										? `${styles.link} ${styles.isActive} ${styles.linkMobile}`
+										: `${styles.link} ${styles.linkMobile}`
+								}
+								to={'/notification/notices'}
+							>
+								<span className={styles.iconMobile}>
+									<FontAwesomeIcon icon={faMessage} />
+								</span>
+								<span>Входящие</span>
+								{<Notif unreadCount={unreadCount} />}
+							</NavLink>
+							<NavLink
+								className={({ isActive }) =>
+									isActive
+										? `${styles.link} ${styles.isActive} ${styles.linkMobile}`
+										: `${styles.link} ${styles.linkMobile}`
+								}
+								to={userdata ? `/profile/${userdata.id}` : ''}
+							>
+								<img
+									className={styles.ava}
+									src={
+										userdata && userdata.avatar
+											? `${import.meta.env.VITE_APP_API_URL}${userdata.avatar}`
+											: avatar
+									}
+									width={20}
+									alt='Логотип'
+								/>
+								<span>Профиль</span>
+							</NavLink>
+						</>
+					)}
 					<div className={styles.input}>
 						<FontAwesomeIcon
 							className={styles.iconSearch}
@@ -259,7 +247,7 @@ function Header() {
 									onDelete={onDelete}
 									isNavVisible={isNavVisible}
 									searchedItems={renderItems}
-								/>{' '}
+								/>
 								<button
 									className={styles.clearBtn}
 									onClick={() => setSearchedText('')}
@@ -271,24 +259,26 @@ function Header() {
 					</div>
 					{userdata ? (
 						<div className={styles.groupIcons}>
-							<button onClick={handleNotifications}>
+							<button ref={refs[0]} onClick={handleNotifications}>
 								<FontAwesomeIcon
 									className={styles.iconNotification}
 									icon={faBell}
 								/>
 							</button>
-							<button onClick={handleMessages}>
+							<button ref={refs[1]} onClick={handleMessages}>
 								<FontAwesomeIcon
 									className={styles.iconMessage}
 									icon={faMessage}
 								/>
+								{<Notif unreadCount={unreadCount} />}
 							</button>
 
 							<Link to={`/profile/${userdata.id}`}>
 								<img
+									className={styles.ava}
 									src={
 										userdata.avatar
-											? `http://127.0.0.1:8000${userdata.avatar}`
+											? `${import.meta.env.VITE_APP_API_URL}${userdata.avatar}`
 											: avatar
 									}
 									width={40}
@@ -297,6 +287,7 @@ function Header() {
 							</Link>
 
 							<button
+								ref={refs[2]}
 								onClick={handleSettings}
 								className={styles.settings}
 							>
@@ -309,10 +300,20 @@ function Header() {
 						</Link>
 					)}
 					{settingsOpened && (
-						<div className={styles.wrapMenu} ref={refs[2]}><Settings user={userdata} handleSettings={handleSettings} /></div>
+						<div className={styles.wrapMenu} ref={refs[2]}>
+							<Settings user={userdata} handleSettings={handleSettings} />
+						</div>
 					)}
-					{messagesOpened && <div ref={refs[1]} className={styles.wrapMenu}><Messages id={userdata.id} /></div>}
-					{notificationsOpened && <div ref={refs[0]} className={styles.wrapMenu}><Notifications /></div>}
+					{messagesOpened && (
+						<div ref={refs[1]} className={styles.wrapMenu}>
+							<Messages id={userdata.id} />
+						</div>
+					)}
+					{notificationsOpened && (
+						<div ref={refs[0]} className={styles.wrapMenu}>
+							<Notifications />
+						</div>
+					)}
 				</nav>
 			</header>
 		</div>

@@ -65,18 +65,18 @@ const Post = ({
 			})
 		} else if (images && isHomePost) {
 			images.forEach(img => {
-				getMeta(`http://127.0.0.1:8000${img.image}`, (width, height) => {
+				getMeta(`${import.meta.env.VITE_APP_API_URL}${img.image}`, (width, height) => {
 					const aspect = width / height
 
 					if (aspect < 0.5625) {
 						setAspectRatioHome(prev => ({
 							...prev,
-							[`http://127.0.0.1:8000${img.image}`]: 0.5625,
+							[`${import.meta.env.VITE_APP_API_URL}${img.image}`]: 0.5625,
 						}))
 					} else {
 						setAspectRatioHome(prev => ({
 							...prev,
-							[`http://127.0.0.1:8000${img.image}`]: width / height,
+							[`${import.meta.env.VITE_APP_API_URL}${img.image}`]: width / height,
 						}))
 					}
 				})
@@ -162,10 +162,10 @@ const Post = ({
 										style={{
 											aspectRatio:
 												aspectRatioHome[
-													`http://127.0.0.1:8000${images[0].image}`
+													`${import.meta.env.VITE_APP_API_URL}${images[0].image}`
 												],
 										}}
-										src={`http://127.0.0.1:8000${images[0].image}`}
+										src={`${import.meta.env.VITE_APP_API_URL}${images[0].image}`}
 										alt={title}
 										crossOrigin='anonymous'
 										loading='lazy'
@@ -181,12 +181,12 @@ const Post = ({
 												muted
 												loop
 												ref={videoRef}
-												src={`http://127.0.0.1:8000${videos[0].video}`}
+												src={`${import.meta.env.VITE_APP_API_URL}${videos[0].video}`}
 												onMouseOver={handleMouseOver}
 												onMouseOut={handleMouseOut}
 											>
 												<source
-													src={`http://127.0.0.1:8000${videos[0].video}`}
+													src={`${import.meta.env.VITE_APP_API_URL}${videos[0].video}`}
 												/>
 											</video>
 										)}

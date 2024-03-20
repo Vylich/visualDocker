@@ -1,10 +1,48 @@
 import React, { useEffect, useState } from 'react'
 import styles from './NavSettings.module.scss'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLeftLong } from '@fortawesome/free-solid-svg-icons'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../../../../redux/slices/auth'
+import { clearMessages } from '../../../../redux/slices/notification'
 
 const NavSettings = ({ isNavVisible, hideNavOnClick, isNavVisibleOnClick }) => {
+
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
+	const isUserDataLoaded = (state) => state.auth.data !== null;
+	const userData = useSelector((state) =>
+		isUserDataLoaded(state) ? state.auth.data : null,
+	);
+	const users = JSON.parse(localStorage.getItem("users"))
+
+	const onClickLogout = () => {
+		if (window.confirm('Are you sure you want to log out?')) {
+			dispatch(logout())
+			navigate('/login')
+			window.localStorage.removeItem('access')
+			window.localStorage.removeItem('refresh')
+			window.localStorage.removeItem('username')
+			window.localStorage.removeItem('avatar')
+			const users = JSON.parse(localStorage.getItem('users')) || []
+			const invalidObj = users.find(item => item.username === userData.username)
+			const newUsers = users.filter(item => item.username !== userData.username)
+			console.log(invalidObj)
+			if (newUsers.length) {
+				window.localStorage.setItem('users', JSON.stringify(newUsers))
+			} else {
+				window.localStorage.removeItem('users')
+			}
+			dispatch(clearMessages());
+		}
+	}
+
+	useEffect(() => {
+
+	}, [])
+
+
 	return (
 		<div className={isNavVisibleOnClick ? styles.root : styles.rootMobile}>
 			<div className={styles.block}>
@@ -53,8 +91,10 @@ const NavSettings = ({ isNavVisible, hideNavOnClick, isNavVisibleOnClick }) => {
 			</div>
 			<div className={isNavVisible ? styles.block : styles.blockNone}>
 				<span>Вход</span>
-				<Link onClick={hideNavOnClick} className={styles.link} to='/add-account'>Добавить аккаунт</Link>
-				<button className={styles.logout} >Выход</button>
+				{users && users.length > 1 ? (<Link onClick={hideNavOnClick} className={styles.link} to='change-account'>Сменить аккаунт</Link>) : (<Link onClick={hideNavOnClick} className={styles.link} to='/login'>Добавить аккаунт</Link>)}
+
+
+				<button className={styles.logout} onClick={onClickLogout}>Выход</button>
 			</div>
 		</div>
 	)

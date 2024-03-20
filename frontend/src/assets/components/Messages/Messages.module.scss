@@ -13,6 +13,8 @@
 		z-index: 1;
 		height: 100%;
 		padding-bottom: 0;
+		margin-bottom: 0;
+		// max-height:
 	}
 
 	form {
@@ -28,9 +30,17 @@
 	overflow-y: scroll;
 	margin-top: auto;
 	scrollbar-width: thin;
+
+	@include vp-1023 {
+		// min-height: calc(100% - 72px);
+		height: calc(100% - 72px);
+		max-height: calc(100% - 72px);
+		margin-top: 0;
+	}
 }
 
-.myMessage, .userMessage {
+.myMessage,
+.userMessage {
 	position: relative;
 	display: flex;
 	max-width: 300px;
@@ -100,23 +110,20 @@
 	}
 }
 
-
-
 .header {
 	display: flex;
 	position: relative;
 	width: 100%;
 	justify-content: center;
-	-webkit-box-shadow: 0px 14px 32px -6px rgba(0,0,0,0.2);
--moz-box-shadow: 0px 14px 32px -6px rgba(0,0,0,0.2);
-box-shadow: 0px 14px 32px -6px rgba(0,0,0,0.2);
-margin-left: -10px;
-margin-right: -10px;
-border-radius: 0px 0px 30px 30px;
--moz-border-radius: 0px 0px 30px 30px;
--webkit-border-radius: 0px 0px 30px 30px;
+	-webkit-box-shadow: 0px 14px 32px -6px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0px 14px 32px -6px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 14px 32px -6px rgba(0, 0, 0, 0.2);
+	margin-left: -10px;
+	margin-right: -10px;
+	border-radius: 0px 0px 30px 30px;
+	-moz-border-radius: 0px 0px 30px 30px;
+	-webkit-border-radius: 0px 0px 30px 30px;
 }
-
 
 .wrapper {
 	width: 100%;
@@ -137,7 +144,8 @@ border-radius: 0px 0px 30px 30px;
 		-moz-box-shadow: none;
 		box-shadow: none;
 		padding: 0;
-		margin-top: 20px;
+		height: 100%;
+		margin-top: 0;
 	}
 
 	button {
@@ -312,6 +320,7 @@ border-radius: 0px 0px 30px 30px;
 	img {
 		width: 30px;
 		height: 30px;
+		border-radius: 50%;
 	}
 
 	span {
@@ -321,6 +330,10 @@ border-radius: 0px 0px 30px 30px;
 
 .talkers {
 	width: 100%;
+	@include vp-1023 {
+		max-height: 60%;
+		overflow: scroll;
+	}
 }
 
 .talker {

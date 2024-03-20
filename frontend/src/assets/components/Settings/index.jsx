@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { fetchLogin, logout } from '../../../redux/slices/auth'
 import avatarDefault from '../../../img/avatar-default.svg'
 import { useEffect, useState } from 'react'
+import { clearMessages } from '../../../redux/slices/notification'
 
 const Settings = ({ user, handleSettings }) => {
 	const dispatch = useDispatch()
@@ -29,6 +30,7 @@ const Settings = ({ user, handleSettings }) => {
 				window.localStorage.removeItem('users')
 			}
 			handleSettings()
+			dispatch(clearMessages());
 		}
 	}
 

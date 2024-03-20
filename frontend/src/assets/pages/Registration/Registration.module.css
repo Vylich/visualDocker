@@ -1,0 +1,151 @@
+.container {
+  max-width: 450px;
+  width: 450px;
+  margin: auto auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+@media (max-width: 1024px) {
+  .container {
+    height: 100dvh;
+    width: 100%;
+    gap: 0;
+    justify-content: space-between;
+  }
+}
+.container__block {
+  border: 1px solid #c2c2c2;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 3px;
+}
+@media (max-width: 1024px) {
+  .container__block {
+    border: none;
+  }
+}
+.container__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+}
+.container__form input[type=text],
+.container__form input[type=password] {
+  box-sizing: border-box;
+  height: 36px;
+  width: 100%;
+  border-radius: 7px;
+  outline: none;
+  border: 2px solid #c2c2c2;
+  background-color: #ffffff;
+  padding: 10px 20px 10px 8px;
+  transition: all 0.3s;
+}
+@media (hover: hover) {
+  .container__form input[type=text]:hover,
+  .container__form input[type=password]:hover {
+    border: 2px solid #7a4ad8;
+    background-color: rgba(121, 74, 216, 0.137254902);
+  }
+}
+.container__form input[type=text]:focus,
+.container__form input[type=password]:focus {
+  border: 2px solid #7a4ad8;
+  background-color: rgba(121, 74, 216, 0.137254902);
+}
+@media (max-width: 1024px) {
+  .container__form input[type=text],
+  .container__form input[type=password] {
+    height: 48px;
+    border-radius: 13px;
+  }
+}
+.container__login {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.container__login p {
+  margin: 0;
+}
+.container__login a {
+  text-decoration: none;
+  color: #7a4ad8;
+}
+
+.error {
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+}
+
+.field {
+  width: 100%;
+  position: relative;
+}
+
+.btnReg {
+  height: 36px;
+  cursor: pointer;
+  outline: none;
+  border-radius: 13px;
+  border: 1px solid #7a4ad8;
+  background-color: #7a4ad8;
+  color: #ffffff;
+  font-size: 14px;
+  margin-top: 20px;
+  transition: all 0.3s;
+}
+@media (hover: hover) {
+  .btnReg:hover {
+    opacity: 0.5;
+  }
+}
+.btnReg:focus {
+  opacity: 0.5;
+}
+@media (max-width: 1024px) {
+  .btnReg {
+    height: 48px;
+    border-radius: 13px;
+  }
+}
+
+.disabled {
+  background-color: #c2c2c2 !important;
+  border-color: #c2c2c2 !important;
+  pointer-events: none;
+  height: 36px;
+  outline: none;
+  border-radius: 13px;
+  border: 1px solid;
+}
+
+.showPass {
+  border-radius: 50%;
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.showPass svg {
+  color: #7a4ad8;
+}/*# sourceMappingURL=Registration.module.css.map */

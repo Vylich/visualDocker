@@ -1,0 +1,115 @@
+.root {
+  width: auto;
+  cursor: pointer;
+  height: 207px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s;
+  position: relative;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+@media (hover: hover) {
+  .root:hover {
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3294117647);
+  }
+}
+
+.loading {
+  width: 100%;
+  height: 300px;
+  position: relative;
+}
+
+.rootFull {
+  width: 82%;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  border-radius: 0;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+@media (hover: hover) {
+  .rootFull:hover {
+    box-shadow: none;
+    cursor: auto;
+  }
+}
+@media (max-width: 1024px) {
+  .rootFull {
+    max-height: 80vh;
+    width: 100%;
+    border-radius: 0;
+  }
+}
+.rootFull .imageFull {
+  height: auto;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+@media (max-width: 1024px) {
+  .rootFull .imageFull {
+    width: 100%;
+    height: auto;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.rootHome {
+  width: 100%;
+  height: auto;
+  border-radius: 13px;
+}
+@media (max-width: 768px) {
+  .rootHome {
+    width: 100%;
+  }
+}
+.rootHome .imageHome {
+  width: 100%;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+}
+
+.image {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  overflow: hidden;
+  height: 100%;
+  -o-object-position: top;
+     object-position: top;
+}
+
+.link {
+  display: block;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 1024px) {
+  .link {
+    width: 100%;
+    height: auto;
+  }
+}/*# sourceMappingURL=Post.module.css.map */

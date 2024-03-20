@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import {
 	fetchLogin,
@@ -25,18 +25,31 @@ import Confidentiality from './assets/pages/Settings/Confidentiality'
 import Search from './assets/components/Search'
 import Notification from './assets/pages/Notification'
 import ContinuePage from './assets/pages/СontinuePage'
-
+import WebSocketComponent from './assets/components/notifications.jsx'
+import ChangeAccount from './assets/pages/Settings/ChangeAccount/index.jsx'
 
 function App() {
 	const dispatch = useDispatch()
 	const isAuth = useSelector(selectIsAuth)
 	const authStatus = useSelector(selectIsAuthStatus)
 	const myId = useSelector(state => state.auth)
-
+	// const socketRef = useRef()
+	// const [notificationMess, setNotificationMess] = useState([])
 
 
 	// useEffect(() => {
+	// 	if (window.localStorage.getItem('access')) {
+	// 		socketRef.current = new WebSocket(
+	// 			`${
+	// 				import.meta.env.VITE_APP_WS_URL
+	// 			}/ws/notifications/?token=${window.localStorage.getItem('access')}`
+	// 		)
 
+	// 		socketRef.current.addEventListener('message', event => {
+	// 			const data = JSON.parse(event.data)
+	// 			setNotificationMess(prev => [data, ...prev])
+	// 		})
+	// 	}
 	// }, [])
 
 	useEffect(() => {
@@ -46,7 +59,8 @@ function App() {
 	return (
 		<>
 			<div className='wrapper'>
-				<Header />
+				<WebSocketComponent />
+				<Header/>
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route path='/home' element={<Home />} />
@@ -62,11 +76,12 @@ function App() {
 						<Route path='edit-profile' element={<EditProfile />} />
 						<Route path='manage-account' element={<ManageAccount />} />
 						<Route path='profile-visibility' element={<VisibilityProfile />} />
-						<Route path='notification' element={<NotificationSettings />} />
+						<Route path='notification/*' element={<NotificationSettings />} />
 						<Route path='security' element={<Security />} />
 						<Route path='confidentiality' element={<Confidentiality />} />
 						<Route path='terms-of-service' element={<Confidentiality />} />
 						<Route path='privacy-policy' element={<Confidentiality />} />
+						<Route path='change-account' element={<ChangeAccount />} />
 					</Route>
 					<Route path='/search' element={<Search />} />
 					<Route path='/notification' element={<Notification />}>

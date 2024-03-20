@@ -1,0 +1,128 @@
+.root {
+  display: flex;
+  margin-bottom: 80px;
+}
+.root button {
+  transition: all 0.3s;
+}
+@media (hover: hover) {
+  .root button:hover {
+    color: #ffffff;
+    background-color: #7a4ad8;
+  }
+}
+.root button:focus {
+  color: #ffffff;
+  background-color: #7a4ad8;
+}
+.root input[type=text], .root textarea, .root input[type=date], .root select {
+  transition: all 0.3s;
+}
+@media (hover: hover) {
+  .root input[type=text]:hover, .root textarea:hover, .root input[type=date]:hover, .root select:hover {
+    border: #7a4ad8 2px solid;
+    background-color: rgba(121, 74, 216, 0.137254902);
+  }
+}
+.root input[type=text]:focus, .root textarea:focus, .root input[type=date]:focus, .root select:focus {
+  border: #7a4ad8 2px solid;
+  background-color: rgba(121, 74, 216, 0.137254902);
+}
+@media (max-width: 1024px) {
+  .root {
+    justify-content: center;
+  }
+}
+
+.buttonsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  position: fixed;
+  bottom: 0;
+  background-color: #ffffff;
+  width: 100%;
+  box-shadow: 0px -5px 5px -5px rgba(34, 60, 80, 0.6);
+  height: 80px;
+}
+@media (max-width: 1024px) {
+  .buttonsWrapper {
+    position: relative;
+    margin-bottom: 90px;
+    box-shadow: none;
+  }
+}
+.buttonsWrapper button {
+  height: 40px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+@media (hover: hover) {
+  .buttonsWrapper button:hover {
+    opacity: 0.5;
+  }
+}
+.buttonsWrapper button:focus {
+  opacity: 0.5;
+}
+.buttonsWrapper button:nth-child(2) {
+  background-color: #7a4ad8;
+  color: #ffffff;
+}
+
+.titleWrapper {
+  display: none;
+  width: 100%;
+  padding: 15px 20px;
+}
+.titleWrapper h2 {
+  margin: 0;
+}
+@media (max-width: 1024px) {
+  .titleWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.titleWrapper a {
+  position: absolute;
+  left: 20px;
+}
+
+.visible {
+  display: flex;
+}
+
+.notVisible {
+  display: none;
+}
+
+.backBtn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #7a4ad8;
+  border: 1px solid #7a4ad8;
+  background-color: #ffffff;
+  transition: all 0.5s;
+}
+@media (hover: hover) {
+  .backBtn:hover {
+    color: #ffffff;
+    background-color: #7a4ad8;
+  }
+}
+.backBtn:focus {
+  color: #ffffff;
+  background-color: #7a4ad8;
+}/*# sourceMappingURL=SettingsProfile.module.css.map */
