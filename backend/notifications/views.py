@@ -27,7 +27,7 @@ class NotificationView(RetrieveModelMixin, ListModelMixin, UpdateModelMixin, Des
         if not count:
             return Response({'message': 'Новых уведомлений нет'})
         else:
-            return count
+            return Response(count)
 
     def list(self, request):
         user = request.user
@@ -64,11 +64,3 @@ class NotificationView(RetrieveModelMixin, ListModelMixin, UpdateModelMixin, Des
                 'comments': data_comments,
                 'followers': data_followers
             })
-
-
-
-
-
-
-
-

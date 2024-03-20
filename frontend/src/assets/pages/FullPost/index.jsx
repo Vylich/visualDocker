@@ -72,6 +72,7 @@ const FullPost = () => {
       const fields = {
         text: text,
         post: id,
+        parent: '',
       };
       await axios.post(`comments/`, fields);
       const { data } = await axios.get(`posts/${id}`);

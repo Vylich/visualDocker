@@ -13,11 +13,11 @@ const Notification = ({ type, post, user, avatar }) => {
 				setUser(res.data)
 			})
 		}
-		if (type === 'like' || type === 'comment') {
-			axios.get(`/posts/${post}`).then(res => {
-				setPost(res.data)
-			})
-		}
+		// if (type === 'like' || type === 'comment') {
+		// 	axios.get(`/posts/${post}`).then(res => {
+		// 		setPost(res.data)
+		// 	})
+		// }
 
 	}, [type])
 

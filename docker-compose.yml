@@ -13,8 +13,8 @@ services:
       - "3000:3000"
     depends_on:
       - api
-    networks:
-      - visual
+    # networks:
+    #   - visual
   api:
     container_name: "backend"
     build:
@@ -24,8 +24,8 @@ services:
       - "8000:8000"
     depends_on:
       - db
-    networks:
-      - visual
+    # networks:
+    #   - visual
 
   redis:
     container_name: "visual-redis"
@@ -33,22 +33,24 @@ services:
     restart: always
     ports:
       - '6379:6379'
-    networks:
-      - visual
+    depends_on:
+      - api
+    # networks:
+    #   - visual
 
   db:
-    container_name: "postgres-db"
+    container_name: "visual-pg"
     image: postgres
     restart: always
     environment:
-      POSTGRES_DB: mydatabase
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: visual
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
     ports:
       - "5432:5432"
-    networks:
-      - visual
+    # networks:
+    #   - visual
 
-networks:
-  visual:
-    driver: bridge
+# networks:
+#   visual:
+#     driver: bridge
