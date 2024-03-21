@@ -3,7 +3,7 @@ import styles from './Notification.module.scss'
 import Notification from '../Notification'
 import axios from '../../../axios'
 import { useDispatch, useSelector } from 'react-redux';
-import { addNotificationsAll } from '../../../redux/slices/notification';
+import { addNotificationsAll, removeNotificationsCount } from '../../../redux/slices/notification';
 
 const Notifications = () => {
 	const dispatch = useDispatch()
@@ -12,6 +12,7 @@ const Notifications = () => {
 	useEffect(() => {
 		axios.get('notifications/list/').then(res => {
 			dispatch(addNotificationsAll(res.data))
+			dispatch(removeNotificationsCount())
 		})
 	}, [])
 

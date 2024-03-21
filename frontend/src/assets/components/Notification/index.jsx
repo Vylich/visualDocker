@@ -13,11 +13,11 @@ const Notification = ({ type, post, user, avatar }) => {
 				setUser(res.data)
 			})
 		}
-		// if (type === 'like' || type === 'comment') {
-		// 	axios.get(`/posts/${post}`).then(res => {
-		// 		setPost(res.data)
-		// 	})
-		// }
+		if (type === 'comment') {
+			axios.get(`/posts/${post}`).then(res => {
+				setPost(res.data)
+			})
+		}
 
 	}, [type])
 
@@ -36,12 +36,12 @@ const Notification = ({ type, post, user, avatar }) => {
 							Пользователю под ником
 							<span className={styles.username}> {userState && userState.username} </span>
 							<span className={styles.type}> понравился ваш пост </span>
-							<span className={styles.titlePost}>{post}</span>
+							<span className={styles.titlePost}>{post.name}</span>
 							{/* <span className={styles.date}> 20 нед. </span> */}
 						</p>
 					</header>
 					<div className={styles.postImg}>
-						<img src='https://loremflickr.com/500/500/animals' alt='' />
+						<img src={post.image ? `${import.meta.env.VITE_APP_API_URL}${post.image[0].image}` : ''} alt='' />
 					</div>
 				</>
 			)}
@@ -62,7 +62,7 @@ const Notification = ({ type, post, user, avatar }) => {
 						</p>
 					</header>
 					<div className={styles.postImg}>
-						<img src='https://loremflickr.com/400/500/animals' alt='' />
+						<img src={postState.image ? `${postState.image[0].image}` : ''} alt='' />
 					</div>
 				</>
 			)}
@@ -78,7 +78,7 @@ const Notification = ({ type, post, user, avatar }) => {
 							Пользователь под ником
 							<span className={styles.username}> {userState && userState.username} </span>
 							<span className={styles.type}> подписался на вас </span>
-							<span className={styles.date}> 3 мин. </span>
+							{/* <span className={styles.date}> 3 мин. </span> */}
 						</p>
 					</header>
 				</>
