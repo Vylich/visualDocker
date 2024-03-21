@@ -40,7 +40,7 @@ const Notifications = () => {
 				{!!notifications.followers && (
 					<>
 					{notifications.followers.map((follower, i) => (
-						<Notification key={i} user={follower.author} type={'subscribe'}/>
+						<Notification key={i} user={follower.follower} type={'subscribe'}/>
 					))}
 					</>
 				)}

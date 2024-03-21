@@ -29,6 +29,7 @@ const Messages = ({ id }) => {
 		me: 'none',
 		interlocutor: 'none',
 	})
+	const notifUserMess = useSelector(state => state.notif.unreadCount)
 	const [talkers, setTalkers] = useState([])
 	const [idReceiver, setIdReceiver] = useState('')
 	// const notif = useSelector(state => state.notif.unreadMessages)
@@ -57,11 +58,11 @@ const Messages = ({ id }) => {
 	useEffect(() => {
 		if (id) {
 			axios.get('conversations/').then(res => {
+				setTalkers([])
 				filterTalkers(res.data)
-				console.log(id)
 			})
 		}
-	}, [id])
+	}, [id, notifUserMess])
 
 	useEffect(() => {
 		if (idRoom) {
@@ -180,7 +181,6 @@ const Messages = ({ id }) => {
 								type='text'
 								onClick={() => {
 									setIsMessaging(true)
-
 								}}
 								name='search'
 								placeholder='Поиск по имени или эл. адресу'
@@ -215,7 +215,9 @@ const Messages = ({ id }) => {
 													? `Вы: ${talker.lastMessage.text}`
 													: talker.lastMessage.text
 											}
+											isUnread={talker.lastMessage.read === false}
 										/>
+										<span>{!!talker.lastMessage.read}</span>
 									</div>
 								))}
 						</div>

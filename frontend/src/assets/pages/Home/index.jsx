@@ -112,6 +112,7 @@ const Home = () => {
 				.then(res => {
 					setPostsState([...postsState, ...res.data])
 					setLoadingPost(false)
+					console.log(res.data)
 				})
 		}
 	}, [inView])

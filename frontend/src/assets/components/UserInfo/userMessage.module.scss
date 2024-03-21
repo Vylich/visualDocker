@@ -10,25 +10,25 @@
 	position: relative;
 }
 
-// .notif {
-// 	background-color: #7a4ad8;
-// 	border-radius: 50%;
-// 	width: 15px;
-// 	height: 15px;
-// 	position: absolute;
-// 	top: 8px;
-// 	right: 10px;
-// 	color: #ffffff;
-// 	font-size: 12px;
+.notif {
+	background-color: #7a4ad8;
+	border-radius: 50%;
+	width: 15px;
+	height: 15px;
+	position: absolute;
+	top: 8px;
+	right: 10px;
+	color: #ffffff;
+	font-size: 12px;
 
-// 	@include vp-1023 {
-// 		display: flex;
-// 		justify-content: center;
-// 		align-items: center;
-// 		top: 0;
-// 		right: 2px;
-// 	}
-// }
+	@include vp-1023 {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		top: 0;
+		right: 2px;
+	}
+}
 
 .image {
 	width: 48px;

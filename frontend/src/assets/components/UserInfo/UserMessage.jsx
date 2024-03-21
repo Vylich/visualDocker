@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './userMessage.module.scss'
 import avatarDefault from '../../../img/avatar-default.svg'
 
-const UserMessage = ({username, avatar, text, isNewMessage}) => {
+const UserMessage = ({username, avatar, text, isNewMessage, isUnread}) => {
 	return (
 		<div className={styles.root}>
 			<img className={styles.image} src={avatar ? `${import.meta.env.VITE_APP_API_URL}${avatar}` : avatarDefault}/>
@@ -11,7 +11,7 @@ const UserMessage = ({username, avatar, text, isNewMessage}) => {
 				<span className={styles.text}>{text}</span>
 			</div>
 
-			{isNewMessage && <span className={styles.notif}></span>}
+			{isUnread && <span className={styles.notif}></span>}
 		</div>
 	)
 }

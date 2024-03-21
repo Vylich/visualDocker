@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './Notification.module.scss'
 import axios from '../../../axios'
 import avatarDefault from '../../../img/avatar-default.svg'
+import { Link } from 'react-router-dom'
 
 const Notification = ({ type, post, user, avatar }) => {
 	const [userState, setUser] = useState({})
@@ -16,6 +17,7 @@ const Notification = ({ type, post, user, avatar }) => {
 		if (type === 'comment') {
 			axios.get(`/posts/${post}`).then(res => {
 				setPost(res.data)
+				console.log(res.data)
 			})
 		}
 
@@ -27,11 +29,11 @@ const Notification = ({ type, post, user, avatar }) => {
 			{type === 'like' && (
 				<>
 					<header className={styles.header}>
-						<img
+						<Link to={`/profile/${user}`}><img
 							className={styles.avatar}
 							src={userState.avatar ? `${import.meta.env.VITE_APP_API_URL}${userState.avatar}` : avatarDefault}
 							alt=''
-						/>
+						/></Link>
 						<p>
 							Пользователю под ником
 							<span className={styles.username}> {userState && userState.username} </span>
@@ -41,39 +43,45 @@ const Notification = ({ type, post, user, avatar }) => {
 						</p>
 					</header>
 					<div className={styles.postImg}>
+					<Link to={`/posts/${post.slug}`}>
 						<img src={post.image ? `${import.meta.env.VITE_APP_API_URL}${post.image[0].image}` : ''} alt='' />
+						</Link>
 					</div>
 				</>
 			)}
 			{type === 'comment' && (
 				<>
 					<header className={styles.header}>
-						<img
+						<Link to={`/profile/${user}`}><img
 							className={styles.avatar}
 							src={avatar ? `${import.meta.env.VITE_APP_API_URL}/media/${avatar}` : avatarDefault}
 							alt=''
-						/>
+						/></Link>
 						<p>
 							Пользователь под ником
 							<span className={styles.username}> {user} </span>
 							<span className={styles.type}> прокомментировал ваш пост: </span>
-							<span className={styles.titlePost}>{post}</span>
+							<span className={styles.titlePost}>{postState.name}</span>
 							{/* <span className={styles.date}> 2 часа </span> */}
 						</p>
 					</header>
 					<div className={styles.postImg}>
-						<img src={postState.image ? `${postState.image[0].image}` : ''} alt='' />
+						<Link to={`/posts/${post}`}>
+
+						<img src={postState.image ? `${postState.image[0].image}` : ''} alt='' /></Link>
 					</div>
 				</>
 			)}
 			{type === 'subscribe' && (
 				<>
 					<header className={styles.header}>
+						<Link to={`/profile/${user}`}>
 						<img
 							className={styles.avatar}
 							src={userState.avatar ? `${import.meta.env.VITE_APP_API_URL}${userState.avatar}` : avatarDefault}
 							alt=''
 						/>
+						</Link>
 						<p>
 							Пользователь под ником
 							<span className={styles.username}> {userState && userState.username} </span>
