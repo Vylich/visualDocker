@@ -7,7 +7,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     environment:
-      VITE_APP_API_URL: "http://localhost:8000"
+      VITE_APP_API_URL: "http://176.109.109.0:8000"
     ports:
       - "80:8010"
       - "3000:3000"

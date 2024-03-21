@@ -26,6 +26,7 @@ import { fetchLogin, selectIsAuth } from '../../../redux/slices/auth'
 import useOnclickOutside from 'react-cool-onclickoutside'
 import WebSocketComponent from '../notifications'
 import Notif from '../Notif/Notif'
+import axios from '../../../axios'
 
 function Header() {
 	const [searchedText, setSearchedText] = useState('')
@@ -135,6 +136,14 @@ function Header() {
 			)
 		)
 	}
+
+
+	useEffect(() => {
+		if (searchedText) {
+			axios.get(`/search/?search=${searchedText}`).then(res => cpnsole.log(res.data))
+		}
+
+	}, [searchedText])
 
 	return (
 		<div className={styles.root}>
