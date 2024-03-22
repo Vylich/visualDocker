@@ -65,7 +65,7 @@ const CommentsBlock = ({
         <img
           src={
             avatarUrl
-              ? `http://127.0.0.1:8000/media/${avatarUrl}`
+              ? `${import.meta.env.VITE_APP_API_URL}/media/${avatarUrl}`
               : avatarDefault
           }
           alt={`Аватар пользователя ${username}`}

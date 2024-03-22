@@ -12,7 +12,7 @@ import { useInView } from 'react-intersection-observer'
 import axios from '../../../axios.js'
 import Loading from '../../components/Loading/Loading.jsx'
 
-const Columns = ({ posts, loading }) => {
+export const Columns = ({ posts, loading }) => {
 	const [width, setWidth] = useState(window.innerWidth)
 	const [widthColumn, setWidthColumn] = useState(260)
 	const dispatch = useDispatch()

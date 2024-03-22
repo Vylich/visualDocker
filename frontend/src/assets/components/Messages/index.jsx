@@ -90,12 +90,21 @@ const Messages = ({ id }) => {
 		}
 	}, [idRoom])
 
+	// useEffect(() => {
+	// 	axios.get('users/').then(res => {
+	// 		const usersItems = res.data.filter(user => user.id !== id)
+	// 		setUsers(usersItems)
+	// 	})
+	// }, [])
+
 	useEffect(() => {
-		axios.get('users/').then(res => {
-			const usersItems = res.data.filter(user => user.id !== id)
-			setUsers(usersItems)
-		})
-	}, [])
+		if(searchValue) {
+			axios.get(`/search/?search=${searchValue}`).then(res => {
+				const usersItems = res.data.user.filter(user => user.id !== id)
+				setUsers(usersItems)
+			})
+		}
+	}, [searchValue])
 
 	const sendMessage = e => {
 		e.preventDefault()
@@ -154,15 +163,12 @@ const Messages = ({ id }) => {
 			}
 			setIdRoom(res.data.id)
 			setHistory(delDuplicate(res.data.message_set))
-
-
-
-
 		})
 	}
 
 	const handleClick = () => {
 		setIsStartChat(false)
+		setIdRoom(null)
 		socketRef.current.close()
 	}
 
@@ -207,6 +213,7 @@ const Messages = ({ id }) => {
 										}}
 										key={i}
 									>
+
 										<UserMessage
 											username={talker.user.username}
 											avatar={talker.user.avatar}
@@ -215,9 +222,9 @@ const Messages = ({ id }) => {
 													? `Вы: ${talker.lastMessage.text}`
 													: talker.lastMessage.text
 											}
-											isUnread={talker.lastMessage.read === false}
+											isUnread={String(talker.lastMessage.read) === 'false'}
 										/>
-										<span>{!!talker.lastMessage.read}</span>
+										{/* <span>{String(talker.lastMessage.read)}</span> */}
 									</div>
 								))}
 						</div>
@@ -259,8 +266,10 @@ const Messages = ({ id }) => {
 										onClick={() => {
 											setSearchValue(user.username)
 											startChat(user.username)
+											setIdReceiver(user.id)
 										}}
 									>
+
 										<UserInfo
 											isSmall
 											username={user.username}

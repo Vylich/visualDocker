@@ -27,6 +27,7 @@ import Notification from './assets/pages/Notification'
 import ContinuePage from './assets/pages/СontinuePage'
 import WebSocketComponent from './assets/components/notifications.jsx'
 import ChangeAccount from './assets/pages/Settings/ChangeAccount/index.jsx'
+import SearchPage from './assets/pages/SearchPage/index.jsx'
 
 function App() {
 	const dispatch = useDispatch()
@@ -84,6 +85,7 @@ function App() {
 						<Route path='change-account' element={<ChangeAccount />} />
 					</Route>
 					<Route path='/search' element={<Search />} />
+					<Route path='/search/:id' element={<SearchPage />}/>
 					<Route path='/notification' element={<Notification />}>
 						<Route path='notices' element={<Confidentiality />} />
 						<Route path='messages' element={<Confidentiality />} />

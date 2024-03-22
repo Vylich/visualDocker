@@ -1,12 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './ChangeAccount.module.scss'
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import UserInfo from '../../../components/UserInfo'
+import { fetchLogin } from '../../../../redux/slices/auth'
 
 const ChangeAccount = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const [usersActive, setUsersActive] = useState([])
+
+	const onSubmit = username => {
+		const obj = usersActive.find(ob => ob.username === username)
+		window.localStorage.setItem('access', obj.access)
+		window.localStorage.setItem('refresh', obj.refresh)
+		dispatch(fetchLogin())
+		navigate('/home')
+	}
+
+	useEffect(() => {
+		const arrUsers = window.localStorage.getItem('users')
+		setUsersActive(JSON.parse(arrUsers))
+	}, [])
 
 	return (
 		<div className={styles.root}>

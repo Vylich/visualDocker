@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import styles from './Header.module.scss'
 import logo from '../../../img/logo/Logo.svg'
 import avatar from '../../../img/avatar-default.svg'
@@ -27,6 +27,7 @@ import useOnclickOutside from 'react-cool-onclickoutside'
 import WebSocketComponent from '../notifications'
 import Notif from '../Notif/Notif'
 import axios from '../../../axios'
+import { addSearch } from '../../../redux/slices/search'
 
 function Header() {
 	const [searchedText, setSearchedText] = useState('')
@@ -45,6 +46,7 @@ function Header() {
 	const unreadCount = useSelector(state => state.notif.unreadCount)
 	const unreadNotifCount = useSelector(state => state.notif.notificationsCount)
 
+	const [foundItems, setFoundItems] = useState(null)
 
 	const refs = [
 		useOnclickOutside(() => setNotificationsOpened(false)),
@@ -55,6 +57,7 @@ function Header() {
 	const { posts } = useSelector(state => state.posts)
 	const isPostsLoading = posts.status === 'loading'
 	const dispatch = useDispatch()
+	const navigate = useNavigate();
 	const hideNavOnClick = () => {
 		if (window.innerWidth < 1024) {
 			setIsNavVisible(false)
@@ -79,30 +82,26 @@ function Header() {
 	}
 
 	const handleSearch = () => {
-		setSearchOpened(!searchOpened)
+		setSearchOpened(true)
 		hideNavOnClick()
 	}
 
 	const onClickSearch = obj => {
 		setSearchedText(obj)
-		console.log(renderItems())
 	}
 
 	const onSubmit = e => {
 		e.preventDefault()
 		const filteredItems = itemsSearch.filter(str => str.trim() !== '')
-
 		setItemsSearch([...filteredItems, searchedText])
-		setSearchedText('')
-		console.log(itemsSearch)
+		setSearchOpened(false)
+		navigate(`/search/${searchedText}`)
 	}
 
 	const onDelete = obj => {
 		const filteredItems = itemsSearch.filter(item => item !== obj.obj)
 		setItemsSearch(filteredItems)
 		localStorage.removeItem('searchedItems')
-
-		console.log('gvbcx')
 	}
 
 	useEffect(() => {
@@ -117,6 +116,7 @@ function Header() {
 	useEffect(() => {
 		localStorage.setItem('searchedItems', JSON.stringify(itemsSearch))
 	}, [itemsSearch])
+
 	useEffect(() => {
 		dispatch(fetchPosts())
 	}, [])
@@ -137,12 +137,13 @@ function Header() {
 		)
 	}
 
-
 	useEffect(() => {
-		if (searchedText) {
-			axios.get(`/search/?search=${searchedText}`).then(res => cpnsole.log(res.data))
+		if(searchedText) {
+			axios.get(`/search/?search=${searchedText}`).then(res => {
+				setFoundItems(res.data)
+				dispatch(addSearch(res.data.post_tag))
+			})
 		}
-
 	}, [searchedText])
 
 	return (
@@ -150,7 +151,11 @@ function Header() {
 			{searchOpened && (
 				<div
 					className={styles.overlay}
-					onClick={() => setSearchOpened(false)}
+					onClick={() => {
+						setSearchOpened(false)
+						setSearchedText('')
+						setFoundItems(null)
+					}}
 				></div>
 			)}
 			<header className={styles.header}>
@@ -258,10 +263,17 @@ function Header() {
 									onDelete={onDelete}
 									isNavVisible={isNavVisible}
 									searchedItems={renderItems}
+									foundItems={foundItems}
+									searchedText={searchedText}
+									setSearchedText={setSearchedText}
+									onSubmit={onSubmit}
 								/>
 								<button
 									className={styles.clearBtn}
-									onClick={() => setSearchedText('')}
+									onClick={() => {
+										setSearchedText('')
+										setFoundItems(null)
+									}}
 								>
 									<FontAwesomeIcon icon={faXmark} />
 								</button>

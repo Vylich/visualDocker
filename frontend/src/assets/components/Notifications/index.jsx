@@ -13,7 +13,7 @@ const Notifications = () => {
 		axios.get('notifications/list/').then(res => {
 			dispatch(addNotificationsAll(res.data))
 			dispatch(removeNotificationsCount())
-		})
+		}).catch(dispatch(addNotificationsAll('')))
 	}, [])
 
 
@@ -23,7 +23,7 @@ const Notifications = () => {
 		<div className={styles.root}>
 			<div className={styles.wrapper}>
 				<h3>Обновления</h3>
-				{!!notifications.likes && (
+				{notifications ? (<>{!!notifications.likes && (
 					<>
 					{notifications.likes.map((like, i) => (
 						<Notification key={i} post={like.post} user={like.user} type={'like'}/>
@@ -43,7 +43,7 @@ const Notifications = () => {
 						<Notification key={i} user={follower.follower} type={'subscribe'}/>
 					))}
 					</>
-				)}
+				)}</>) : (<span className={styles.notificationNone}>Уведомлений нет</span>)}
 			</div>
 		</div>
 	)
