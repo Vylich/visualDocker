@@ -63,4 +63,9 @@ a, img {
   align-items: center;
   justify-content: center;
   height: 100vh;
+}
+
+#payment-form {
+  width: 500px;
+  height: 500px;
 }/*# sourceMappingURL=index.css.map */

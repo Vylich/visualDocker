@@ -20,14 +20,14 @@ class NotificationView(RetrieveModelMixin, ListModelMixin, UpdateModelMixin, Des
         if not check:
             return Response({'count_notification': count})
         else:
-            return Response({'message': 'Новых уведомлений нет'})
+            return count
 
     def push(self, request):
         count = self.count_notification(request, check=True)
         if not count:
             return Response({'message': 'Новых уведомлений нет'})
         else:
-            return Response({'count_notification': count})
+            return Response(count)
 
     def list(self, request):
         user = request.user

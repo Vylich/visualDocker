@@ -214,6 +214,7 @@ a.logo img {
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
+  position: relative;
 }
 @media (max-width: 1024px) {
   .link {
@@ -277,4 +278,8 @@ a.linkMobile {
   a.linkMobile {
     display: flex;
   }
+}
+
+.ava {
+  border-radius: 50%;
 }/*# sourceMappingURL=Header.module.css.map */

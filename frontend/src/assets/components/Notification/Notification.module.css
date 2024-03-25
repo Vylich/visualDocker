@@ -66,6 +66,10 @@
   justify-content: center;
   margin-top: 20px;
 }
+.postImg a {
+  width: 100%;
+  height: auto;
+}
 .postImg img {
   width: 100%;
   height: auto;

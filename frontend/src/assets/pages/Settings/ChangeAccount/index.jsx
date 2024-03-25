@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './ChangeAccount.module.scss'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import UserInfo from '../../../components/UserInfo'
 import { fetchLogin } from '../../../../redux/slices/auth'
@@ -9,6 +9,14 @@ const ChangeAccount = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const [usersActive, setUsersActive] = useState([])
+	const isUserDataLoaded = state => state.auth.data !== null
+	const userData = useSelector(state =>
+		isUserDataLoaded(state) ? state.auth.data.user : null
+	)
+
+	useEffect(() => {
+		dispatch(fetchLogin())
+	}, [])
 
 	const onSubmit = username => {
 		const obj = usersActive.find(ob => ob.username === username)
@@ -25,16 +33,16 @@ const ChangeAccount = () => {
 
 	return (
 		<div className={styles.root}>
-				<div className={styles.block}>
+			<div className={styles.block}>
 				<span>Сейчас:</span>
-				{user && (
-					<Link to={`/profile/${user.id}`}>
+				{userData && (
+					<Link to={`/profile/${userData.id}`}>
 						<UserInfo
-							username={user.username}
+							username={userData.username}
 							// fullname={user.first_name}
-							avatar={user.avatar ? user.avatar : null}
-							email={user.email}
-							userId={user.id}
+							avatar={userData.avatar ? userData.avatar : null}
+							email={userData.email}
+							userId={userData.id}
 							isSmall
 						/>
 					</Link>
@@ -42,7 +50,7 @@ const ChangeAccount = () => {
 			</div>
 			<div className={styles.block}>
 				<span>Ваши аккаунты</span>
-				{user && (
+				{userData && (
 					<>
 						{usersActive &&
 							usersActive.map((item, i) => (
@@ -50,7 +58,7 @@ const ChangeAccount = () => {
 									key={i}
 									className={styles.link}
 									onClick={() => onSubmit(item.username)}
-									style={{ display: item.username === user.username && 'none' }}
+									style={{ display: item.username === userData.username && 'none' }}
 								>
 									<UserInfo
 										isSmall

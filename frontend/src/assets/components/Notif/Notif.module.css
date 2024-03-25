@@ -1,0 +1,23 @@
+.root {
+  position: absolute;
+  top: 0;
+  right: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3453f;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+}
+
+.rootTab {
+  right: -15px;
+  top: -5px;
+}
+
+.notif {
+  font-size: 10px;
+  font-weight: 600;
+  color: #ffffff;
+}/*# sourceMappingURL=Notif.module.css.map */

@@ -28,6 +28,7 @@
 .rootContinue img {
   width: 30px;
   height: 30px;
+  border-radius: 50%;
 }
 .rootContinue .userName {
   font-size: 16px;
@@ -45,6 +46,7 @@
 .rootSmall img {
   width: 60px;
   height: 60px;
+  border-radius: 50%;
 }
 .rootSmall .email {
   padding: 0;
@@ -93,6 +95,7 @@
 .rootFull img {
   width: 50px;
   height: 50px;
+  border-radius: 50%;
 }
 
 .userName {

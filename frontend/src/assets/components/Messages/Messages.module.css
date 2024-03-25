@@ -12,22 +12,11 @@
     z-index: 1;
     height: 100%;
     padding-bottom: 0;
+    margin-bottom: 0;
   }
 }
 .root form {
   width: 100%;
-}
-
-.notif {
-  background-color: #7a4ad8;
-  border-radius: 50%;
-  width: 15px;
-  height: 15px;
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  color: #ffffff;
-  font-size: 12px;
 }
 
 .messages {
@@ -39,8 +28,16 @@
   margin-top: auto;
   scrollbar-width: thin;
 }
+@media (max-width: 1024px) {
+  .messages {
+    height: calc(100% - 72px);
+    max-height: calc(100% - 72px);
+    margin-top: 0;
+  }
+}
 
-.myMessage, .userMessage {
+.myMessage,
+.userMessage {
   position: relative;
   display: flex;
   max-width: 300px;
@@ -136,7 +133,8 @@
   .wrapper {
     box-shadow: none;
     padding: 0;
-    margin-top: 20px;
+    height: 100%;
+    margin-top: 0;
   }
 }
 .wrapper button {
@@ -285,6 +283,7 @@
 .usersList {
   max-height: 100%;
   width: 100%;
+  overflow: scroll;
 }
 
 .linkUser {
@@ -299,6 +298,7 @@
 .linkUser img {
   width: 30px;
   height: 30px;
+  border-radius: 50%;
 }
 .linkUser span {
   font-size: 20px;
@@ -306,6 +306,12 @@
 
 .talkers {
   width: 100%;
+}
+@media (max-width: 1024px) {
+  .talkers {
+    max-height: 60%;
+    overflow: scroll;
+  }
 }
 
 .talker {

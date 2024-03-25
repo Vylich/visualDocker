@@ -37,6 +37,7 @@
     margin-top: 20px;
     gap: 20px;
     height: 100%;
+    box-shadow: none;
   }
 }
 .wrapper h3 {
@@ -47,4 +48,11 @@
   .wrapper h3 {
     display: none;
   }
+}
+
+.notificationNone {
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }/*# sourceMappingURL=Notification.module.css.map */

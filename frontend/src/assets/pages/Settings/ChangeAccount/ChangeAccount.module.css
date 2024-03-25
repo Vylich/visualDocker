@@ -1,0 +1,50 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 30px;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.block span {
+  font-size: 12px;
+  padding: 8px;
+}
+.block a {
+  min-height: 36px;
+  height: auto;
+  padding: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 8px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  color: #000000;
+}
+@media (hover: hover) {
+  .block a:hover {
+    background-color: #e1e1e1;
+  }
+}
+
+.link {
+  cursor: pointer;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  background-color: transparent;
+}
+.link div {
+  pointer-events: none;
+}
+@media (hover: hover) {
+  .link:hover {
+    background-color: #e1e1e1;
+  }
+}/*# sourceMappingURL=ChangeAccount.module.css.map */
