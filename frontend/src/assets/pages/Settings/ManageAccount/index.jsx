@@ -173,6 +173,7 @@ const ManageAccount = ({
             </div>
             <button onClick={delAccount}>Удалить аккаунт</button>
           </div>
+          <div id="payment-form"></div>
         </div>
       </div>
     </div>

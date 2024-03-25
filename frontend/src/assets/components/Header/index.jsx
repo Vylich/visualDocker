@@ -95,7 +95,9 @@ function Header() {
 		const filteredItems = itemsSearch.filter(str => str.trim() !== '')
 		setItemsSearch([...filteredItems, searchedText])
 		setSearchOpened(false)
-		navigate(`/search/${searchedText}`)
+		if (searchedText !== '') {
+			navigate(`/search/${searchedText}`)
+		}
 	}
 
 	const onDelete = obj => {
@@ -153,7 +155,7 @@ function Header() {
 					className={styles.overlay}
 					onClick={() => {
 						setSearchOpened(false)
-						setSearchedText('')
+						// setSearchedText('')
 						setFoundItems(null)
 					}}
 				></div>

@@ -172,4 +172,12 @@
 	display: flex;
 	gap: 3px;
 	align-items: center;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.searchWrap {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 }

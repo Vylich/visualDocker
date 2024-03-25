@@ -15,6 +15,8 @@ instance.interceptors.request.use(config => {
 		const decodedToken = jwtDecode(token)
 		const currentTime = Math.floor(Date.now() / 1000)
 
+
+
 		const refreshToken = () => {
 			const refresh = window.localStorage.getItem('refresh')
 
@@ -45,10 +47,10 @@ instance.interceptors.request.use(config => {
 		if (decodedToken.exp <= currentTime) {
 			refreshToken()
 		}
-
 		if (!config.skipAuthorization) {
 			config.headers.Authorization = `Bearer ${token}`
 		}
+
 	}
 
 	return config

@@ -46,6 +46,10 @@ const Search = ({
 		}
 	}, [searchedText])
 
+	const navigateToSearchedItems = (item) => {
+		navigate(`/search/${item}`)
+	}
+
 	return (
 		<div className={styles.root}>
 			{!isNavVisible && (
@@ -84,7 +88,7 @@ const Search = ({
 					{foundItems &&
 						foundItems.post_tag &&
 						foundItems.post_tag.map((item, i) => (
-							<div className={styles.searchedItem} key={i}><FontAwesomeIcon
+							<div className={styles.searchedItem} onClick={() => navigateToSearchedItems(item.name)} key={i}><FontAwesomeIcon
 							className={styles.iconSearched}
 							icon={faMagnifyingGlass}
 						/><span>{item.name}</span></div>

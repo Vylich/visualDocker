@@ -83,6 +83,7 @@ const AddPost = () => {
 
 
 	const handleChangeFile = evt => {
+		console.log(evt.target.files)
 		Array.from(evt.target.files).filter(file => file.type.includes('image')).forEach(item => {
 			setImage(prev => [...prev, item])
 		})
@@ -150,7 +151,7 @@ const AddPost = () => {
 			const { data } = isEditing
 				? await axios.patch(`/posts/${id}/`, formData)
 				: await axios.post('/posts/', formData)
-
+				console.log(data)
 			navigate(`/posts/${data.slug}`)
 		} catch (err) {
 			console.warn(err)
@@ -165,6 +166,9 @@ const AddPost = () => {
 				.then(({ data }) => {
 					setTitle(data.name)
 					setImageUrl(data.image)
+					setImage(data.image)
+					setVideoUrls(data.video)
+					setVideo(data.video)
 					setText(data.text)
 					setTags(data.tags.join(','))
 				})
@@ -299,8 +303,8 @@ const AddPost = () => {
 										>
 											<img
 												className={styles.image}
-												src={`${link}`}
-												alt='Uploaded'
+												src={isEditing && typeof link === 'object' ? `${link.image}` :`${link}`}
+												alt={'uploaded'}
 												style={{ aspectRatio: aspectRatio[link] }}
 											/>
 										</SwiperSlide>
@@ -313,7 +317,7 @@ const AddPost = () => {
 										>
 											<video
 												className={styles.video}
-												src={`${link}`}
+												src={isEditing && typeof link === 'object' ? `${link.video}` :`${link}`}
 												autoPlay
 												controls
 												style={{ aspectRatio: aspectRatio[link] }}
