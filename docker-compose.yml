@@ -1,6 +1,6 @@
 services:
   db:
-    container_name: "postgres"
+    container_name: 'postgres'
     image: postgres
     restart: always
     environment:
@@ -8,31 +8,31 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123456
     ports:
-      - "5432:5432"
+      - '5432:5432'
     # networks:
     #   - visual
   frontend:
-    container_name: "frontend"
+    container_name: 'frontend'
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    environment:
-      VITE_APP_API_URL: api:8000
+    # environment:
+    #   VITE_APP_API_URL: api:8000
     ports:
-      - "80:8010"
-      - "3000:3000"
+      - '80:8010'
+      - '3000:3000'
     depends_on:
       api:
         condition: service_started
     # networks:
     #   - visual
   api:
-    container_name: "backend"
+    container_name: 'backend'
     build:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - '8000:8000'
     depends_on:
       db:
         condition: service_started
@@ -40,7 +40,7 @@ services:
     #   - visual
 
   redis:
-    container_name: "redis"
+    container_name: 'redis'
     image: redis
     restart: always
     ports:
@@ -50,9 +50,6 @@ services:
         condition: service_started
     # networks:
     #   - visual
-
-
-
 # networks:
 #   visual:
 #     driver: bridge

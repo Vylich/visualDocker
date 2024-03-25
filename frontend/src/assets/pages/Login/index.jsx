@@ -74,6 +74,7 @@ export const Login = () => {
       const user = await dispatch(fetchLogin());
       if (user.payload) {
         const users = JSON.parse(localStorage.getItem("users")) || [];
+        navigate("/home");
         if (
           !users.find((item) => item.username === user.payload.user.username)
         ) {
