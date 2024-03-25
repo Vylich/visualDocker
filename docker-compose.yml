@@ -1,4 +1,16 @@
 services:
+  db:
+    container_name: "postgres"
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: visual
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - "5432:5432"
+    # networks:
+    #   - visual
   frontend:
     container_name: "frontend"
     build:
@@ -10,7 +22,8 @@ services:
       - "80:8010"
       - "3000:3000"
     depends_on:
-      - api
+      api:
+        condition: service_started
     # networks:
     #   - visual
   api:
@@ -27,28 +40,18 @@ services:
     #   - visual
 
   redis:
-    container_name: "visual-redis"
+    container_name: "redis"
     image: redis
     restart: always
     ports:
       - '6379:6379'
     depends_on:
-      - api
+      db:
+        condition: service_started
     # networks:
     #   - visual
 
-  db:
-    container_name: "visual-pg"
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_DB: visual
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 123456
-    ports:
-      - "5432:5432"
-    # networks:
-    #   - visual
+
 
 # networks:
 #   visual:
