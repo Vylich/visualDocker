@@ -86,6 +86,7 @@ export const Columns = ({ posts, loading }) => {
 const Home = () => {
 	const dispatch = useDispatch()
 	const isAuth = useSelector(selectIsAuth)
+	const posts = useSelector(state => state.posts.posts.items)
 	const authStatus = useSelector(selectIsAuthStatus)
 	const [postsState, setPostsState] = useState([])
 
@@ -107,13 +108,8 @@ const Home = () => {
 	useEffect(() => {
 		if (inView) {
 			setLoadingPost(true)
-			axios
-				.get('posts')
-				.then(res => {
-					setPostsState([...postsState, ...res.data])
-					setLoadingPost(false)
-					console.log(res.data)
-				})
+			dispatch(fetchPosts())
+			setLoadingPost(false)
 		}
 	}, [inView])
 
@@ -128,8 +124,8 @@ const Home = () => {
 
 	return (
 		<div className={styles.root}>
-			{loading ? <Loading /> : <Columns posts={postsState} loading={loadingPost} />}
-			{/* <div style={{width: '100%', height: '10px'}} ref={ref} /> */}
+			{loading ? <Loading /> : <Columns posts={posts} loading={loadingPost} />}
+			<div style={{width: '100%', height: '10px'}} ref={ref} />
 		</div>
 	)
 }

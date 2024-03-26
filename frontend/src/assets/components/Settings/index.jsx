@@ -6,6 +6,7 @@ import { fetchLogin, logout } from '../../../redux/slices/auth'
 import avatarDefault from '../../../img/avatar-default.svg'
 import { useEffect, useState } from 'react'
 import { clearMessages } from '../../../redux/slices/notification'
+import { fetchPosts } from '../../../redux/slices/posts'
 
 const Settings = ({ user, handleSettings }) => {
 	const dispatch = useDispatch()
@@ -31,6 +32,7 @@ const Settings = ({ user, handleSettings }) => {
 			}
 			handleSettings()
 			dispatch(clearMessages());
+
 		}
 	}
 
@@ -40,6 +42,7 @@ const Settings = ({ user, handleSettings }) => {
 		window.localStorage.setItem('refresh', obj.refresh)
 		dispatch(fetchLogin())
 		navigate('/home')
+		dispatch(fetchPosts())
 	}
 
 	useEffect(() => {
