@@ -101,8 +101,12 @@
 
 .fieldBusiness {
 	display: flex;
-	align-items: center;
-	gap: 30px;
+	flex-direction: column;
+
+	h4 {
+		font-size: 20px;
+		margin-bottom: 20px;
+	}
 
 	@include vp-1023 {
 		flex-direction: column;
@@ -159,4 +163,21 @@
 	display: flex;
 	align-items: center;
 	gap: 5px;
+}
+
+.subsTitle {
+	font-weight: 600;
+	margin-right: 10px;
+}
+
+.subsWrap {
+	display: flex;
+
+	align-items: end;
+}
+
+.subsBlock {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 }

@@ -28,6 +28,8 @@ import ContinuePage from './assets/pages/СontinuePage'
 import WebSocketComponent from './assets/components/notifications.jsx'
 import ChangeAccount from './assets/pages/Settings/ChangeAccount/index.jsx'
 import SearchPage from './assets/pages/SearchPage/index.jsx'
+import Subs from './assets/pages/Subs/index.jsx'
+import SuccessfulPage from './assets/pages/Subs/SuccessfulPage.jsx'
 
 function App() {
 	const dispatch = useDispatch()
@@ -90,6 +92,8 @@ function App() {
 						<Route path='notices' element={<Confidentiality />} />
 						<Route path='messages' element={<Confidentiality />} />
 					</Route>
+					<Route path='/subs' element={<Subs />} />
+					<Route path='/subs/successful' element={<SuccessfulPage />} />
 				</Routes>
 			</div>
 		</>

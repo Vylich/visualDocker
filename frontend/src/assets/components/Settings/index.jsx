@@ -89,6 +89,7 @@ const Settings = ({ user, handleSettings }) => {
 			</div>
 			<div className={styles.block}>
 				<span>Дополнительно</span>
+				<Link to='/subs'>Купить подписку</Link>
 				<Link to='/settings/manage-account'>Настройки</Link>
 				<Link to='/terms-of-service'>Условия предоставления услуг</Link>
 				<Link to='/privacy-policy'>Политика конфиденциальности</Link>
