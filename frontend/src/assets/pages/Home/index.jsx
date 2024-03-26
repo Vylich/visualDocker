@@ -129,7 +129,7 @@ const Home = () => {
 	return (
 		<div className={styles.root}>
 			{loading ? <Loading /> : <Columns posts={postsState} loading={loadingPost} />}
-			<div style={{width: '100%', height: '10px'}} ref={ref} />
+			{/* <div style={{width: '100%', height: '10px'}} ref={ref} /> */}
 		</div>
 	)
 }
