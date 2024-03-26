@@ -20,7 +20,7 @@ import Messages from '../Messages'
 import Notifications from '../Notifications'
 import Search from '../Search'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchPosts } from '../../../redux/slices/posts'
+
 import Card from '../SearchigCard'
 import { fetchLogin, selectIsAuth } from '../../../redux/slices/auth'
 import useOnclickOutside from 'react-cool-onclickoutside'
@@ -119,9 +119,6 @@ function Header() {
 		localStorage.setItem('searchedItems', JSON.stringify(itemsSearch))
 	}, [itemsSearch])
 
-	useEffect(() => {
-		dispatch(fetchPosts())
-	}, [])
 
 	const renderItems = () => {
 		const filtredItems = posts.items.filter(item =>

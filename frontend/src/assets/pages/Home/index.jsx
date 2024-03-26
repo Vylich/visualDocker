@@ -98,29 +98,18 @@ const Home = () => {
 		threshold: 0,
 	})
 
-	useEffect(() => {
-		axios.get('posts').then(res => {
-			setPostsState(res.data)
-			setLoading(false)
-
-		})
-	}, [])
+	// useEffect(() => {
+	// 	dispatch(fetchPosts())
+	// 	setLoading(false)
+	// }, [])
 	useEffect(() => {
 		if (inView) {
 			setLoadingPost(true)
 			dispatch(fetchPosts())
 			setLoadingPost(false)
+			setLoading(false)
 		}
 	}, [inView])
-
-	// if (authStatus === 'error' && window.localStorage.getItem('refresh')) {
-	// 	return <Navigate to='/continue' />
-	// } else if (
-	// 	authStatus === 'error' &&
-	// 	!window.localStorage.getItem('refresh')
-	// ) {
-	// 	return <Navigate to='/login' />
-	// }
 
 	return (
 		<div className={styles.root}>
