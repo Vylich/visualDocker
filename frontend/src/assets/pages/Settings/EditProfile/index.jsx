@@ -86,7 +86,7 @@ const EditProfile = ({
                 imageUrl
                   ? imageUrl
                   : image
-                    ? `http://127.0.0.1:8000${image}`
+                    ? `${import.meta.env.VITE_APP_API_URL}${image}`
                     : avatarDefault
               }
               alt="Avatar"

@@ -27,9 +27,6 @@ export const Registration = () => {
     watch,
   } = useForm({
     defaultValues: {
-      phone: "+7",
-      first_name: "",
-      last_name: "",
       username: "",
       password: "",
       password2: "",
@@ -125,12 +122,27 @@ export const Registration = () => {
             placeholder="Фамилия"
             {...register("last_name", { required: "Укажите фамилию" })}
           /> */}
+          <div className={styles.field}>
           <input
             type="text"
             required
             placeholder="Имя пользователя"
-            {...register("username", { required: "Укажите имя пользователя" })}
+            {...register("username", {  required: "Имя пользователя обязательно",
+            minLength: {
+              value: 4,
+              message: "Имя пользователя должно быть не менее 4 символов"
+            },
+            maxLength: {
+              value: 20,
+              message: "Имя пользователя должно быть не более 20 символов"
+            },
+            pattern: {
+              value: /^[A-Za-z_=\-><\*#!.]+$/i,
+              message: "Только латиница без пробелов"
+            } })}
           />
+          {errors.username && <span className={styles.error}>{errors.username.message}</span>}
+          </div>
           <div className={styles.field}>
             <input
               type={typePass}

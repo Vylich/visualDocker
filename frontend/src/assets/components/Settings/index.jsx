@@ -55,7 +55,6 @@ const Settings = ({ user, handleSettings }) => {
 					<Link to={`/profile/${user.id}`}>
 						<UserInfo
 							username={user.username}
-							// fullname={user.first_name}
 							avatar={user.avatar ? user.avatar : null}
 							email={user.email}
 							userId={user.id}

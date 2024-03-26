@@ -91,12 +91,12 @@ function UserInfo({
 			}
 		} catch (err) {
 			console.warn(err)
-			alert('Bad create comment')
+			alert('Не удалось отправить комментарий')
 		}
 	}
 
 	const onClickRemove = () => {
-		if (window.confirm('Are you sure you want remove post?')) {
+		if (window.confirm('Вы правда зотите удалить пост?')) {
 			dispatch(fetchRemovePost(id))
 			navigate('/')
 		}
@@ -113,14 +113,22 @@ function UserInfo({
 			{!isProfile && !isSmall ? (
 				<Link to={`/profile/${userId}`}>
 					<img
-						src={avatar ? `${import.meta.env.VITE_APP_API_URL}${avatar}` : avatarDefault}
-						alt={`Аватар пользователя ${fullname}`}
+						src={
+							avatar
+								? `${import.meta.env.VITE_APP_API_URL}${avatar}`
+								: avatarDefault
+						}
+						alt={`Аватар пользователя ${username}`}
 					/>
 				</Link>
 			) : (
 				<img
-					src={avatar ? `${import.meta.env.VITE_APP_API_URL}${avatar}` : avatarDefault}
-					alt={`Аватар пользователя ${fullname}`}
+					src={
+						avatar
+							? `${import.meta.env.VITE_APP_API_URL}${avatar}`
+							: avatarDefault
+					}
+					alt={`Аватар пользователя ${username}`}
 				/>
 			)}
 			<div className={styles.userDetails}>
@@ -129,7 +137,11 @@ function UserInfo({
 						<span className={styles.userName}>@{username}</span>
 					</Link>
 				) : (
-					<span className={styles.userName}>@{username}</span>
+					<>
+						<span className={styles.userName}>@{username}</span>
+						<span className={styles.fullname}>{fullname}</span>
+
+					</>
 				)}
 				{posts && (
 					<div className={styles.additionals}>

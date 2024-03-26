@@ -44,7 +44,7 @@ const Notification = ({ type, post, user, avatar }) => {
 					</header>
 					<div className={styles.postImg}>
 					<Link to={`/posts/${post.slug}`}>
-						<img src={post.image ? `${import.meta.env.VITE_APP_API_URL}${post.image[0].image}` : ''} alt='' />
+						{post.image[0] ? <img src={`${import.meta.env.VITE_APP_API_URL}${post.image[0].image}`} alt='' /> : <video src={`${import.meta.env.VITE_APP_API_URL}${post.video[0].video}`} alt='' />}
 						</Link>
 					</div>
 				</>

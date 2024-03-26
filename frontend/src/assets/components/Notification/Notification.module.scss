@@ -34,6 +34,7 @@
 	width: 70px;
 	height: 70px;
 	flex-shrink: 0;
+	object-fit: cover;
 
 	@include vp-1023 {
 		border-radius: 50%;

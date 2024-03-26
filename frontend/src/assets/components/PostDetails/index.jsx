@@ -67,9 +67,7 @@ const PostDetails = ({
 	return (
 		<div className={styles.root}>
 			<UserInfo
-				avatarUrl={'/avatar-default.svg'}
 				username={username}
-				fullname={'dddsd'}
 				userId={userId}
 				avatar={userdata && userdata.avatar ? userdata.avatar : null}
 				isPost

@@ -21,59 +21,60 @@ const WebSocketComponent = () => {
 	const isAuth = useSelector(selectIsAuth)
 
 	useEffect(() => {
+		// Функция для создания WebSocket соединения
+		const createWebSocketConnection = () => {
+				const accessToken = window.localStorage.getItem('access');
+				if (!accessToken) return; // Если токена нет, не создаем соединение
 
-			// Функция для создания WebSocket соединения
-			const createWebSocketConnection = () => {
 				wsRef.current = new WebSocket(
-					`${
-						import.meta.env.VITE_APP_WS_URL
-					}/ws/notifications/?token=${window.localStorage.getItem('access')}`
-				)
+						`${import.meta.env.VITE_APP_WS_URL}/ws/notifications/?token=${accessToken}`
+				);
 
 				// Подключение
 				wsRef.current.onopen = () => {
-					console.log('Подключено к WebSocket')
-				}
+						console.log('Подключено к WebSocket');
+				};
 
 				// Обработка входящих сообщений
-				wsRef.current.onmessage = event => {
-					const data = JSON.parse(event.data)
-					dispatch(addUnreadMessage(data))
-					console.log(data)
+				wsRef.current.onmessage = (event) => {
+						const data = JSON.parse(event.data);
+						dispatch(addUnreadMessage(data));
+						console.log(data);
 
-					if (data.type === 'unread_type') {
-						dispatch(addUnreadCount(Number(data.unread_count)))
-					}
+						if (data.type === 'unread_type') {
+								dispatch(addUnreadCount(Number(data.unread_count)));
+						}
 
-					if (data.type === 'unread_count') {
-						dispatch(updateUnreadCount(data.unread_count))
-					}
+						if (data.type === 'unread_count') {
+								dispatch(updateUnreadCount(data.unread_count));
+						}
 
-					if (data.type === 'new_message_notification') {
-						dispatch(incrementUnreadCount())
-					}
+						if (data.type === 'new_message_notification') {
+								dispatch(incrementUnreadCount());
+						}
+				};
+		};
+
+		// Создаем соединение при монтировании компонента и при изменении состояния авторизации или токена
+		createWebSocketConnection();
+
+		// Функция для переподключения в случае разрыва связи
+		const handleReconnect = () => {
+				if (!wsRef.current || wsRef.current.readyState === WebSocket.CLOSED) {
+						createWebSocketConnection();
 				}
-			}
+		};
 
-			// Создаем соединение при монтировании компонента
-			createWebSocketConnection()
+		// Проверяем состояние соединения и переподключаемся, если необходимо
+		const interval = setInterval(handleReconnect, 5000); // Каждые 5 секунд
 
-			// Функция для переподключения в случае разрыва связи
-			const handleReconnect = () => {
-				if (!wsRef.current || wsRef.current.readyState === WebSocket.CLOSED && isAuth) {
-					createWebSocketConnection()
-				}
-			}
+		return () => {
+				clearInterval(interval);
+				wsRef.current?.close();
+		};
 
-			// Проверяем состояние соединения и переподключаемся, если необходимо
-			const interval = setInterval(handleReconnect, 5000) // Каждые 5 секунд
-
-			return () => {
-				clearInterval(interval)
-				wsRef.current?.close()
-			}
-
-	}, [])
+// Добавляем isAuth и токен в массив зависимостей, чтобы useEffect реагировал на их изменения
+}, [window.localStorage.getItem('access')]);
 
 	useEffect(() => {
 		const fetchData = async () => {

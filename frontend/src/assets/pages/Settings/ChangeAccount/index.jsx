@@ -39,7 +39,6 @@ const ChangeAccount = () => {
 					<Link to={`/profile/${userData.id}`}>
 						<UserInfo
 							username={userData.username}
-							// fullname={user.first_name}
 							avatar={userData.avatar ? userData.avatar : null}
 							email={userData.email}
 							userId={userData.id}

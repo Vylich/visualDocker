@@ -110,7 +110,7 @@ function UserProfile() {
 				<UserInfo
 					avatar={otherUserData.avatar}
 					username={otherUserData.username}
-					fullName={otherUserData.first_name}
+					fullname={`${otherUserData.first_name} ${otherUserData.last_name}`}
 					followers={followers}
 					subscriptions={subscriptions}
 					isFollow={isFollow}
