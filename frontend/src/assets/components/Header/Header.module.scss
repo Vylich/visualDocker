@@ -24,6 +24,7 @@
 
 .avatar {
 	border-radius: 50%;
+	flex-shrink: 0;
 }
 
 .searchedItems {
@@ -277,4 +278,10 @@ a.linkMobile {
 .ava {
 	border-radius: 50%;
 	object-fit: cover;
+	flex-shrink: 0;
+
+	@include vp-1023 {
+		width: 20px;
+		height: 20px;
+	}
 }
