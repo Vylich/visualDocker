@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { fetchRegister, selectIsAuth } from "../../../redux/slices/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -19,6 +19,7 @@ export const Registration = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isShowPass, setIsShowPass] = useState(false);
   const [typePass, setTypePass] = useState("password");
+  const navigate = useNavigate();
 
   const {
     register,
@@ -53,13 +54,12 @@ export const Registration = () => {
     const data = await dispatch(fetchRegister(values));
 
     if (!data.payload) {
-      console.log();
-      return alert("Bad log in");
+      return alert("Не удалось зарегистрироваться");
+    } else {
+      navigate("/login");
     }
 
-    if ("access" in data.payload) {
-      window.localStorage.setItem("access", data.payload.access);
-    }
+
   };
 
 

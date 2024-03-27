@@ -22,12 +22,14 @@ const Post = ({
 	images,
 	videos,
 	slug,
-	loading,
+	i
 }) => {
 	const [aspectRatio, setAspectRatio] = useState({})
 	const [aspectRatioHome, setAspectRatioHome] = useState({})
 	const videoRef = useRef(null)
 	const [isPlaying, setIsPlaying] = useState(false)
+	const [isLoaded, setIsLoaded] = useState(false);
+
 
 	function getMeta(url, callback) {
 		const img = new Image()
@@ -46,6 +48,20 @@ const Post = ({
 		videoRef.current.pause()
 		setIsPlaying(false)
 	}
+
+	useEffect(() => {
+		if(!isFullPost && images.length) {
+			const image = new Image();
+		image.src = `${import.meta.env.VITE_APP_API_URL}${images[0].image}`;
+    image.onload = () => setIsLoaded(true);
+		} else if (!isFullPost && videos) {
+			const video = document.createElement('video');
+			video.src = `${import.meta.env.VITE_APP_API_URL}${videos[0].video}`;
+			video.oncanplaythrough = () => setIsLoaded(true);
+		}
+
+
+	}, [images, videos])
 
 	useEffect(() => {
 		if (images && isFullPost) {
@@ -127,7 +143,7 @@ const Post = ({
 										src={link.image}
 										crossOrigin='anonymous'
 										loading='lazy'
-										alt={title}
+										alt={`${title}${i}`}
 									/>
 								</SwiperSlide>
 							))}
@@ -147,13 +163,14 @@ const Post = ({
 			) : (
 				<SwiperSlide className='swiper-slide-active'>
 					<Link className={styles.link} to={`/posts/${slug}`}>
-						{loading ? (
+						{!isLoaded ? (
 							<div className={styles.loading}>
 								<Loading />
 							</div>
 						) : (
 							<>
 								{images && images.length ? (
+									<>
 									<img
 										className={clsx(styles.image, {
 											[styles.imageFull]: isFullPost,
@@ -166,10 +183,11 @@ const Post = ({
 												],
 										}}
 										src={`${import.meta.env.VITE_APP_API_URL}${images[0].image}`}
-										alt={title}
+										alt={`${i}`}
 										crossOrigin='anonymous'
 										loading='lazy'
 									/>
+									</>
 								) : (
 									<>
 										{videos && videos[0] && (

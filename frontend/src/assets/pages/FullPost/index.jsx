@@ -16,7 +16,10 @@ const FullPost = () => {
   const [isLiked, setIsLiked] = useState(null);
   const navigate = useNavigate()
 
-  const userData = useSelector((state) => state.auth.data);
+	const isUserDataLoaded = state => state.auth.data !== null
+	const userdata = useSelector(state =>
+		isUserDataLoaded(state) ? state.auth.data.user : null
+	)
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -51,13 +54,14 @@ const FullPost = () => {
   }, []);
 
   useEffect(() => {
-    axios
+    if (userdata) {
+      axios
       .get(`/posts/${id}/likes/`)
       .then((res) => {
         setLikes(res.data.length);
 
         if (
-          res.data.some((item) => Number(item.id) === Number(userData.user.id))
+          res.data.some((item) => Number(item.id) === Number(userdata.id))
         ) {
           return setIsLiked(true);
         }
@@ -65,7 +69,8 @@ const FullPost = () => {
       .catch((err) => {
         console.error(err);
       });
-  }, [isLiked]);
+    }
+  }, [userdata]);
 
   const onSubmit = async (text, setText) => {
     try {

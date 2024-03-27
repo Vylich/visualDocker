@@ -6,6 +6,7 @@ import { faLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../../../redux/slices/auth'
 import { clearMessages } from '../../../../redux/slices/notification'
+import { removePostsState } from '../../../../redux/slices/posts'
 
 const NavSettings = ({ isNavVisible, hideNavOnClick, isNavVisibleOnClick }) => {
 
@@ -35,6 +36,7 @@ const NavSettings = ({ isNavVisible, hideNavOnClick, isNavVisibleOnClick }) => {
 				window.localStorage.removeItem('users')
 			}
 			dispatch(clearMessages());
+			dispatch(removePostsState())
 		}
 	}
 

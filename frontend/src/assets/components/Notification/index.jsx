@@ -3,10 +3,16 @@ import styles from './Notification.module.scss'
 import axios from '../../../axios'
 import avatarDefault from '../../../img/avatar-default.svg'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 const Notification = ({ type, post, user, avatar }) => {
 	const [userState, setUser] = useState({})
 	const [postState, setPost] = useState({})
+	const isUserDataLoaded = state => state.auth.data !== null
+	const userdata = useSelector(state =>
+		isUserDataLoaded(state) ? state.auth.data.user : null
+	)
+
 
 	useEffect(() => {
 		if (type === 'like' || type === 'subscribe') {
@@ -26,7 +32,7 @@ const Notification = ({ type, post, user, avatar }) => {
 
 	return (
 		<div className={styles.root}>
-			{type === 'like' && (
+			{type === 'like' && user !== userdata.id &&  (
 				<>
 					<header className={styles.header}>
 						<Link to={`/profile/${user}`}><img
@@ -49,7 +55,7 @@ const Notification = ({ type, post, user, avatar }) => {
 					</div>
 				</>
 			)}
-			{type === 'comment' && (
+			{type === 'comment' && user !== userdata.username && (
 				<>
 					<header className={styles.header}>
 						<Link to={`/profile/${user}`}><img
@@ -80,6 +86,7 @@ const Notification = ({ type, post, user, avatar }) => {
 							className={styles.avatar}
 							src={userState.avatar ? `${import.meta.env.VITE_APP_API_URL}${userState.avatar}` : avatarDefault}
 							alt=''
+
 						/>
 						</Link>
 						<p>

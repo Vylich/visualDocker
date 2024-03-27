@@ -23,7 +23,7 @@ const AddComment = ({
                 value={textComment}
                 onChange={(e) => setTextComment(e.target.value)}
               />
-              <button
+              <button disabled={!textComment}
                 onClick={() => {
                   onSubmitChild(
                     textComment,
@@ -32,6 +32,7 @@ const AddComment = ({
                     setIsAnswer,
                     user,
                   );
+                  setTextComment('')
                 }}
               >
                 Отправить
@@ -46,7 +47,10 @@ const AddComment = ({
                 value={text}
                 onChange={(e) => setText(e.target.value)}
               />
-              <button onClick={() => onSubmit(text, setText)}>Отправить</button>
+              <button disabled={!text} onClick={() => {
+                onSubmit(text, setText)
+                setText('')
+              }}>Отправить</button>
             </>
           )}
         </div>

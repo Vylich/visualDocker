@@ -12,10 +12,10 @@ import { useInView } from 'react-intersection-observer'
 import axios from '../../../axios.js'
 import Loading from '../../components/Loading/Loading.jsx'
 
-export const Columns = ({ posts, loading }) => {
+export const Columns = ({ posts }) => {
 	const [width, setWidth] = useState(window.innerWidth)
 	const [widthColumn, setWidthColumn] = useState(260)
-	const dispatch = useDispatch()
+	// const dispatch = useDispatch()
 
 	React.useEffect(() => {
 		if (width < 768) {
@@ -43,11 +43,7 @@ export const Columns = ({ posts, loading }) => {
 		setCountCols(renderCols)
 	}, [width, widthColumn])
 
-	// const loadMorePosts = () => {
-	//   setLoading(true)
-	//   dispatch(fetchMorePosts())
-	//   setLoading(false)
-	// }
+	// const sortedPosts = [...posts].sort((a, b) => new Date(b.created_date) - new Date(a.created_date));
 
 	const renderComponents = () => {
 
@@ -60,7 +56,7 @@ export const Columns = ({ posts, loading }) => {
 				videos={obj.video && obj.video}
 				title={obj.title}
 				slug={obj.slug}
-				loading={loading}
+				i={i}
 				isHomePost
 			/>
 		))
@@ -87,6 +83,7 @@ const Home = () => {
 	const dispatch = useDispatch()
 	const isAuth = useSelector(selectIsAuth)
 	const posts = useSelector(state => state.posts.posts.items)
+	const postsStatus = useSelector(state => state.posts.posts.status)
 	const authStatus = useSelector(selectIsAuthStatus)
 	const [postsState, setPostsState] = useState([])
 
@@ -104,16 +101,17 @@ const Home = () => {
 	// }, [])
 	useEffect(() => {
 		if (inView) {
-			setLoadingPost(true)
-			dispatch(fetchPosts())
-			setLoadingPost(false)
+			dispatch(fetchPosts()).then(res => {
+				setLoadingPost(true)
+			})
+			// setLoadingPost(false)
 			setLoading(false)
 		}
 	}, [inView])
 
 	return (
 		<div className={styles.root}>
-			{loading ? <Loading /> : <Columns posts={posts} loading={loadingPost} />}
+			{loading ? <Loading /> : <Columns posts={posts} />}
 			<div style={{width: '100%', height: '10px'}} ref={ref} />
 		</div>
 	)

@@ -114,9 +114,7 @@ function UserInfo({
 				<Link to={`/profile/${userId}`}>
 					<img
 						src={
-							avatar
-								? `${import.meta.env.VITE_APP_API_URL}${avatar}`
-								: avatarDefault
+							avatar ? (avatar.startsWith('blob') ? avatar : `${import.meta.env.VITE_APP_API_URL}${avatar}`) : avatarDefault
 						}
 						alt={`Аватар пользователя ${username}`}
 					/>
@@ -124,9 +122,7 @@ function UserInfo({
 			) : (
 				<img
 					src={
-						avatar
-							? `${import.meta.env.VITE_APP_API_URL}${avatar}`
-							: avatarDefault
+						avatar ? (avatar.startsWith('blob') ? avatar : `${import.meta.env.VITE_APP_API_URL}${avatar}`) : avatarDefault
 					}
 					alt={`Аватар пользователя ${username}`}
 				/>

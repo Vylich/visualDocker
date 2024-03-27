@@ -30,12 +30,15 @@ import ChangeAccount from './assets/pages/Settings/ChangeAccount/index.jsx'
 import SearchPage from './assets/pages/SearchPage/index.jsx'
 import Subs from './assets/pages/Subs/index.jsx'
 import SuccessfulPage from './assets/pages/Subs/SuccessfulPage.jsx'
+import {useNavigate} from 'react-router-dom'
+import ErrorPage from './assets/pages/ErrorPage/index.jsx'
 
 function App() {
 	const dispatch = useDispatch()
 	const isAuth = useSelector(selectIsAuth)
 	const authStatus = useSelector(selectIsAuthStatus)
 	const myId = useSelector(state => state.auth)
+	const navigate = useNavigate()
 	// const socketRef = useRef()
 	// const [notificationMess, setNotificationMess] = useState([])
 
@@ -56,7 +59,11 @@ function App() {
 	// }, [])
 
 	useEffect(() => {
-		dispatch(fetchLogin())
+		dispatch(fetchLogin()).then(res => {
+			if(!res.payload) {
+				navigate('/continue')
+			}
+		})
 	}, [])
 
 	return (
@@ -94,6 +101,7 @@ function App() {
 					</Route>
 					<Route path='/subs' element={<Subs />} />
 					<Route path='/subs/successful' element={<SuccessfulPage />} />
+					<Route path='/error' element={<ErrorPage />} />
 				</Routes>
 			</div>
 		</>

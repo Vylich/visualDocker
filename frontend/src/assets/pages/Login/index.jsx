@@ -20,6 +20,7 @@ import {
   fetchUserData,
   selectIsAuth,
 } from "../../../redux/slices/auth";
+import { removePostsState } from '../../../redux/slices/posts';
 
 export const Login = () => {
   const isAuth = useSelector(selectIsAuth);
@@ -62,6 +63,7 @@ export const Login = () => {
 
   const onSubmit = async (values) => {
     const data = await dispatch(fetchUserData(values));
+    dispatch(removePostsState())
 
     console.log(data);
     if (!data.payload) {
