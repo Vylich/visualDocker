@@ -15,21 +15,16 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import Loading from '../Loading/Loading'
 
-const Post = ({
-	isHomePost,
-	isFullPost,
-	title,
-	images,
-	videos,
-	slug,
-	i
-}) => {
+export const removeApiUrl = (url) => {
+	return url.replace('api', 'localhost')
+}
+
+const Post = ({ isHomePost, isFullPost, title, images, videos, slug, i }) => {
 	const [aspectRatio, setAspectRatio] = useState({})
 	const [aspectRatioHome, setAspectRatioHome] = useState({})
 	const videoRef = useRef(null)
 	const [isPlaying, setIsPlaying] = useState(false)
-	const [isLoaded, setIsLoaded] = useState(false);
-
+	const [isLoaded, setIsLoaded] = useState(false)
 
 	function getMeta(url, callback) {
 		const img = new Image()
@@ -38,6 +33,8 @@ const Post = ({
 			callback(this.width, this.height)
 		}
 	}
+
+
 
 	const handleMouseOver = () => {
 		videoRef.current.play()
@@ -50,52 +47,54 @@ const Post = ({
 	}
 
 	useEffect(() => {
-		if(!isFullPost && images.length) {
-			const image = new Image();
-		image.src = `${import.meta.env.VITE_APP_API_URL}${images[0].image}`;
-    image.onload = () => setIsLoaded(true);
+		if (!isFullPost && images.length) {
+			const image = new Image()
+			image.src = `http://${window.location.hostname}:8000${images[0].image}`
+			image.onload = () => setIsLoaded(true)
 		} else if (!isFullPost && videos) {
-			const video = document.createElement('video');
-			video.src = `${import.meta.env.VITE_APP_API_URL}${videos[0].video}`;
-			video.oncanplaythrough = () => setIsLoaded(true);
+			const video = document.createElement('video')
+			video.src = `http://${window.location.hostname}:8000${videos[0].video}`
+			video.oncanplaythrough = () => setIsLoaded(true)
 		}
-
-
 	}, [images, videos])
 
 	useEffect(() => {
 		if (images && isFullPost) {
 			images.forEach(img => {
-				getMeta(img.image, (width, height) => {
+				getMeta(removeApiUrl(img.image), (width, height) => {
 					const aspect = width / height
 
 					if (aspect < 0.5625) {
-						setAspectRatio(prev => ({ ...prev, [img.image]: 0.5625 }))
+						setAspectRatio(prev => ({ ...prev, [removeApiUrl(img.image)]: 0.5625 }))
 					} else {
 						setAspectRatio(prev => ({
 							...prev,
-							[img.image]: width / height,
+							[removeApiUrl(img.image)]: width / height,
 						}))
 					}
 				})
 			})
 		} else if (images && isHomePost) {
 			images.forEach(img => {
-				getMeta(`${import.meta.env.VITE_APP_API_URL}${img.image}`, (width, height) => {
-					const aspect = width / height
+				getMeta(
+					`http://${window.location.hostname}:8000${img.image}`,
+					(width, height) => {
+						const aspect = width / height
 
-					if (aspect < 0.5625) {
-						setAspectRatioHome(prev => ({
-							...prev,
-							[`${import.meta.env.VITE_APP_API_URL}${img.image}`]: 0.5625,
-						}))
-					} else {
-						setAspectRatioHome(prev => ({
-							...prev,
-							[`${import.meta.env.VITE_APP_API_URL}${img.image}`]: width / height,
-						}))
+						if (aspect < 0.5625) {
+							setAspectRatioHome(prev => ({
+								...prev,
+								[`http://${window.location.hostname}:8000${img.image}`]: 0.5625,
+							}))
+						} else {
+							setAspectRatioHome(prev => ({
+								...prev,
+								[`http://${window.location.hostname}:8000${img.image}`]:
+									width / height,
+							}))
+						}
 					}
-				})
+				)
 			})
 		}
 	}, [images])
@@ -139,8 +138,8 @@ const Post = ({
 											[styles.imageFull]: isFullPost,
 											[styles.imageHome]: isHomePost,
 										})}
-										style={{ aspectRatio: aspectRatio[link.image] }}
-										src={link.image}
+										style={{ aspectRatio: aspectRatio[removeApiUrl(link.image)] }}
+										src={removeApiUrl(link.image)}
 										crossOrigin='anonymous'
 										loading='lazy'
 										alt={`${title}${i}`}
@@ -151,7 +150,7 @@ const Post = ({
 								<SwiperSlide key={link.id}>
 									<video
 										className={styles.video}
-										src={link.video}
+										src={removeApiUrl(link.video)}
 										autoPlay
 										controls
 									/>
@@ -171,22 +170,22 @@ const Post = ({
 							<>
 								{images && images.length ? (
 									<>
-									<img
-										className={clsx(styles.image, {
-											[styles.imageFull]: isFullPost,
-											[styles.imageHome]: isHomePost,
-										})}
-										style={{
-											aspectRatio:
-												aspectRatioHome[
-													`${import.meta.env.VITE_APP_API_URL}${images[0].image}`
-												],
-										}}
-										src={`${import.meta.env.VITE_APP_API_URL}${images[0].image}`}
-										alt={`${i}`}
-										crossOrigin='anonymous'
-										loading='lazy'
-									/>
+										<img
+											className={clsx(styles.image, {
+												[styles.imageFull]: isFullPost,
+												[styles.imageHome]: isHomePost,
+											})}
+											style={{
+												aspectRatio:
+													aspectRatioHome[
+														`http://${window.location.hostname}:8000${images[0].image}`
+													],
+											}}
+											src={`http://${window.location.hostname}:8000${images[0].image}`}
+											alt={`${i}`}
+											crossOrigin='anonymous'
+											loading='lazy'
+										/>
 									</>
 								) : (
 									<>
@@ -199,13 +198,11 @@ const Post = ({
 												muted
 												loop
 												ref={videoRef}
-												src={`${import.meta.env.VITE_APP_API_URL}${videos[0].video}`}
+												src={`http://${window.location.hostname}:8000${videos[0].video}`}
 												onMouseOver={handleMouseOver}
 												onMouseOut={handleMouseOut}
 											>
-												<source
-													src={`${import.meta.env.VITE_APP_API_URL}${videos[0].video}`}
-												/>
+												<source src={`http://${window.location.hostname}:8000${videos[0].video}`} />
 											</video>
 										)}
 									</>

@@ -67,9 +67,7 @@ const Messages = ({ id }) => {
 	useEffect(() => {
 		if (idRoom) {
 			socketRef.current = new WebSocket(
-				`${
-					import.meta.env.VITE_APP_WS_URL
-				}/ws/chat/${idRoom}/?token=${window.localStorage.getItem('access')}`
+				`/ws/chat/${idRoom}/?token=${window.localStorage.getItem('access')}`
 			)
 
 			socketRef.current.addEventListener('open', event => {

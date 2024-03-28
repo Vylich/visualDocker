@@ -9,8 +9,10 @@
 	gap: 20px;
 
 	@include vp-1023 {
-		height: 100dvh;
+		max-height: calc(100dvh - 75px);
+		overflow-y: scroll;
 		width: 100%;
+		margin: 0;
 		gap: 0;
 		justify-content: space-between;
 	}

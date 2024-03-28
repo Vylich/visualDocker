@@ -22,6 +22,7 @@ import './slider.scss'
 
 import ImageCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
+import { removeApiUrl } from '../../components/Post'
 
 const AddPost = () => {
 	const { id } = useParams()
@@ -303,7 +304,7 @@ const AddPost = () => {
 										>
 											<img
 												className={styles.image}
-												src={isEditing && typeof link === 'object' ? `${link.image}` :`${link}`}
+												src={isEditing && typeof link === 'object' ? `${removeApiUrl(link.image)}` :`${link}`}
 												alt={'uploaded'}
 												style={{ aspectRatio: aspectRatio[link] }}
 											/>
@@ -317,7 +318,7 @@ const AddPost = () => {
 										>
 											<video
 												className={styles.video}
-												src={isEditing && typeof link === 'object' ? `${link.video}` :`${link}`}
+												src={isEditing && typeof link === 'object' ? `${removeApiUrl(link.video)}` :`${link}`}
 												autoPlay
 												controls
 												style={{ aspectRatio: aspectRatio[link] }}

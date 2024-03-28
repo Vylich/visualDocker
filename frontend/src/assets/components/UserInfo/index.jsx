@@ -114,7 +114,11 @@ function UserInfo({
 				<Link to={`/profile/${userId}`}>
 					<img
 						src={
-							avatar ? (avatar.startsWith('blob') ? avatar : `${import.meta.env.VITE_APP_API_URL}${avatar}`) : avatarDefault
+							avatar
+								? avatar.startsWith('blob')
+									? avatar
+									: `http://${window.location.hostname}:8000${avatar}`
+								: avatarDefault
 						}
 						alt={`Аватар пользователя ${username}`}
 					/>
@@ -122,9 +126,13 @@ function UserInfo({
 			) : (
 				<img
 					src={
-						avatar ? (avatar.startsWith('blob') ? avatar : `${import.meta.env.VITE_APP_API_URL}${avatar}`) : avatarDefault
+						avatar
+							? avatar.startsWith('blob')
+								? avatar
+								: `http://${window.location.hostname}:8000${avatar}`
+							: avatarDefault
 					}
-					alt={`Аватар пользователя ${username}${import.meta.env.VITE_APP_API_URL}`}
+					alt={`Аватар пользователя ${username}`}
 				/>
 			)}
 			<div className={styles.userDetails}>
@@ -136,7 +144,6 @@ function UserInfo({
 					<>
 						<span className={styles.userName}>@{username}</span>
 						<span className={styles.fullname}>{fullname}</span>
-
 					</>
 				)}
 				{posts && (

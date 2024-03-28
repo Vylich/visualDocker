@@ -57,7 +57,7 @@ function Header() {
 	const { posts } = useSelector(state => state.posts)
 	const isPostsLoading = posts.status === 'loading'
 	const dispatch = useDispatch()
-	const navigate = useNavigate();
+	const navigate = useNavigate()
 	const hideNavOnClick = () => {
 		if (window.innerWidth < 1024) {
 			setIsNavVisible(false)
@@ -119,7 +119,6 @@ function Header() {
 		localStorage.setItem('searchedItems', JSON.stringify(itemsSearch))
 	}, [itemsSearch])
 
-
 	const renderItems = () => {
 		const filtredItems = posts.items.filter(item =>
 			item.name.toLowerCase().includes(searchedText.toLowerCase())
@@ -137,7 +136,7 @@ function Header() {
 	}
 
 	useEffect(() => {
-		if(searchedText) {
+		if (searchedText) {
 			axios.get(`/search/?search=${searchedText}`).then(res => {
 				setFoundItems(res.data)
 				dispatch(addSearch(res.data.post_tag))
@@ -227,11 +226,11 @@ function Header() {
 									className={styles.ava}
 									src={
 										userdata && userdata.avatar
-											? `${import.meta.env.VITE_APP_API_URL}${userdata.avatar}`
+											? `http://${window.location.hostname}:8000${userdata.avatar}`
 											: avatar
 									}
 									width={20}
-									alt='Логотип'
+									alt='Аватар'
 								/>
 								<span>Профиль</span>
 							</NavLink>
@@ -299,13 +298,9 @@ function Header() {
 							<Link to={`/profile/${userdata.id}`}>
 								<img
 									className={styles.ava}
-									src={
-										userdata.avatar
-											? `${import.meta.env.VITE_APP_API_URL}${userdata.avatar}`
-											: avatar
-									}
+									src={userdata.avatar ? `http://${window.location.hostname}:8000${userdata.avatar}` : avatar}
 									width={40}
-									alt='Логотип'
+									alt='Аватар'
 								/>
 							</Link>
 

@@ -2,10 +2,17 @@ import React from 'react'
 import styles from './userMessage.module.scss'
 import avatarDefault from '../../../img/avatar-default.svg'
 
-const UserMessage = ({username, avatar, text, isNewMessage, isUnread}) => {
+const UserMessage = ({ username, avatar, text, isNewMessage, isUnread }) => {
 	return (
 		<div className={styles.root}>
-			<img className={styles.image} src={avatar ? `${import.meta.env.VITE_APP_API_URL}${avatar}` : avatarDefault}/>
+			<img
+				className={styles.image}
+				src={
+					avatar
+						? `http://${window.location.hostname}:8000${avatar}`
+						: avatarDefault
+				}
+			/>
 			<div className={styles.extra}>
 				<span className={styles.username}>@{username}</span>
 				<span className={styles.text}>{text}</span>
