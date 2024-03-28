@@ -1,9 +1,11 @@
+
 import axios from 'axios'
 import { jwtDecode } from 'jwt-decode'
 
 const instance = axios.create({
 	// baseURL: 'http://192.168.217.105:8000/api/',
-	baseURL: `${import.meta.env.VITE_APP_API_URL}/api/`,
+	baseURL: `${import.meta.env.VITE_APP_API_URL}`,
+	// baseURL: 'http://localhost/api/',
 })
 
 

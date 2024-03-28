@@ -4,11 +4,12 @@
   margin: 0 auto;
   grid-gap: 10px;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   padding: 10px 3vw;
   justify-content: center;
   grid-template-rows: masonry;
   position: relative;
+  overflow-y: scroll;
 }
 @media (max-width: 1024px) {
   .root {
@@ -31,4 +32,12 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.border {
+  position: absolute;
+  width: 100vw;
+  bottom: 0;
+  left: 0;
+  height: 50px;
 }/*# sourceMappingURL=Home.module.css.map */

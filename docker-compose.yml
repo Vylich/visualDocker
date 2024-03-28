@@ -11,11 +11,14 @@ services:
       - '5432:5432'
     networks:
       - visual
+
   frontend:
     container_name: 'frontend'
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    environment:
+      VITE_APP_API_URL: api
     depends_on:
       api:
         condition: service_started
@@ -53,8 +56,8 @@ services:
     depends_on:
       api:
         condition: service_started
-      frontend:
-        condition: service_started
+      # frontend:
+      #   condition: service_started
     networks:
       - visual
 

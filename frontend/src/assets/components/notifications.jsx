@@ -79,12 +79,12 @@ const WebSocketComponent = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await axios.get('/notifications/push')
+				const response = await axios.get('/api/notifications/push')
 				if (response.data.message === 'Новых уведомлений нет') {
 					console.log('Новых уведомлений нет')
 					// Ничего не делать, продолжить ждать 10 минут
 				} else {
-					await axios.get('/notifications').then(res => {
+					await axios.get('/api/notifications').then(res => {
 						console.log(res.data.count_notification)
 						dispatch(addNotificationsCount(res.data.count_notification))
 					})

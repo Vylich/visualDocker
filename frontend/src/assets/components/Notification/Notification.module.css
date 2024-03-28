@@ -35,6 +35,8 @@
   width: 70px;
   height: 70px;
   flex-shrink: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 @media (max-width: 1024px) {
   .avatar {

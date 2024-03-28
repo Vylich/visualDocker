@@ -160,4 +160,9 @@
   padding: 5px 10px;
   border-radius: 30px;
   cursor: pointer;
+}
+
+.fullname {
+  font-size: 16px;
+  font-weight: 600;
 }/*# sourceMappingURL=UserInfo.module.css.map */

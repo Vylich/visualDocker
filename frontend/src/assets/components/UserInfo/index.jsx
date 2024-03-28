@@ -124,7 +124,7 @@ function UserInfo({
 					src={
 						avatar ? (avatar.startsWith('blob') ? avatar : `${import.meta.env.VITE_APP_API_URL}${avatar}`) : avatarDefault
 					}
-					alt={`Аватар пользователя ${username}`}
+					alt={`Аватар пользователя ${username}${import.meta.env.VITE_APP_API_URL}`}
 				/>
 			)}
 			<div className={styles.userDetails}>
