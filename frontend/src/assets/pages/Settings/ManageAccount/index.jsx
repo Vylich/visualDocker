@@ -52,6 +52,16 @@ const ManageAccount = ({
 		}
 	}
 
+	const handleClickPay = async (type, price) => {
+		const config = {
+			subscription: type,
+			value: price,
+		}
+		await axios.post('create_payment/', config);
+
+    // window.location.href = data.url;
+  };
+
 	return (
 		<div className={styles.root}>
 			<header className={styles.header}>
@@ -97,13 +107,13 @@ const ManageAccount = ({
 							<p>
 								<span className={styles.subsTitle}>Стандарт</span>При оформлении данной подписки вам больше не будет показываться реклама.
 							</p>
-							<button>300 ₽</button>
+							<button onClick={() => handleClickPay('standard', '300')}>300 ₽</button>
 						</div>
 						<div className={styles.subsWrap}>
 							<p>
 								<span className={styles.subsTitle}>Премиум</span>При оформлении данной подписки вам больше не будет показываться реклама, а так же ваши посты будут активнее продвигаться в рекомендациях других пользователей Visual.
 							</p>
-							<button>800 ₽</button>
+							<button onClick={() => handleClickPay('premium', '800')}>800 ₽</button>
 						</div>
             </div>
 					</div>

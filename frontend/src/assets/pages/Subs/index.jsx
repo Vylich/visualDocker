@@ -8,12 +8,12 @@ const Subs = () => {
 
 	const handleClickPay = async (type, price) => {
 		const config = {
-			price: price,
-			type: type,
+			subscription: type,
+			value: price,
 		}
-		const {data} = await axios.post('/payment', config);
+		const {data} = await axios.post('create_payment/', config);
 
-    window.location.href = data.url;
+    window.location.href = data.confirmation_url;
   };
 
 	// const handleClickPremium = async () => {
@@ -40,7 +40,7 @@ const Subs = () => {
 					<h3 className={styles.title}>Стандарт</h3>
 					<div className={styles.subWrapper}>
 					<p className={styles.descr}>При оформлении данной подписки вам больше не будет показываться реклама.</p>
-					<button onClick={() => handleClickPay('standart', '300')} className={styles.btn}>300 ₽</button>
+					<button onClick={() => handleClickPay('standard', '300')} className={styles.btn}>300 ₽</button>
 					</div>
 				</div>
 				<div className={styles.block}>

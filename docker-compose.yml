@@ -2,13 +2,20 @@ services:
   db:
     container_name: 'postgres'
     image: postgres
-    restart: always
     environment:
       POSTGRES_DB: visual
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123456
     ports:
       - '5432:5432'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d visual"]
+      interval: 5s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - /postgres-data:/save-data/postgresql/data
     networks:
       - visual
 
@@ -32,6 +39,11 @@ services:
       dockerfile: Dockerfile
     environment:
       PG_HOST: db
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s http://localhost:5000/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     ports:
       - '8000:8000'
     depends_on:
@@ -71,6 +83,9 @@ services:
         condition: service_started
     networks:
       - visual
+
+volumes:
+  postrges-data:
 
 networks:
   visual:
