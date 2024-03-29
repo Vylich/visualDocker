@@ -86,6 +86,8 @@ REST_FRAMEWORK = {
     "TEST_REQUEST_DEFAULT_FORMAT": "json",
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.DjangoModelPermissions",),
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
 }
 
 SPECTACULAR_SETTINGS = {
@@ -187,21 +189,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# SECURE_SSL_REDIRECT = True
-# SESSION_COOKIE_SECURE = True
-# SECURE_SSL_ROOT = '/путь/к/сертификату.crt'
-
-# # Укажите путь к файлу закрытого ключа
-# SECURE_SSL_PRIVATE_KEY = '/путь/к/закрытому_ключу.key'
-
-# # Разрешить HTTPS-запросы
-# SECURE_SSL_REDIRECT = True
-
-# # Список заголовков, которые должны быть установлены для всех ответов HTTPS
-# SECURE_HSTS_SECONDS = 31536000  # 1 год
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-# SECURE_HSTS_PRELOAD = True
 
 
 # Daphne
