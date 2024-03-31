@@ -44,10 +44,10 @@ const ManageAccount = ({
 			dispatch(fetchDeleteAccount(userdata.user.id)).then(() => {
 				dispatch(logout())
 				navigate('/login')
-				window.localStorage.removeItem('access')
-				window.localStorage.removeItem('refresh')
-				window.localStorage.removeItem('username')
-				window.localStorage.removeItem('avatar')
+				window.sessionStorage.removeItem('accessff')
+				window.sessionStorage.removeItem('refresh')
+				window.sessionStorage.removeItem('username')
+				window.sessionStorage.removeItem('avatar')
 			})
 		}
 	}
@@ -57,10 +57,10 @@ const ManageAccount = ({
 			subscription: type,
 			value: price,
 		}
-		await axios.post('create_payment/', config);
+		await axios.post('create_payment/', config)
 
-    // window.location.href = data.url;
-  };
+		// window.location.href = data.url;
+	}
 
 	return (
 		<div className={styles.root}>
@@ -103,19 +103,28 @@ const ManageAccount = ({
 					<div className={styles.fieldBusiness}>
 						<h4>Оформить подписку</h4>
 						<div className={styles.subsBlock}>
-            <div className={styles.subsWrap}>
-							<p>
-								<span className={styles.subsTitle}>Стандарт</span>При оформлении данной подписки вам больше не будет показываться реклама.
-							</p>
-							<button onClick={() => handleClickPay('standard', '300')}>300 ₽</button>
+							<div className={styles.subsWrap}>
+								<p>
+									<span className={styles.subsTitle}>Стандарт</span>При
+									оформлении данной подписки вам больше не будет показываться
+									реклама.
+								</p>
+								<button onClick={() => handleClickPay('standard', '300')}>
+									300 ₽
+								</button>
+							</div>
+							<div className={styles.subsWrap}>
+								<p>
+									<span className={styles.subsTitle}>Премиум</span>При
+									оформлении данной подписки вам больше не будет показываться
+									реклама, а так же ваши посты будут активнее продвигаться в
+									рекомендациях других пользователей Visual.
+								</p>
+								<button onClick={() => handleClickPay('premium', '800')}>
+									800 ₽
+								</button>
+							</div>
 						</div>
-						<div className={styles.subsWrap}>
-							<p>
-								<span className={styles.subsTitle}>Премиум</span>При оформлении данной подписки вам больше не будет показываться реклама, а так же ваши посты будут активнее продвигаться в рекомендациях других пользователей Visual.
-							</p>
-							<button onClick={() => handleClickPay('premium', '800')}>800 ₽</button>
-						</div>
-            </div>
 					</div>
 				</div>
 			</div>

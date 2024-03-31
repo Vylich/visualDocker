@@ -50,7 +50,6 @@ export const Login = () => {
 		setIsSuccessModalOpen(true)
 	}
 
-
 	const {
 		register,
 		handleSubmit,
@@ -73,24 +72,24 @@ export const Login = () => {
 		}
 
 		if ('access' in data.payload) {
-			window.localStorage.setItem('access', data.payload.access)
-			window.localStorage.setItem('refresh', data.payload.refresh)
+			window.sessionStorage.setItem('accessff', `fdsafhrwodddddddd${data.payload.access}`)
+			window.sessionStorage.setItem('refresh', data.payload.refresh)
 			const user = await dispatch(fetchLogin())
 			if (user.payload) {
-				const users = JSON.parse(localStorage.getItem('users')) || []
+				const users = JSON.parse(sessionStorage.getItem('users')) || []
 				navigate('/home')
 				if (!users.find(item => item.username === user.payload.user.username)) {
 					const obj = {
 						id: user.payload.user.id,
 						username: user.payload.user.username,
 						avatar: user.payload.user.avatar,
-						access: data.payload.access,
+						accessff: `fdsafhrwodddddddd${data.payload.access}`,
 						refresh: data.payload.refresh,
 					}
 					users.push(obj)
-					window.localStorage.setItem('users', JSON.stringify(users))
-					window.localStorage.setItem('username', user.payload.user.username)
-					window.localStorage.setItem('avatar', user.payload.user.avatar)
+					window.sessionStorage.setItem('users', JSON.stringify(users))
+					window.sessionStorage.setItem('username', user.payload.user.username)
+					window.sessionStorage.setItem('avatar', user.payload.user.avatar)
 					console.log(user.payload)
 					navigate('/home')
 				}

@@ -8,7 +8,7 @@ import {
 	incrementUnreadCount,
 	updateUnreadCount,
 } from '../../redux/slices/notification'
-import axios from '../../axios'
+import axios, { normalAccess } from '../../axios'
 import { selectIsAuth } from '../../redux/slices/auth'
 
 const WebSocketComponent = () => {
@@ -23,58 +23,56 @@ const WebSocketComponent = () => {
 	useEffect(() => {
 		// Функция для создания WebSocket соединения
 		const createWebSocketConnection = () => {
-				const accessToken = window.localStorage.getItem('access');
-				if (!accessToken) return; // Если токена нет, не создаем соединение
+			const accessToken = window.sessionStorage.getItem('accessff')
+			if (!accessToken) return // Если токена нет, не создаем соединение
 
-				wsRef.current = new WebSocket(
-						`/ws/notifications/?token=${accessToken}`
-				);
+			wsRef.current = new WebSocket(`ws://localhost:8000/ws/notifications/?token=${accessToken}`)
 
-				// Подключение
-				wsRef.current.onopen = () => {
-						console.log('Подключено к WebSocket');
-				};
+			// Подключение
+			wsRef.current.onopen = () => {
+				console.log('Подключено к WebSocket')
+			}
 
-				// Обработка входящих сообщений
-				wsRef.current.onmessage = (event) => {
-						const data = JSON.parse(event.data);
-						dispatch(addUnreadMessage(data));
-						console.log(data);
+			// Обработка входящих сообщений
+			wsRef.current.onmessage = event => {
+				const data = JSON.parse(event.data)
+				dispatch(addUnreadMessage(data))
+				console.log(data)
 
-						if (data.type === 'unread_type') {
-								dispatch(addUnreadCount(Number(data.unread_count)));
-						}
+				if (data.type === 'unread_type') {
+					dispatch(addUnreadCount(Number(data.unread_count)))
+				}
 
-						if (data.type === 'unread_count') {
-								dispatch(updateUnreadCount(data.unread_count));
-						}
+				if (data.type === 'unread_count') {
+					dispatch(updateUnreadCount(data.unread_count))
+				}
 
-						if (data.type === 'new_message_notification') {
-								dispatch(incrementUnreadCount());
-						}
-				};
-		};
+				if (data.type === 'new_message_notification') {
+					dispatch(incrementUnreadCount())
+				}
+			}
+		}
 
 		// Создаем соединение при монтировании компонента и при изменении состояния авторизации или токена
-		createWebSocketConnection();
+		createWebSocketConnection()
 
 		// Функция для переподключения в случае разрыва связи
 		const handleReconnect = () => {
-				if (!wsRef.current || wsRef.current.readyState === WebSocket.CLOSED) {
-						createWebSocketConnection();
-				}
-		};
+			if (!wsRef.current || wsRef.current.readyState === WebSocket.CLOSED) {
+				createWebSocketConnection()
+			}
+		}
 
 		// Проверяем состояние соединения и переподключаемся, если необходимо
-		const interval = setInterval(handleReconnect, 5000); // Каждые 5 секунд
+		const interval = setInterval(handleReconnect, 10000)
 
 		return () => {
-				clearInterval(interval);
-				wsRef.current?.close();
-		};
+			clearInterval(interval)
+			wsRef.current?.close()
+		}
 
-// Добавляем isAuth и токен в массив зависимостей, чтобы useEffect реагировал на их изменения
-}, [window.localStorage.getItem('access')]);
+		// Добавляем isAuth и токен в массив зависимостей, чтобы useEffect реагировал на их изменения
+	}, [window.sessionStorage.getItem('accessff')])
 
 	useEffect(() => {
 		const fetchData = async () => {

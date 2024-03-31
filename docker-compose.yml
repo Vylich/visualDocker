@@ -39,11 +39,6 @@ services:
       dockerfile: Dockerfile
     environment:
       PG_HOST: db
-    healthcheck:
-      test: ["CMD-SHELL", "curl -s http://localhost:5000/ || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
     ports:
       - '8000:8000'
     depends_on:

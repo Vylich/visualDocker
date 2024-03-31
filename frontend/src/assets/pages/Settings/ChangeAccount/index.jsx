@@ -20,14 +20,14 @@ const ChangeAccount = () => {
 
 	const onSubmit = username => {
 		const obj = usersActive.find(ob => ob.username === username)
-		window.localStorage.setItem('access', obj.access)
-		window.localStorage.setItem('refresh', obj.refresh)
+		window.sessionStorage.setItem('accessff', obj.accessff)
+		window.sessionStorage.setItem('refresh', obj.refresh)
 		dispatch(fetchLogin())
 		navigate('/home')
 	}
 
 	useEffect(() => {
-		const arrUsers = window.localStorage.getItem('users')
+		const arrUsers = window.sessionStorage.getItem('users')
 		setUsersActive(JSON.parse(arrUsers))
 	}, [])
 
@@ -57,7 +57,9 @@ const ChangeAccount = () => {
 									key={i}
 									className={styles.link}
 									onClick={() => onSubmit(item.username)}
-									style={{ display: item.username === userData.username && 'none' }}
+									style={{
+										display: item.username === userData.username && 'none',
+									}}
 								>
 									<UserInfo
 										isSmall

@@ -20,8 +20,8 @@ import 'swiper/scss'
 import 'swiper/scss/navigation'
 import './slider.scss'
 
-import ImageCrop from 'react-image-crop';
-import 'react-image-crop/dist/ReactCrop.css';
+import ImageCrop from 'react-image-crop'
+import 'react-image-crop/dist/ReactCrop.css'
 import { removeApiUrl } from '../../components/Post'
 
 const AddPost = () => {
@@ -54,7 +54,7 @@ const AddPost = () => {
 	const [aspectRatio, setAspectRatio] = useState('')
 	const inputFileRef = React.useRef(null)
 
-	const [crop, setCrop] = useState({});
+	const [crop, setCrop] = useState({})
 	const isEditing = Boolean(id)
 
 	function getMeta(imageUrl, callback) {
@@ -74,25 +74,26 @@ const AddPost = () => {
 						setAspectRatio(prev => ({ ...prev, [url]: 0.5625 }))
 					} else {
 						setAspectRatio(prev => ({ ...prev, [url]: width / height }))
-						setCrop(prev => ({ ...prev, [url]: { aspect } }));
-
+						setCrop(prev => ({ ...prev, [url]: { aspect } }))
 					}
 				})
 			})
 		}
 	}, [imageUrl])
 
-
 	const handleChangeFile = evt => {
 		console.log(evt.target.files)
-		Array.from(evt.target.files).filter(file => file.type.includes('image')).forEach(item => {
-			setImage(prev => [...prev, item])
-		})
+		Array.from(evt.target.files)
+			.filter(file => file.type.includes('image'))
+			.forEach(item => {
+				setImage(prev => [...prev, item])
+			})
 
-		Array.from(evt.target.files).filter(file => file.type.includes('video')).forEach(item => {
-			setVideo(prev => [...prev, item])
-		})
-
+		Array.from(evt.target.files)
+			.filter(file => file.type.includes('video'))
+			.forEach(item => {
+				setVideo(prev => [...prev, item])
+			})
 
 		const files = Array.from(evt.target.files)
 
@@ -100,10 +101,8 @@ const AddPost = () => {
 			const file = files[i]
 
 			if (file.type.includes('image')) {
-
 				setImageUrl(prev => [...prev, URL.createObjectURL(file)])
 			} else if (file.type.includes('video')) {
-
 				setVideoUrls(prev => [...prev, URL.createObjectURL(file)])
 			}
 		}
@@ -121,17 +120,16 @@ const AddPost = () => {
 			setLoading(true)
 			const formData = new FormData()
 			const arrTags = tags.split(',').map(tag => tag.trim())
-			if(image.length < 1) {
+			if (image.length < 1) {
 				formData.append('image', '')
 			}
-			if(video.length < 1) {
+			if (video.length < 1) {
 				formData.append('video', '')
 			}
 
 			image.forEach(Img => {
 				formData.append('image', Img)
 			})
-
 
 			video.forEach(Vid => {
 				formData.append('video', Vid)
@@ -152,7 +150,7 @@ const AddPost = () => {
 			const { data } = isEditing
 				? await axios.patch(`/posts/${id}/`, formData)
 				: await axios.post('/posts/', formData)
-				console.log(data)
+			console.log(data)
 			navigate(`/posts/${data.slug}`)
 		} catch (err) {
 			console.warn(err)
@@ -232,7 +230,7 @@ const AddPost = () => {
 		}
 	}
 
-	if (!window.localStorage.getItem('access')) {
+	if (!window.sessionStorage.getItem('accessff')) {
 		return <Navigate to='/' />
 	}
 
@@ -278,11 +276,11 @@ const AddPost = () => {
 									<FontAwesomeIcon icon={faChevronRight} />
 								</button>
 								<button
-								className={styles.buttonAddMore}
-								onClick={() => inputFileRef.current.click()}
-							>
-								<FontAwesomeIcon icon={faPlus} />
-							</button>
+									className={styles.buttonAddMore}
+									onClick={() => inputFileRef.current.click()}
+								>
+									<FontAwesomeIcon icon={faPlus} />
+								</button>
 								<Swiper
 									modules={[Navigation]}
 									spaceBetween={0}
@@ -304,7 +302,11 @@ const AddPost = () => {
 										>
 											<img
 												className={styles.image}
-												src={isEditing && typeof link === 'object' ? `${removeApiUrl(link.image)}` :`${link}`}
+												src={
+													isEditing && typeof link === 'object'
+														? `${removeApiUrl(link.image)}`
+														: `${link}`
+												}
 												alt={'uploaded'}
 												style={{ aspectRatio: aspectRatio[link] }}
 											/>
@@ -318,7 +320,11 @@ const AddPost = () => {
 										>
 											<video
 												className={styles.video}
-												src={isEditing && typeof link === 'object' ? `${removeApiUrl(link.video)}` :`${link}`}
+												src={
+													isEditing && typeof link === 'object'
+														? `${removeApiUrl(link.video)}`
+														: `${link}`
+												}
 												autoPlay
 												controls
 												style={{ aspectRatio: aspectRatio[link] }}

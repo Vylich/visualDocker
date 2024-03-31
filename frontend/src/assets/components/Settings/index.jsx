@@ -16,36 +16,35 @@ const Settings = ({ user, handleSettings }) => {
 		if (window.confirm('Are you sure you want to log out?')) {
 			dispatch(logout())
 			navigate('/login')
-			window.localStorage.removeItem('access')
-			window.localStorage.removeItem('refresh')
-			window.localStorage.removeItem('username')
-			window.localStorage.removeItem('avatar')
-			const users = JSON.parse(localStorage.getItem('users')) || []
+			window.sessionStorage.removeItem('accessff')
+			window.sessionStorage.removeItem('refresh')
+			window.sessionStorage.removeItem('username')
+			window.sessionStorage.removeItem('avatar')
+			const users = JSON.parse(sessionStorage.getItem('users')) || []
 			const invalidObj = users.find(item => item.username === user.username)
 			const newUsers = users.filter(item => item.username !== user.username)
 			console.log(invalidObj)
 			if (newUsers.length) {
-				window.localStorage.setItem('users', JSON.stringify(newUsers))
+				window.sessionStorage.setItem('users', JSON.stringify(newUsers))
 			} else {
-				window.localStorage.removeItem('users')
+				window.sessionStorage.removeItem('users')
 			}
 			handleSettings()
-			dispatch(clearMessages());
-
+			dispatch(clearMessages())
 		}
 	}
 
 	const onSubmit = username => {
 		const obj = usersActive.find(ob => ob.username === username)
-		window.localStorage.setItem('access', obj.access)
-		window.localStorage.setItem('refresh', obj.refresh)
+		window.sessionStorage.setItem('accessff', obj.accessff)
+		window.sessionStorage.setItem('refresh', obj.refresh)
 		dispatch(fetchLogin())
 		dispatch(removePostsState())
 		navigate('/home')
 	}
 
 	useEffect(() => {
-		const arrUsers = window.localStorage.getItem('users')
+		const arrUsers = window.sessionStorage.getItem('users')
 		setUsersActive(JSON.parse(arrUsers))
 	}, [])
 

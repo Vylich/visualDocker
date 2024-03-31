@@ -9,7 +9,7 @@ import {
 	faUserPlus,
 } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
-import axios from '../../../axios'
+import axios, { normalAccess } from '../../../axios'
 import UserInfo from '../UserInfo'
 import UserMessage from '../UserInfo/UserMessage'
 import { useDispatch, useSelector } from 'react-redux'
@@ -67,13 +67,13 @@ const Messages = ({ id }) => {
 	useEffect(() => {
 		if (idRoom) {
 			socketRef.current = new WebSocket(
-				`/ws/chat/${idRoom}/?token=${window.localStorage.getItem('access')}`
+				`/ws/chat/${idRoom}/?token=${normalAccess(window.sessionStorage.getItem('accessff'))}`
 			)
 
 			socketRef.current.addEventListener('open', event => {
 				const objRead = {
 					type: 'read_message',
-					receiver: idReceiver
+					receiver: idReceiver,
 				}
 				socketRef.current.send(JSON.stringify(objRead))
 			})
@@ -96,7 +96,7 @@ const Messages = ({ id }) => {
 	// }, [])
 
 	useEffect(() => {
-		if(searchValue) {
+		if (searchValue) {
 			axios.get(`/search/?search=${searchValue}`).then(res => {
 				const usersItems = res.data.user.filter(user => user.id !== id)
 				setUsers(usersItems)
@@ -211,7 +211,6 @@ const Messages = ({ id }) => {
 										}}
 										key={i}
 									>
-
 										<UserMessage
 											username={talker.user.username}
 											avatar={talker.user.avatar}
@@ -267,7 +266,6 @@ const Messages = ({ id }) => {
 											setIdReceiver(user.id)
 										}}
 									>
-
 										<UserInfo
 											isSmall
 											username={user.username}

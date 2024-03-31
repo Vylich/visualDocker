@@ -47,23 +47,23 @@ function UserProfile() {
 
 		try {
 			if (userData) {
-				const users = JSON.parse(localStorage.getItem('users')) || []
+				const users = JSON.parse(sessionStorage.getItem('users')) || []
 				if (users.find(item => item.avatar !== userData.user.avatar)) {
 					const invalidObj = users.find(
 						item => item.username === userData.user.username
 					)
 					const newUsers = users.splice(users.indexOf(invalidObj), 1)
-					window.localStorage.setItem('users', JSON.stringify(newUsers))
+					window.sessionStorage.setItem('users', JSON.stringify(newUsers))
 
 					const obj = {
 						id: invalidObj.id,
 						username: userData.user.username,
 						avatar: userData.user.avatar,
 						refresh: invalidObj.refresh,
-						access: invalidObj.access,
+						accessff: invalidObj.accessff,
 					}
 					users.push(obj)
-					window.localStorage.setItem('users', JSON.stringify(users))
+					window.sessionStorage.setItem('users', JSON.stringify(users))
 				}
 
 				axios.get(`my_followers/${id}/`).then(res => {

@@ -30,7 +30,7 @@ import ChangeAccount from './assets/pages/Settings/ChangeAccount/index.jsx'
 import SearchPage from './assets/pages/SearchPage/index.jsx'
 import Subs from './assets/pages/Subs/index.jsx'
 import SuccessfulPage from './assets/pages/Subs/SuccessfulPage.jsx'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import ErrorPage from './assets/pages/ErrorPage/index.jsx'
 
 function App() {
@@ -42,13 +42,12 @@ function App() {
 	// const socketRef = useRef()
 	// const [notificationMess, setNotificationMess] = useState([])
 
-
 	// useEffect(() => {
-	// 	if (window.localStorage.getItem('access')) {
+	// 	if (window.sessionStorage.getItem('access')) {
 	// 		socketRef.current = new WebSocket(
 	// 			`${
 	// 				import.meta.env.VITE_APP_WS_URL
-	// 			}/ws/notifications/?token=${window.localStorage.getItem('access')}`
+	// 			}/ws/notifications/?token=${window.sessionStorage.getItem('access')}`
 	// 		)
 
 	// 		socketRef.current.addEventListener('message', event => {
@@ -60,7 +59,7 @@ function App() {
 
 	useEffect(() => {
 		dispatch(fetchLogin()).then(res => {
-			if(!res.payload) {
+			if (!res.payload) {
 				navigate('/continue')
 			}
 		})
@@ -70,13 +69,12 @@ function App() {
 		<>
 			<div className='wrapper'>
 				<WebSocketComponent />
-				<Header/>
+				<Header />
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route path='/home' element={<Home />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/continue' element={<ContinuePage />} />
-
 					<Route path='/login/reg' element={<Registration />} />
 					<Route path='/profile/:id' element={<UserProfile myId={myId} />} />
 					<Route path='/posts/:id' element={<FullPost />} />
@@ -94,7 +92,7 @@ function App() {
 						<Route path='change-account' element={<ChangeAccount />} />
 					</Route>
 					<Route path='/search' element={<Search />} />
-					<Route path='/search/:id' element={<SearchPage />}/>
+					<Route path='/search/:id' element={<SearchPage />} />
 					<Route path='/notification' element={<Notification />}>
 						<Route path='notices' element={<Confidentiality />} />
 						<Route path='messages' element={<Confidentiality />} />

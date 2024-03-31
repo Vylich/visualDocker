@@ -103,12 +103,12 @@ function Header() {
 	const onDelete = obj => {
 		const filteredItems = itemsSearch.filter(item => item !== obj.obj)
 		setItemsSearch(filteredItems)
-		localStorage.removeItem('searchedItems')
+		sessionStorage.removeItem('searchedItems')
 	}
 
 	useEffect(() => {
 		const storageSearchedItems = JSON.parse(
-			localStorage.getItem('searchedItems')
+			sessionStorage.getItem('searchedItems')
 		)
 		if (storageSearchedItems) {
 			setItemsSearch(storageSearchedItems)
@@ -116,7 +116,7 @@ function Header() {
 	}, [])
 
 	useEffect(() => {
-		localStorage.setItem('searchedItems', JSON.stringify(itemsSearch))
+		sessionStorage.setItem('searchedItems', JSON.stringify(itemsSearch))
 	}, [itemsSearch])
 
 	const renderItems = () => {
@@ -298,7 +298,11 @@ function Header() {
 							<Link to={`/profile/${userdata.id}`}>
 								<img
 									className={styles.ava}
-									src={userdata.avatar ? `http://${window.location.hostname}:8000${userdata.avatar}` : avatar}
+									src={
+										userdata.avatar
+											? `http://${window.location.hostname}:8000${userdata.avatar}`
+											: avatar
+									}
 									width={40}
 									alt='Аватар'
 								/>
