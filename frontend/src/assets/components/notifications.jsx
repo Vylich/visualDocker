@@ -26,7 +26,7 @@ const WebSocketComponent = () => {
 			const accessToken = window.sessionStorage.getItem('accessff')
 			if (!accessToken) return // Если токена нет, не создаем соединение
 
-			wsRef.current = new WebSocket(`ws://localhost:8000/ws/notifications/?token=${accessToken}`)
+			wsRef.current = new WebSocket(`/ws/notifications/?token=${accessToken}`)
 
 			// Подключение
 			wsRef.current.onopen = () => {
