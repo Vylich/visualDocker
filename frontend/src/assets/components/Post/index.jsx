@@ -15,7 +15,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import Loading from '../Loading/Loading'
 
-export const removeApiUrl = (url) => {
+export const removeApiUrl = url => {
 	return url.replace('api', 'localhost')
 }
 
@@ -34,8 +34,6 @@ const Post = ({ isHomePost, isFullPost, title, images, videos, slug, i }) => {
 		}
 	}
 
-
-
 	const handleMouseOver = () => {
 		videoRef.current.play()
 		setIsPlaying(true)
@@ -49,11 +47,11 @@ const Post = ({ isHomePost, isFullPost, title, images, videos, slug, i }) => {
 	useEffect(() => {
 		if (!isFullPost && images.length) {
 			const image = new Image()
-			image.src = `http://${window.location.hostname}:8000${images[0].image}`
+			image.src = `https://visualapp.ru:8000${images[0].image}`
 			image.onload = () => setIsLoaded(true)
 		} else if (!isFullPost && videos) {
 			const video = document.createElement('video')
-			video.src = `http://${window.location.hostname}:8000${videos[0].video}`
+			video.src = `https://visualapp.ru:8000${videos[0].video}`
 			video.oncanplaythrough = () => setIsLoaded(true)
 		}
 	}, [images, videos])
@@ -65,7 +63,10 @@ const Post = ({ isHomePost, isFullPost, title, images, videos, slug, i }) => {
 					const aspect = width / height
 
 					if (aspect < 0.5625) {
-						setAspectRatio(prev => ({ ...prev, [removeApiUrl(img.image)]: 0.5625 }))
+						setAspectRatio(prev => ({
+							...prev,
+							[removeApiUrl(img.image)]: 0.5625,
+						}))
 					} else {
 						setAspectRatio(prev => ({
 							...prev,
@@ -76,25 +77,21 @@ const Post = ({ isHomePost, isFullPost, title, images, videos, slug, i }) => {
 			})
 		} else if (images && isHomePost) {
 			images.forEach(img => {
-				getMeta(
-					`http://${window.location.hostname}:8000${img.image}`,
-					(width, height) => {
-						const aspect = width / height
+				getMeta(`https://visualapp.ru:8000${img.image}`, (width, height) => {
+					const aspect = width / height
 
-						if (aspect < 0.5625) {
-							setAspectRatioHome(prev => ({
-								...prev,
-								[`http://${window.location.hostname}:8000${img.image}`]: 0.5625,
-							}))
-						} else {
-							setAspectRatioHome(prev => ({
-								...prev,
-								[`http://${window.location.hostname}:8000${img.image}`]:
-									width / height,
-							}))
-						}
+					if (aspect < 0.5625) {
+						setAspectRatioHome(prev => ({
+							...prev,
+							[`https://visualapp.ru:8000${img.image}`]: 0.5625,
+						}))
+					} else {
+						setAspectRatioHome(prev => ({
+							...prev,
+							[`https://visualapp.ru:8000${img.image}`]: width / height,
+						}))
 					}
-				)
+				})
 			})
 		}
 	}, [images])
@@ -138,7 +135,9 @@ const Post = ({ isHomePost, isFullPost, title, images, videos, slug, i }) => {
 											[styles.imageFull]: isFullPost,
 											[styles.imageHome]: isHomePost,
 										})}
-										style={{ aspectRatio: aspectRatio[removeApiUrl(link.image)] }}
+										style={{
+											aspectRatio: aspectRatio[removeApiUrl(link.image)],
+										}}
 										src={removeApiUrl(link.image)}
 										crossOrigin='anonymous'
 										loading='lazy'
@@ -178,10 +177,10 @@ const Post = ({ isHomePost, isFullPost, title, images, videos, slug, i }) => {
 											style={{
 												aspectRatio:
 													aspectRatioHome[
-														`http://${window.location.hostname}:8000${images[0].image}`
+														`https://visualapp.ru:8000${images[0].image}`
 													],
 											}}
-											src={`http://${window.location.hostname}:8000${images[0].image}`}
+											src={`https://visualapp.ru:8000${images[0].image}`}
 											alt={`${i}`}
 											crossOrigin='anonymous'
 											loading='lazy'
@@ -198,11 +197,13 @@ const Post = ({ isHomePost, isFullPost, title, images, videos, slug, i }) => {
 												muted
 												loop
 												ref={videoRef}
-												src={`http://${window.location.hostname}:8000${videos[0].video}`}
+												src={`https://visualapp.ru:8000${videos[0].video}`}
 												onMouseOver={handleMouseOver}
 												onMouseOut={handleMouseOut}
 											>
-												<source src={`http://${window.location.hostname}:8000${videos[0].video}`} />
+												<source
+													src={`https://visualapp.ru:8000${videos[0].video}`}
+												/>
 											</video>
 										)}
 									</>

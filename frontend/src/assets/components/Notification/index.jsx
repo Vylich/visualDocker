@@ -38,7 +38,7 @@ const Notification = ({ type, post, user, avatar }) => {
 								className={styles.avatar}
 								src={
 									userState.avatar
-										? `http://${window.location.hostname}:8000${userState.avatar}`
+										? `https://visualapp.ru:8000${userState.avatar}`
 										: avatarDefault
 								}
 								alt=''
@@ -59,12 +59,12 @@ const Notification = ({ type, post, user, avatar }) => {
 						<Link to={`/posts/${post.slug}`}>
 							{post.image[0] ? (
 								<img
-									src={`http://${window.location.hostname}:8000${post.image[0].image}`}
+									src={`https://visualapp.ru:8000${post.image[0].image}`}
 									alt=''
 								/>
 							) : (
 								<video
-									src={`http://${window.location.hostname}:8000${post.video[0].video}`}
+									src={`https://visualapp.ru:8000${post.video[0].video}`}
 									alt=''
 								/>
 							)}
@@ -78,7 +78,11 @@ const Notification = ({ type, post, user, avatar }) => {
 						<Link to={`/profile/${user}`}>
 							<img
 								className={styles.avatar}
-								src={avatar ? `http://${window.location.hostname}:8000/media/${avatar}` : avatarDefault}
+								src={
+									avatar
+										? `https://visualapp.ru:8000/media/${avatar}`
+										: avatarDefault
+								}
 								alt=''
 							/>
 						</Link>
@@ -93,7 +97,11 @@ const Notification = ({ type, post, user, avatar }) => {
 					<div className={styles.postImg}>
 						<Link to={`/posts/${post}`}>
 							<img
-								src={postState.image ? `${removeApiUrl(postState.image[0].image)}` : ''}
+								src={
+									postState.image
+										? `${removeApiUrl(postState.image[0].image)}`
+										: ''
+								}
 								alt=''
 							/>
 						</Link>
@@ -106,7 +114,11 @@ const Notification = ({ type, post, user, avatar }) => {
 						<Link to={`/profile/${user}`}>
 							<img
 								className={styles.avatar}
-								src={userState.avatar ? `${removeApiUrl(userState.avatar)}` : avatarDefault}
+								src={
+									userState.avatar
+										? `${removeApiUrl(userState.avatar)}`
+										: avatarDefault
+								}
 								alt=''
 							/>
 						</Link>
