@@ -117,7 +117,7 @@ function UserInfo({
 							avatar
 								? avatar.startsWith('blob')
 									? avatar
-									: `http://visualapp.ru:8000${avatar}`
+									: `https://visualapp.ru:8000${avatar}`
 								: avatarDefault
 						}
 						alt={`Аватар пользователя ${username}`}
@@ -129,7 +129,7 @@ function UserInfo({
 						avatar
 							? avatar.startsWith('blob')
 								? avatar
-								: `http://visualapp.ru:8000${avatar}`
+								: `https://visualapp.ru:8000${avatar}`
 							: avatarDefault
 					}
 					alt={`Аватар пользователя ${username}`}

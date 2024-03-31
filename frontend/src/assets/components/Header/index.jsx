@@ -226,7 +226,7 @@ function Header() {
 									className={styles.ava}
 									src={
 										userdata && userdata.avatar
-											? `http://visualapp.ru:8000${userdata.avatar}`
+											? `https://visualapp.ru:8000${userdata.avatar}`
 											: avatar
 									}
 									width={20}
@@ -300,7 +300,7 @@ function Header() {
 									className={styles.ava}
 									src={
 										userdata.avatar
-											? `http://visualapp.ru:8000${userdata.avatar}`
+											? `https://visualapp.ru:8000${userdata.avatar}`
 											: avatar
 									}
 									width={40}

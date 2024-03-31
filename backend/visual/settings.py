@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'taggit',
     'chat',
     'notifications',
-    'followers'
+    'followers',
+    "sslserver",
 ]
 
 MIDDLEWARE = [
