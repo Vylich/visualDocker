@@ -47,11 +47,11 @@ const Post = ({ isHomePost, isFullPost, title, images, videos, slug, i }) => {
 	useEffect(() => {
 		if (!isFullPost && images.length) {
 			const image = new Image()
-			image.src = `https://visualapp.ru:8000${images[0].image}`
+			image.src = `http://visualapp.ru:8000${images[0].image}`
 			image.onload = () => setIsLoaded(true)
 		} else if (!isFullPost && videos) {
 			const video = document.createElement('video')
-			video.src = `https://visualapp.ru:8000${videos[0].video}`
+			video.src = `http://visualapp.ru:8000${videos[0].video}`
 			video.oncanplaythrough = () => setIsLoaded(true)
 		}
 	}, [images, videos])
@@ -77,18 +77,18 @@ const Post = ({ isHomePost, isFullPost, title, images, videos, slug, i }) => {
 			})
 		} else if (images && isHomePost) {
 			images.forEach(img => {
-				getMeta(`https://visualapp.ru:8000${img.image}`, (width, height) => {
+				getMeta(`http://visualapp.ru:8000${img.image}`, (width, height) => {
 					const aspect = width / height
 
 					if (aspect < 0.5625) {
 						setAspectRatioHome(prev => ({
 							...prev,
-							[`https://visualapp.ru:8000${img.image}`]: 0.5625,
+							[`http://visualapp.ru:8000${img.image}`]: 0.5625,
 						}))
 					} else {
 						setAspectRatioHome(prev => ({
 							...prev,
-							[`https://visualapp.ru:8000${img.image}`]: width / height,
+							[`http://visualapp.ru:8000${img.image}`]: width / height,
 						}))
 					}
 				})
@@ -177,10 +177,10 @@ const Post = ({ isHomePost, isFullPost, title, images, videos, slug, i }) => {
 											style={{
 												aspectRatio:
 													aspectRatioHome[
-														`https://visualapp.ru:8000${images[0].image}`
+														`http://visualapp.ru:8000${images[0].image}`
 													],
 											}}
-											src={`https://visualapp.ru:8000${images[0].image}`}
+											src={`http://visualapp.ru:8000${images[0].image}`}
 											alt={`${i}`}
 											crossOrigin='anonymous'
 											loading='lazy'
@@ -197,12 +197,12 @@ const Post = ({ isHomePost, isFullPost, title, images, videos, slug, i }) => {
 												muted
 												loop
 												ref={videoRef}
-												src={`https://visualapp.ru:8000${videos[0].video}`}
+												src={`http://visualapp.ru:8000${videos[0].video}`}
 												onMouseOver={handleMouseOver}
 												onMouseOut={handleMouseOut}
 											>
 												<source
-													src={`https://visualapp.ru:8000${videos[0].video}`}
+													src={`http://visualapp.ru:8000${videos[0].video}`}
 												/>
 											</video>
 										)}
