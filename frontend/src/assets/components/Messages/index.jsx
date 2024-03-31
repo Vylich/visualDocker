@@ -67,7 +67,7 @@ const Messages = ({ id }) => {
 	useEffect(() => {
 		if (idRoom) {
 			socketRef.current = new WebSocket(
-				`/ws/chat/${idRoom}/?token=${normalAccess(window.sessionStorage.getItem('accessff'))}`
+				`wss://visualapp.ru/ws/chat/${idRoom}/?token=${normalAccess(window.sessionStorage.getItem('accessff'))}`
 			)
 
 			socketRef.current.addEventListener('open', event => {
