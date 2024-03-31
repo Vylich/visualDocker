@@ -27,7 +27,7 @@
 	display: flex;
 	flex-direction: column-reverse;
 	max-height: 100%;
-	overflow-y: scroll;
+	overflow-y: overlay;
 	margin-top: auto;
 	scrollbar-width: thin;
 
@@ -134,7 +134,7 @@
 	background-color: #ffffff;
 	padding: 10px;
 	height: 100%;
-	overflow-y: scroll;
+	overflow-y: overlay;
 	-webkit-box-shadow: 0px 0px 19px -6px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 0px 0px 19px -6px rgba(0, 0, 0, 0.5);
 	box-shadow: 0px 0px 19px -6px rgba(0, 0, 0, 0.5);
@@ -305,7 +305,7 @@
 .usersList {
 	max-height: 100%;
 	width: 100%;
-	overflow: scroll;
+	overflow-y: overlay;
 }
 
 .linkUser {
@@ -333,7 +333,7 @@
 	width: 100%;
 	@include vp-1023 {
 		max-height: 60%;
-		overflow: scroll;
+		overflow-y: overlay;
 	}
 }
 

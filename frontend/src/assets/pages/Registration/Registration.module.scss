@@ -1,4 +1,4 @@
-@import "../../scss/utils/mixins";
+@import '../../scss/utils/mixins';
 
 .container {
 	max-width: 450px;
@@ -10,7 +10,7 @@
 
 	@include vp-1023 {
 		max-height: calc(100dvh - 75px);
-		overflow-y: scroll;
+		overflow-y: overlay;
 		width: 100%;
 		margin: 0;
 		gap: 0;
@@ -42,8 +42,8 @@
 		width: 100%;
 		gap: 15px;
 
-		input[type="text"],
-		input[type="password"] {
+		input[type='text'],
+		input[type='password'] {
 			box-sizing: border-box;
 			height: 36px;
 			width: 100%;

@@ -11,7 +11,7 @@
 	justify-content: center;
 	grid-template-rows: masonry;
 	position: relative;
-	overflow-y: scroll;
+	overflow-y: overlay;
 
 	@include vp-1023 {
 		grid-template-columns: repeat(auto-fit, 30.788530466%);

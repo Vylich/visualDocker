@@ -5,7 +5,6 @@
 	height: 100%;
 	padding-bottom: 20px;
 
-
 	@include vp-1023 {
 		position: relative;
 		width: 100%;
@@ -29,14 +28,13 @@
 	align-items: center;
 	padding: 10px;
 	height: 100%;
-	overflow-y: scroll;
+	overflow-y: overlay;
 	-webkit-box-shadow: 0px 0px 19px -6px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 0px 0px 19px -6px rgba(0, 0, 0, 0.5);
 	box-shadow: 0px 0px 19px -6px rgba(0, 0, 0, 0.5);
 	background-color: #ffffff;
 	padding: 10px;
 	border-radius: 16px;
-
 
 	@include vp-1023 {
 		padding: 0;
