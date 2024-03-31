@@ -72,9 +72,11 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=2),
 }
 
-CORS_ORIGIN_WHITELIST = ["http://localhost:3000", "http://localhost:3000", "http://127.0.0.1:3000", "http://192.168.217.49:3000"]
+# CORS_ORIGIN_WHITELIST = ["http://localhost:3000", "http://localhost:3000", "http://127.0.0.1:3000", "http://192.168.217.49:3000"]
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = ["http://visualapp.ru", "https://visualapp.ru", "http://www.visualapp.ru", "https://www.visualapp.ru"]
+
+# CORS_ORIGIN_ALLOW_ALL = True
 # конец настроек JWT токена
 
 
