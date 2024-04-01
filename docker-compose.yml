@@ -4,8 +4,8 @@ services:
     image: postgres
     environment:
       POSTGRES_DB: visual
-      POSTGRES_USER: visualUser
-      POSTGRES_PASSWORD: visual123
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
     ports:
       - '5432:5432'
     healthcheck:
