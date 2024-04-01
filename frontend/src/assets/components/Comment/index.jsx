@@ -65,7 +65,7 @@ const CommentsBlock = ({
 				<img
 					src={
 						avatarUrl
-							? `http://visualapp.ru:8000/media/${avatarUrl}`
+							? `https://visualapp.ru/media/${avatarUrl}`
 							: avatarDefault
 					}
 					alt={`Аватар пользователя ${username}`}

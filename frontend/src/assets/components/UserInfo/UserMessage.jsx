@@ -7,7 +7,7 @@ const UserMessage = ({ username, avatar, text, isNewMessage, isUnread }) => {
 		<div className={styles.root}>
 			<img
 				className={styles.image}
-				src={avatar ? `http://visualapp.ru:8000${avatar}` : avatarDefault}
+				src={avatar ? `https://visualapp.ru${avatar}` : avatarDefault}
 			/>
 			<div className={styles.extra}>
 				<span className={styles.username}>@{username}</span>
