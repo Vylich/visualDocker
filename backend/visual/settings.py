@@ -137,8 +137,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'visual',
-        'USER': 'postgres',
-        'PASSWORD': '123456',
+        'USER': 'visualUser',
+        'PASSWORD': 'visual123',
         'HOST': 'db',
         'PORT': 5432,
     }
