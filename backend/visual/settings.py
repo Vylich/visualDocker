@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'chat',
     'notifications',
     'followers',
-    "sslserver",
+    'sslserver_simple',
 ]
 
 MIDDLEWARE = [

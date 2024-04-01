@@ -56,4 +56,4 @@ urllib3==2.2.1
 wrapt==1.16.0
 yookassa==3.0.1
 zope.interface==6.2
-django-sslserver
+django-sslserver-simple
