@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'chat',
     'notifications',
     'followers',
-    'sslserver_simple',
+    "sslserver",
 ]
 
 MIDDLEWARE = [
@@ -207,9 +207,3 @@ CHANNEL_LAYERS = {
 #     'BACKEND': 'channels.layers.InMemoryChannelLayer'
 #   },
 }
-
-
-SSL_CERT_FILE = '/etc/nginx/ssl/live/visualapp.ru/fullchain.pem'
-
-
-SSL_KEY_FILE = '/etc/nginx/ssl/live/visualapp.ru/privkey.pem;'
