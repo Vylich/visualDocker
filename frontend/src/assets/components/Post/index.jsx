@@ -16,7 +16,7 @@ import {
 import Loading from '../Loading/Loading'
 
 export const removeApiUrl = url => {
-	return url.replace('api', 'visualapp.ru')
+	return url.replace('api:8000', 'visualapp.ru')
 }
 
 const Post = ({ isHomePost, isFullPost, title, images, videos, slug, i }) => {
