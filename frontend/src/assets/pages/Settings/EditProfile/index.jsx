@@ -86,7 +86,7 @@ const EditProfile = ({
 								imageUrl
 									? imageUrl
 									: image
-									? `https://visualapp.ru:8000${image}`
+									? `http://visualapp.ru:8000${image}`
 									: avatarDefault
 							}
 							alt='Avatar'

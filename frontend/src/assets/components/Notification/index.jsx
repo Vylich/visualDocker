@@ -38,7 +38,7 @@ const Notification = ({ type, post, user, avatar }) => {
 								className={styles.avatar}
 								src={
 									userState.avatar
-										? `https://visualapp.ru:8000${userState.avatar}`
+										? `http://visualapp.ru:8000${userState.avatar}`
 										: avatarDefault
 								}
 								alt=''
@@ -59,12 +59,12 @@ const Notification = ({ type, post, user, avatar }) => {
 						<Link to={`/posts/${post.slug}`}>
 							{post.image[0] ? (
 								<img
-									src={`https://visualapp.ru:8000${post.image[0].image}`}
+									src={`http://visualapp.ru:8000${post.image[0].image}`}
 									alt=''
 								/>
 							) : (
 								<video
-									src={`https://visualapp.ru:8000${post.video[0].video}`}
+									src={`http://visualapp.ru:8000${post.video[0].video}`}
 									alt=''
 								/>
 							)}
@@ -80,7 +80,7 @@ const Notification = ({ type, post, user, avatar }) => {
 								className={styles.avatar}
 								src={
 									avatar
-										? `https://visualapp.ru:8000/media/${avatar}`
+										? `http://visualapp.ru:8000/media/${avatar}`
 										: avatarDefault
 								}
 								alt=''
