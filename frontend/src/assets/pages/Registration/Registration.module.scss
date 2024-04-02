@@ -27,7 +27,7 @@
 		align-items: center;
 		border-radius: 3px;
 		max-width: 450px;
-		width: 450px;
+		width: 100%;
 
 		@include vp-1023 {
 			border: none;
