@@ -120,7 +120,7 @@ export const Login = () => {
 			<div className={styles.container__block}>
 				<header className={styles.container__header}>
 					<img src={logo} width={70} alt='Логотип' />
-					<h2>Вход Visual</h2>
+					<h2>Вход Visualsaa</h2>
 				</header>
 				<form
 					className={styles.container__form}
