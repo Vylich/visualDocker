@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-&v#9*%6jn!80jx0w8-=6hvv&2bk!g5q6hd&0x)39d5t*7t*&%@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["visualapp.ru", "visualapp.ru", "www.visualapp.ru", "www.visualapp.ru"]
+ALLOWED_HOSTS = ["api", "visualapp.ru", "visualapp.ru", "www.visualapp.ru", "www.visualapp.ru"]
 
 
 # Application definition
