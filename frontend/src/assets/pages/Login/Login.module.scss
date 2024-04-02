@@ -13,8 +13,10 @@
 		max-height: calc(100dvh - 75px);
 		overflow-y: overlay;
 		width: 100%;
+		max-width: 100%;
 		gap: 0;
 		justify-content: center;
+		align-items: center;
 		margin: 0;
 	}
 
@@ -25,6 +27,8 @@
 		flex-direction: column;
 		align-items: center;
 		border-radius: 3px;
+		max-width: 450px;
+		width: 450px;
 
 		@include vp-1023 {
 			border: none;
