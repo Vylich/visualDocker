@@ -17,6 +17,10 @@ from notifications.models import Notification
 from .mixins import LikedMixin, AddImageVideoMixin
 from .utils import get_mime_type
 from rest_framework.response import Response
+import logging
+
+
+logger = logging.getLogger('django')
 
 
 class CustomPostPagination(PageNumberPagination):
@@ -44,14 +48,15 @@ class PostViewSet(LikedMixin, AddImageVideoMixin, viewsets.ModelViewSet):
     @transaction.atomic
     def create(self, request, *args, **kwargs):
         # images = dict((request.data).lists()).get('image', [])
+        logger.info(f'PostCreate | {request.user} {request.data}')
         file_data = []
-        request.data._mutable=True
+        request.data._mutable = True
         post = None
-        images = (request.FILES.getlist('image', []))
+        images = request.FILES.getlist('image', [])
         if images:
             file_data.extend(images)
             request.data.pop('image')
-        videos = (request.FILES.getlist('video', []))
+        videos = request.FILES.getlist('video', [])
         if videos:
             file_data.extend(videos)
             request.data.pop('video')
@@ -59,7 +64,6 @@ class PostViewSet(LikedMixin, AddImageVideoMixin, viewsets.ModelViewSet):
 
         serializer_data = self.serializer_class(data=request.data)
         if serializer_data.is_valid():
-            # post_obj = Post.objects.create(**serializer_data.validated_data)
             post = serializer_data.save(author=self.request.user)
 
         if post:
@@ -69,9 +73,9 @@ class PostViewSet(LikedMixin, AddImageVideoMixin, viewsets.ModelViewSet):
                     type = get_mime_type(file)
                     self.choose_add(type, file, post_id)
         return Response(serializer_data.data)
-            # {'messages': 'Пост добавлен'})
 
     def list(self, request):
+        logger.info(f'PostList | {request.user} {request.data}')
         user = request.user
         if user.is_authenticated:
             ids = []
@@ -120,6 +124,7 @@ class PostViewSet(LikedMixin, AddImageVideoMixin, viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def retrieve(self, request, slug):
+        logger.info(f'PostRetrieve | {request.user} {request.data}')
         try:
             post = Post.objects.get(slug=slug)
         except:
@@ -139,6 +144,7 @@ class CommentView(generics.CreateAPIView, generics.UpdateAPIView, generics.Destr
     serializer_class = CreateCommentSerializer
     permission_classes = [IsAuthorComment]
 
+    @transaction.atomic
     def perform_create(self, serializer):
         # if not serializer.validated_data['parent']:
         author = serializer.validated_data['post'].author

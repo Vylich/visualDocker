@@ -14,4 +14,4 @@ ENV VITE_APP_WS_URL $VITE_APP_WS_URL
 
 RUN npm install
 
-CMD [ "npm", "start"]
+CMD npm run build && npm run preview

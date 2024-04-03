@@ -1,6 +1,7 @@
 import uuid
 import json
 from yookassa import Configuration, Payment
+import logging
 
 from rest_framework import viewsets
 from rest_framework import generics
@@ -20,6 +21,9 @@ from .serializers import AccountSerializer, RegisterSerializer
 Configuration.account_id = '357017'
 Configuration.secret_key = 'test_okbLKMNPtyaarXd2dH8sAicWQdi_Ok_hifBC2z4mKVg'
 
+
+logger = logging.getLogger('django')
+
 class AccountViewSet(UserPostMixin, viewsets.ModelViewSet):
     serializer_class = AccountSerializer
     queryset = Account.objects.all()
@@ -37,6 +41,7 @@ class AccountViewSet(UserPostMixin, viewsets.ModelViewSet):
         queryset = Account.objects.all()
         try:
             user = get_object_or_404(queryset, pk=pk)
+            logger.info(f'Login user | {self.request.user.username}')
         except:
             raise NotFound
         serializer = AccountSerializer(user)
@@ -49,6 +54,7 @@ class RegisterView(generics.GenericAPIView):
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
+        logger.info(f'Post data try | {request.data}')
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         return Response({
@@ -70,12 +76,14 @@ class ProfileViewSet(RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin, vi
         """
         Данные пользователя
         """
+        logger.info(f'User | {request.user}')
         serializer = AccountSerializer(instance=request.user)
         return Response({
             'user': serializer.data
         })
 
     def perform_destroy(self, instance):
+        logger.info(f'User | {self.request.user}')
         deleted_user = Account.objects.get(username='deleted')
         user_id = instance.id
         all_user_comment = Comment.objects.filter(author_id=user_id)
@@ -102,6 +110,7 @@ class CreatePaymentView(generics.CreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = AccountSerializer
     def post(self, request):
+        logger.info(f'Payment | {request.user} {request.data}')
         user = request.user
         subscription = request.data.get('subscription')
         value = request.data.get('value')
@@ -130,21 +139,24 @@ class CreatePaymentView(generics.CreateAPIView):
 
 class CreatePaymentAcceptedView(generics.CreateAPIView):
     queryset = Account.objects.all()
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
     def post(self, request):
+        logger.info(f'Paymentrequest | {request.body}')
         response = json.loads(request.body)
         # response = request.data.get('payment_id')
         # user_id = request.data.get('user_id')
         # subscription = request.data.get('subscription')
 
-        payment = Payment.find_one(response['id'])
-        user_id = response['metadata']['user_id']
-        subscription = response['metadata']['subscription']
-        if response['status'] == 'succeeded':
+        # payment = Payment.find_one(response['id'])
+        user_id = response['object']['metadata']['user_id']
+        subscription = response['object']['metadata']['subscription']
+        if response['object']['status'] == 'succeeded':
             if subscription:
                 user = Account.objects.get(id=user_id)
                 user.subscription=subscription
                 user.save()
+                posts = Post.objects.filter(author_id=user_id)
+                posts.update(premium=False)
                 if subscription == 'premium':
                     posts = Post.objects.filter(author_id=user_id)
                     posts.update(premium=True)

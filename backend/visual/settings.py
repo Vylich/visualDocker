@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-&v#9*%6jn!80jx0w8-=6hvv&2bk!g5q6hd&0x)39d5t*7t*&%@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["api", "visualapp.ru", "visualapp.ru", "www.visualapp.ru", "www.visualapp.ru"]
+ALLOWED_HOSTS = ["localhost", "api", "visualapp.ru", "visualapp.ru", "www.visualapp.ru", "www.visualapp.ru"]
+
+
 
 
 # Application definition
@@ -50,7 +52,7 @@ INSTALLED_APPS = [
     'taggit',
     'chat',
     'notifications',
-    'followers',
+    'followers'
 ]
 
 MIDDLEWARE = [
@@ -64,6 +66,35 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "main_format": {
+            "format": "{asctime} - {levelname} - {module} - {filename} {process:d} {thread:d} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "main_format",
+        },
+        "file": {
+            "class": "logging.FileHandler",
+            "formatter": "main_format",
+            "filename": "information.log"
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console", "file"],
+            "level": "INFO",
+            "propagate": True,
+        },
+    },
+}
+
 # ниже настройки JWT токена
 LOGIN_URL = "api/auth/login"
 
@@ -72,11 +103,7 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=2),
 }
 
-# CORS_ORIGIN_WHITELIST = ["http://localhost:3000", "http://localhost:3000", "http://127.0.0.1:3000", "http://192.168.217.49:3000"]
-
 CORS_ORIGIN_WHITELIST = ["http://visualapp.ru", "https://visualapp.ru", "http://www.visualapp.ru", "https://www.visualapp.ru"]
-
-# CORS_ORIGIN_ALLOW_ALL = True
 # конец настроек JWT токена
 
 
