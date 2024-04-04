@@ -87,7 +87,8 @@ function Header() {
 	}
 
 	const onClickSearch = obj => {
-		setSearchedText(obj)
+		navigate(`/search/${obj}`)
+		setSearchOpened(false)
 	}
 
 	const onSubmit = e => {
@@ -144,6 +145,14 @@ function Header() {
 		}
 	}, [searchedText])
 
+	const navigateToSearchedItems = (item) => {
+		setItemsSearch(prev => [...prev, item])
+		navigate(`/search/${item}`)
+		setSearchOpened(false)
+		setFoundItems(null)
+	}
+
+
 	return (
 		<div className={styles.root}>
 			{searchOpened && (
@@ -151,7 +160,6 @@ function Header() {
 					className={styles.overlay}
 					onClick={() => {
 						setSearchOpened(false)
-						// setSearchedText('')
 						setFoundItems(null)
 					}}
 				></div>
@@ -265,6 +273,7 @@ function Header() {
 									searchedText={searchedText}
 									setSearchedText={setSearchedText}
 									onSubmit={onSubmit}
+									navigateToSearchedItems={navigateToSearchedItems}
 								/>
 								<button
 									className={styles.clearBtn}

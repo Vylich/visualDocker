@@ -18,6 +18,7 @@ const Search = ({
 	isNavVisible,
 	searchedItems,
 	foundItems,
+	navigateToSearchedItems
 }) => {
 	const [foundItemsMobile, setFoundItemsMobile] = useState(null)
 	const [searchedText, setSearchedText] = useState('')
@@ -46,9 +47,6 @@ const Search = ({
 		}
 	}, [searchedText])
 
-	const navigateToSearchedItems = (item) => {
-		navigate(`/search/${item}`)
-	}
 
 	return (
 		<div className={styles.root}>
