@@ -71,7 +71,11 @@ const postsSlice = createSlice({
 	},
 	extraReducers: builder => {
 		builder.addCase(fetchPosts.fulfilled, (state, action) => {
-			state.posts.items = [...state.posts.items, ...action.payload]
+			if (window.sessionStorage.getItem('accessff')) {
+				state.posts.items = [...state.posts.items, ...action.payload]
+			} else {
+				state.posts.items = [...state.posts.items, ...action.payload.results]
+			}
 			state.posts.status = 'loaded'
 		}),
 			builder.addCase(fetchPosts.rejected, state => {

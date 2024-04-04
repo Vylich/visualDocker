@@ -53,6 +53,7 @@
 		border-bottom-left-radius: 30px;
 
 		@include vp-1023 {
+			border-top-left-radius: 0;
 			width: 100%;
 			height: auto;
 			object-fit: cover;
