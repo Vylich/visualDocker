@@ -4,8 +4,8 @@ import { jwtDecode } from 'jwt-decode'
 const instance = axios.create({
 	// baseURL: 'http://192.168.122.96:8000/api/',
 	// baseURL: `${import.meta.env.VITE_APP_API_URL}`,
-	baseURL: '/api/',
-	// baseURL: 'http://localhost:8000/api/',
+	// baseURL: '/api/',
+	baseURL: 'https://visualapp.ru/api/',
 })
 
 export const normalAccess = access => {

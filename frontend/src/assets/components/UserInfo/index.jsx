@@ -13,6 +13,8 @@ import { useSelector } from 'react-redux'
 import { fetchRemovePost } from '../../../redux/slices/posts'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import Modal from '../Modal/Modal'
+import ListUsers from '../ListUsers/ListUsers'
 
 function UserInfo({
 	avatar,
@@ -38,6 +40,8 @@ function UserInfo({
 	const { id } = useParams()
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
+	const [isSubscribersList, setIsSubscribersList] = useState(false)
+	const [isFollowersList, setIsFollowersList] = useState(false)
 
 	useEffect(() => {
 		if (userData) {
@@ -91,12 +95,12 @@ function UserInfo({
 			}
 		} catch (err) {
 			console.warn(err)
-			alert('Не удалось отправить комментарий')
+			alert('Не удалось подписаться')
 		}
 	}
 
 	const onClickRemove = () => {
-		if (window.confirm('Вы правда зотите удалить пост?')) {
+		if (window.confirm('Вы правда хотите удалить пост?')) {
 			dispatch(fetchRemovePost(id))
 			navigate('/')
 		}
@@ -151,13 +155,42 @@ function UserInfo({
 						<span>
 							{posts.length} {getPostsWord(posts.length)}
 						</span>
-						<span>
+						<span
+							onClick={() => setIsFollowersList(true)}
+							className={styles.buttonList}
+						>
 							{followers.length} {getFollowerWord(followers.length)}
 						</span>
-						<span>
+						<span
+							onClick={() => setIsSubscribersList(true)}
+							className={styles.buttonList}
+						>
 							{subscriptions.users.length}{' '}
 							{getSubscriptionsWord(subscriptions.users.length)}
 						</span>
+						<Modal
+							isVisible={isSubscribersList || isFollowersList}
+							title={isSubscribersList ? 'Подписки' : 'Подписчики'}
+							content={
+								isSubscribersList ? (
+									<ListUsers
+										type={'subs'}
+										users={subscriptions.users}
+										typeMessage={'У вас пока нет подписок'}
+									/>
+								) : (
+									<ListUsers
+										type={'follows'}
+										users={followers}
+										typeMessage={'У вас пока нет подписчиков'}
+									/>
+								)
+							}
+							onClose={() => {
+								setIsSubscribersList(false)
+								setIsFollowersList(false)
+							}}
+						/>
 					</div>
 				)}
 				{email && (

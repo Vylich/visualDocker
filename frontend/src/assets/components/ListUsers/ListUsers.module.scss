@@ -1,0 +1,26 @@
+.root {
+	display: flex;
+	flex-direction: column;
+}
+
+.linkSearch {
+	width: min-content;
+	padding: 5px;
+	text-decoration: none;
+	height: auto !important;
+	div {
+		width: 100%;
+		height: 25px;
+		pointer-events: none;
+	}
+
+	img {
+		width: 25px;
+		height: 25px;
+		border-radius: 50%;
+	}
+
+	span {
+		font-size: 16px;
+	}
+}
