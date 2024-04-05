@@ -20,14 +20,14 @@ const ChangeAccount = () => {
 
 	const onSubmit = username => {
 		const obj = usersActive.find(ob => ob.username === username)
-		window.sessionStorage.setItem('accessff', obj.accessff)
-		window.sessionStorage.setItem('refresh', obj.refresh)
+		window.localStorage.setItem('accessff', obj.accessff)
+		window.localStorage.setItem('refresh', obj.refresh)
 		dispatch(fetchLogin())
 		navigate('/home')
 	}
 
 	useEffect(() => {
-		const arrUsers = window.sessionStorage.getItem('users')
+		const arrUsers = window.localStorage.getItem('users')
 		setUsersActive(JSON.parse(arrUsers))
 	}, [])
 

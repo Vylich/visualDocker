@@ -15,24 +15,24 @@ const NavSettings = ({ isNavVisible, hideNavOnClick, isNavVisibleOnClick }) => {
 	const userData = useSelector(state =>
 		isUserDataLoaded(state) ? state.auth.data : null
 	)
-	const users = JSON.parse(sessionStorage.getItem('users'))
+	const users = JSON.parse(localStorage.getItem('users'))
 
 	const onClickLogout = () => {
 		if (window.confirm('Are you sure you want to log out?')) {
 			dispatch(logout())
 			navigate('/login')
-			window.sessionStorage.removeItem('accessff')
-			window.sessionStorage.removeItem('refresh')
-			window.sessionStorage.removeItem('username')
-			window.sessionStorage.removeItem('avatar')
-			const users = JSON.parse(sessionStorage.getItem('users')) || []
+			window.localStorage.removeItem('accessff')
+			window.localStorage.removeItem('refresh')
+			window.localStorage.removeItem('username')
+			window.localStorage.removeItem('avatar')
+			const users = JSON.parse(localStorage.getItem('users')) || []
 			const invalidObj = users.find(item => item.username === userData.username)
 			const newUsers = users.filter(item => item.username !== userData.username)
 			console.log(invalidObj)
 			if (newUsers.length) {
-				window.sessionStorage.setItem('users', JSON.stringify(newUsers))
+				window.localStorage.setItem('users', JSON.stringify(newUsers))
 			} else {
-				window.sessionStorage.removeItem('users')
+				window.localStorage.removeItem('users')
 			}
 			dispatch(clearMessages())
 			dispatch(removePostsState())

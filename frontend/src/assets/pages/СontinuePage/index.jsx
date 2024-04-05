@@ -6,6 +6,8 @@ import UserInfo from '../../components/UserInfo'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchLogin, selectIsAuth } from '../../../redux/slices/auth'
 import { removePostsState } from '../../../redux/slices/posts'
+import { jwtDecode } from 'jwt-decode'
+
 
 const ContinuePage = () => {
 	const isAuth = useSelector(selectIsAuth)
@@ -18,21 +20,31 @@ const ContinuePage = () => {
 
 	const onSubmit = username => {
 		const obj = usersActive.find(ob => ob.username === username)
-		window.sessionStorage.setItem('accessff', obj.accessff)
-		window.sessionStorage.setItem('refresh', obj.refresh)
+		window.localStorage.setItem('accessff', obj.accessff)
+		window.localStorage.setItem('refresh', obj.refresh)
 		dispatch(fetchLogin())
 		dispatch(removePostsState())
 		navigate('/home')
 	}
 
 	useEffect(() => {
-		const arrUsers = window.sessionStorage.getItem('users')
+		const arrUsers = window.localStorage.getItem('users')
 		setUsersActive(JSON.parse(arrUsers))
-		if (!usersActive.length) {
-			return navigate('/login')
+
+		setAvatar(window.localStorage.getItem('avatar'))
+		setUsername(window.localStorage.getItem('username'))
+	}, [])
+
+	useEffect(() => {
+		const refresh = window.localStorage.getItem('refresh')
+
+		if (refresh) {
+			const decodedToken = jwtDecode(refresh)
+			const currentTime = Math.floor(Date.now() / 1000)
+			if (decodedToken.exp <= currentTime) {
+				return navigate('/login')
+			}
 		}
-		setAvatar(window.sessionStorage.getItem('avatar'))
-		setUsername(window.sessionStorage.getItem('username'))
 	}, [])
 
 	return (

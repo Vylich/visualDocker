@@ -13,24 +13,25 @@ export const normalAccess = access => {
 }
 
 instance.interceptors.request.use(config => {
-	let token = window.sessionStorage.getItem('accessff')
+	let token = window.localStorage.getItem('accessff')
+	console.log(token)
 
 	if (token) {
 		const decodedToken = jwtDecode(token)
 		const currentTime = Math.floor(Date.now() / 1000)
 
 		const refreshToken = () => {
-			const refresh = window.sessionStorage.getItem('refresh')
+			const refresh = window.localStorage.getItem('refresh')
 
 			const value = {
 				refresh: refresh,
 			}
-			axios.post(`/api/auth/refresh_token/`, value).then(res => {
-				window.sessionStorage.setItem('accessff', res.data.access)
-				const users = JSON.parse(sessionStorage.getItem('users')) || []
+			axios.post(`https://visualapp.ru/api/auth/refresh_token/`, value).then(res => {
+				window.localStorage.setItem('accessff', res.data.access)
+				const users = JSON.parse(localStorage.getItem('users')) || []
 				const invalidObj = users.find(item => item.refresh === refresh)
 				const newUsers = users.splice(users.indexOf(invalidObj), 1)
-				window.sessionStorage.setItem('users', JSON.stringify(newUsers))
+				window.localStorage.setItem('users', JSON.stringify(newUsers))
 
 				const obj = {
 					id: invalidObj.id,
@@ -40,7 +41,7 @@ instance.interceptors.request.use(config => {
 					accessff: res.data.access,
 				}
 				users.push(obj)
-				window.sessionStorage.setItem('users', JSON.stringify(users))
+				window.localStorage.setItem('users', JSON.stringify(users))
 			})
 		}
 

@@ -72,11 +72,11 @@ const SettingsProfile = () => {
 		}
 		axios.patch(`me/${idUser}/`, formData)
 
-		const users = JSON.parse(sessionStorage.getItem('users')) || []
+		const users = JSON.parse(localStorage.getItem('users')) || []
 		const invalidObj = users.find(item => item.id === idUser)
 		const newUsers = users.splice(users.indexOf(invalidObj), 1)
-		window.sessionStorage.setItem('users', JSON.stringify(newUsers))
-		window.sessionStorage.setItem('avatar', imageUrl)
+		window.localStorage.setItem('users', JSON.stringify(newUsers))
+		window.localStorage.setItem('avatar', imageUrl)
 
 		const obj = {
 			id: idUser,
@@ -86,7 +86,7 @@ const SettingsProfile = () => {
 			accessff: invalidObj.accessff,
 		}
 		users.push(obj)
-		window.sessionStorage.setItem('users', JSON.stringify(users))
+		window.localStorage.setItem('users', JSON.stringify(users))
 		dispatch(fetchLogin())
 	}
 

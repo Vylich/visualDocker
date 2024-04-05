@@ -13,6 +13,7 @@ import {
 	faEye,
 	faEyeSlash,
 } from '@fortawesome/free-solid-svg-icons'
+import { faGoogle, faVk } from '@fortawesome/free-brands-svg-icons'
 import logo from '../../../img/logo/Logo.svg'
 
 import styles from './Login.module.scss'
@@ -72,11 +73,14 @@ export const Login = () => {
 		}
 
 		if ('access' in data.payload) {
-			window.sessionStorage.setItem('accessff', `fdsafhrwodddddddd${data.payload.access}`)
-			window.sessionStorage.setItem('refresh', data.payload.refresh)
+			window.localStorage.setItem(
+				'accessff',
+				`fdsafhrwodddddddd${data.payload.access}`
+			)
+			window.localStorage.setItem('refresh', data.payload.refresh)
 			const user = await dispatch(fetchLogin())
 			if (user.payload) {
-				const users = JSON.parse(sessionStorage.getItem('users')) || []
+				const users = JSON.parse(localStorage.getItem('users')) || []
 				navigate('/home')
 				if (!users.find(item => item.username === user.payload.user.username)) {
 					const obj = {
@@ -87,9 +91,9 @@ export const Login = () => {
 						refresh: data.payload.refresh,
 					}
 					users.push(obj)
-					window.sessionStorage.setItem('users', JSON.stringify(users))
-					window.sessionStorage.setItem('username', user.payload.user.username)
-					window.sessionStorage.setItem('avatar', user.payload.user.avatar)
+					window.localStorage.setItem('users', JSON.stringify(users))
+					window.localStorage.setItem('username', user.payload.user.username)
+					window.localStorage.setItem('avatar', user.payload.user.avatar)
 					console.log(user.payload)
 					navigate('/home')
 				}
@@ -186,6 +190,19 @@ export const Login = () => {
 				<div className={styles.container__register}>
 					<p>У вас еще нет аккаунта?</p>
 					<Link to='/login/reg'>Зарегистрироваться</Link>
+				</div>
+			</div>
+			<div className={styles.container__block}>
+				<div className={styles.container__login}>
+					<p>Войти с помощью:</p>
+					<div className={styles.wrapLogin}>
+						<Link to='/login/reg'>
+							<FontAwesomeIcon icon={faGoogle} />
+						</Link>
+						<Link to='/login/reg'>
+							<FontAwesomeIcon icon={faVk} />
+						</Link>
+					</div>
 				</div>
 			</div>
 			<AuthErrorModal
