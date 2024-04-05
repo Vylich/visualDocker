@@ -26,7 +26,7 @@ instance.interceptors.request.use(config => {
 			const value = {
 				refresh: refresh,
 			}
-			axios.post(`https://visualapp.ru/api/auth/refresh_token/`, value).then(res => {
+			axios.post(`/api/auth/refresh_token/`, value).then(res => {
 				window.localStorage.setItem('accessff', res.data.access)
 				const users = JSON.parse(localStorage.getItem('users')) || []
 				const invalidObj = users.find(item => item.refresh === refresh)
