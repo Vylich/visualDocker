@@ -43,11 +43,11 @@ function App() {
 	// const [notificationMess, setNotificationMess] = useState([])
 
 	// useEffect(() => {
-	// 	if (window.sessionStorage.getItem('access')) {
+	// 	if (window.localStorage.getItem('access')) {
 	// 		socketRef.current = new WebSocket(
 	// 			`${
 	// 				import.meta.env.VITE_APP_WS_URL
-	// 			}/ws/notifications/?token=${window.sessionStorage.getItem('access')}`
+	// 			}/ws/notifications/?token=${window.localStorage.getItem('access')}`
 	// 		)
 
 	// 		socketRef.current.addEventListener('message', event => {
@@ -107,6 +107,3 @@ function App() {
 }
 
 export default App
-
-
-

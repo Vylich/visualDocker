@@ -18,22 +18,25 @@ const ContinuePage = () => {
 
 	const onSubmit = username => {
 		const obj = usersActive.find(ob => ob.username === username)
-		window.sessionStorage.setItem('accessff', obj.accessff)
-		window.sessionStorage.setItem('refresh', obj.refresh)
+		window.localStorage.setItem('accessff', obj.accessff)
+		window.localStorage.setItem('refresh', obj.refresh)
 		dispatch(fetchLogin())
 		dispatch(removePostsState())
 		navigate('/home')
 	}
 
 	useEffect(() => {
-		const arrUsers = window.sessionStorage.getItem('users')
+		const arrUsers = window.localStorage.getItem('users')
 		setUsersActive(JSON.parse(arrUsers))
+		setAvatar(window.localStorage.getItem('avatar'))
+		setUsername(window.localStorage.getItem('username'))
+	}, [])
+
+	useEffect(() => {
 		if (!usersActive.length) {
 			return navigate('/login')
 		}
-		setAvatar(window.sessionStorage.getItem('avatar'))
-		setUsername(window.sessionStorage.getItem('username'))
-	}, [])
+	}, [usersActive])
 
 	return (
 		<div className={styles.container}>

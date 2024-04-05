@@ -104,12 +104,12 @@ function Header() {
 	const onDelete = obj => {
 		const filteredItems = itemsSearch.filter(item => item !== obj.obj)
 		setItemsSearch(filteredItems)
-		sessionStorage.removeItem('searchedItems')
+		localStorage.removeItem('searchedItems')
 	}
 
 	useEffect(() => {
 		const storageSearchedItems = JSON.parse(
-			sessionStorage.getItem('searchedItems')
+			localStorage.getItem('searchedItems')
 		)
 		if (storageSearchedItems) {
 			setItemsSearch(storageSearchedItems)
@@ -117,7 +117,7 @@ function Header() {
 	}, [])
 
 	useEffect(() => {
-		sessionStorage.setItem('searchedItems', JSON.stringify(itemsSearch))
+		localStorage.setItem('searchedItems', JSON.stringify(itemsSearch))
 	}, [itemsSearch])
 
 	const renderItems = () => {
@@ -145,13 +145,12 @@ function Header() {
 		}
 	}, [searchedText])
 
-	const navigateToSearchedItems = (item) => {
+	const navigateToSearchedItems = item => {
 		setItemsSearch(prev => [...prev, item])
 		navigate(`/search/${item}`)
 		setSearchOpened(false)
 		setFoundItems(null)
 	}
-
 
 	return (
 		<div className={styles.root}>

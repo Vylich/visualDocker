@@ -230,7 +230,7 @@ const AddPost = () => {
 		}
 	}
 
-	if (!window.sessionStorage.getItem('accessff')) {
+	if (!window.localStorage.getItem('accessff')) {
 		return <Navigate to='/' />
 	}
 

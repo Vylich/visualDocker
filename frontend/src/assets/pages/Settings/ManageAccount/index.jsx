@@ -44,10 +44,10 @@ const ManageAccount = ({
 			dispatch(fetchDeleteAccount(userdata.user.id)).then(() => {
 				dispatch(logout())
 				navigate('/login')
-				window.sessionStorage.removeItem('accessff')
-				window.sessionStorage.removeItem('refresh')
-				window.sessionStorage.removeItem('username')
-				window.sessionStorage.removeItem('avatar')
+				window.localStorage.removeItem('accessff')
+				window.localStorage.removeItem('refresh')
+				window.localStorage.removeItem('username')
+				window.localStorage.removeItem('avatar')
 			})
 		}
 	}

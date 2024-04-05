@@ -25,6 +25,9 @@ services:
       PGPASSWORD: w^wHcf+M9HtN@r
     volumes:
       - './backup:/backup'
+    networks:
+      - visual
+
 
   frontend:
     container_name: 'frontend'

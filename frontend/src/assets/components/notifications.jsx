@@ -23,10 +23,12 @@ const WebSocketComponent = () => {
 	useEffect(() => {
 		// Функция для создания WebSocket соединения
 		const createWebSocketConnection = () => {
-			const accessToken = window.sessionStorage.getItem('accessff')
+			const accessToken = window.localStorage.getItem('accessff')
 			if (!accessToken) return // Если токена нет, не создаем соединение
 
-			wsRef.current = new WebSocket(`wss://visualapp.ru/ws/notifications/?token=${accessToken}`)
+			wsRef.current = new WebSocket(
+				`wss://visualapp.ru/ws/notifications/?token=${accessToken}`
+			)
 
 			// Подключение
 			wsRef.current.onopen = () => {
@@ -72,7 +74,7 @@ const WebSocketComponent = () => {
 		}
 
 		// Добавляем isAuth и токен в массив зависимостей, чтобы useEffect реагировал на их изменения
-	}, [window.sessionStorage.getItem('accessff')])
+	}, [window.localStorage.getItem('accessff')])
 
 	useEffect(() => {
 		const fetchData = async () => {

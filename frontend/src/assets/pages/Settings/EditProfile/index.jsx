@@ -46,10 +46,10 @@ const EditProfile = ({
 		setImageUrl(URL.createObjectURL(evt.target.files[0]))
 		console.log(imageUrl)
 
-		//  const users = JSON.parse(sessionStorage.getItem("users")) || [];
+		//  const users = JSON.parse(localStorage.getItem("users")) || [];
 		//  const invalidObj = users.find((item) => item.username === username);
 		//  const newUsers = users.splice(users.indexOf(invalidObj), 1);
-		//  window.sessionStorage.setItem("users", JSON.stringify(newUsers));
+		//  window.localStorage.setItem("users", JSON.stringify(newUsers));
 
 		//  const obj = {
 		//    username: userdata.user.username,
@@ -58,7 +58,7 @@ const EditProfile = ({
 		//    access: invalidObj.access,
 		//  };
 		//  users.push(obj);
-		//  window.sessionStorage.setItem("users", JSON.stringify(users));
+		//  window.localStorage.setItem("users", JSON.stringify(users));
 	}
 
 	return (
