@@ -157,6 +157,10 @@
 	flex-direction: column;
 	gap: 5px;
 	align-items: end;
+
+	@include vp-1023 {
+		bottom: 0;
+	}
 }
 
 .btnSub {
