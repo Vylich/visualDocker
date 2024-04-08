@@ -10,11 +10,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Stop Docker Compose Services
-        run: sudo docker-compose down
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Pull Latest Changes
-        run: git pull
+      - name: Deploy code
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{secrets.DEPLOY_HOST}}
+          username: ${{secrets.DEPLOY_USER}}
+          key: ${{secrets.DEPLOY_KEY}}
+          script: |
+            cd ./visual/visualDocker;
 
-      - name: Start Docker Compose Services
-        run: sudo docker-compose up --build
+            sudo docker-compose down;
+
+            git pull;
+            docker-compose up --build;
