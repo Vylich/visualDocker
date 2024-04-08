@@ -25,4 +25,4 @@ jobs:
             sudo docker-compose down;
 
             git pull;
-            docker-compose up --build > /dev/null 2>&1 &;
+            docker-compose up --build;
