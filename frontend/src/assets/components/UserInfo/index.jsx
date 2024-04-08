@@ -165,8 +165,8 @@ function UserInfo({
 							onClick={() => setIsSubscribersList(true)}
 							className={styles.buttonList}
 						>
-							{subscriptions.users.length}{' '}
-							{getSubscriptionsWord(subscriptions.users.length)}
+							{subscriptions.length}{' '}
+							{getSubscriptionsWord(subscriptions.length)}
 						</span>
 						<Modal
 							isVisible={isSubscribersList || isFollowersList}
@@ -175,7 +175,7 @@ function UserInfo({
 								isSubscribersList ? (
 									<ListUsers
 										type={'subs'}
-										users={subscriptions.users}
+										users={subscriptions}
 										typeMessage={'У вас пока нет подписок'}
 									/>
 								) : (

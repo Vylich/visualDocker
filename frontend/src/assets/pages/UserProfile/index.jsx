@@ -23,6 +23,7 @@ import {
 } from '../../../redux/slices/socialGraph'
 import ButtonSubs from '../../components/ButtonSubs/ButtonSubs'
 import Skeleton from '../../components/Post/Skeleton'
+import { Columns } from '../Home'
 
 function UserProfile() {
 	const dispatch = useDispatch()
@@ -33,9 +34,11 @@ function UserProfile() {
 		isUserDataLoaded(state) ? state.auth.data : null
 	)
 	const otherUserData = useSelector(state => state.auth.user)
-	const { subscriptions } = useSelector(state => state.social)
+
 
 	const [followers, setFollowers] = useState([])
+	const [subscriptions, setSubscriptions] = useState([])
+
 	const [isFollow, setIsFollow] = useState(false)
 
 	const { id } = useParams()
@@ -43,7 +46,6 @@ function UserProfile() {
 	useEffect(() => {
 		dispatch(fetchUserPosts(id))
 		dispatch(fetchOtherUser(id))
-		dispatch(fetchSubscriptions(id))
 
 		try {
 			if (userData) {
@@ -74,11 +76,32 @@ function UserProfile() {
 						setIsFollow(true)
 					}
 				})
+
+				axios.get(`my_subscriptions/${id}/`).then(res => {
+					setSubscriptions(res.data)
+					console.log(res.data)
+				})
 			}
 		} catch (error) {
 			console.log(error)
 		}
 	}, [id])
+
+	useEffect(() => {
+		axios.get(`my_followers/${id}/`).then(res => {
+			setFollowers(res.data)
+			if (
+				res.data.some(item => item.follower === Number(userData.user.id))
+			) {
+				setIsFollow(true)
+			}
+		})
+
+		axios.get(`my_subscriptions/${id}/`).then(res => {
+			setSubscriptions(res.data)
+			console.log(res.data)
+		})
+	}, [userData])
 
 	const authStatus = useSelector(selectIsAuthStatus)
 
@@ -139,18 +162,8 @@ function UserProfile() {
 
 			<div className={styles.postWrapper}>
 				<div className={styles.wrapper}>
-					{isPostsLoading
-						? [...Array(5)]
-						: posts.items.map((obj, i) => (
-								<Post
-									key={i}
-									images={obj.image}
-									videos={obj.video}
-									title={obj.title}
-									id={obj.id}
-									slug={obj.slug}
-								/>
-						  ))}
+					<Columns posts={posts.items} />
+
 				</div>
 			</div>
 		</div>

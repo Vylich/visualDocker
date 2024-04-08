@@ -8,6 +8,7 @@
 	padding: 0 20px;
 	max-width: 1500px;
 	margin: 0 auto;
+	width: 100%;
 
 	@include vp-1023 {
 		padding-top: 80px;
@@ -53,22 +54,38 @@
 
 .postWrapper {
 	width: 100%;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: start;
+	// display: flex;
+	// flex-wrap: wrap;
+	// align-items: center;
+	// justify-content: start;
 	margin-top: 40px;
-	margin-bottom: 40px;
 }
 
 .wrapper {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	row-gap: 20px;
-	column-gap: 20px;
+	grid-template-columns: repeat(auto-fit, 236px);
+	margin: 0 auto;
+	grid-gap: 10px;
+	width: 100%;
+	height: 100vh;
+	padding: 10px 3vw;
+	justify-content: center;
+	grid-template-rows: masonry;
+	position: relative;
 
 	@include vp-1023 {
-		gap: 10px;
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(auto-fit, 30.788530466%);
+		padding: 0 2.840909091%;
+		padding-top: 10px;
+		padding-bottom: 0;
+		height: auto;
+	}
+
+	@include vp-767 {
+		grid-template-columns: repeat(auto-fit, 47.75%);
+		padding: 0 2.840909091%;
+		padding-top: 10px;
+		padding-bottom: 0;
+
 	}
 }
