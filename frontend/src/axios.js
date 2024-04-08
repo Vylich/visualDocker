@@ -4,8 +4,8 @@ import { jwtDecode } from 'jwt-decode'
 const instance = axios.create({
 	// baseURL: 'http://192.168.122.96:8000/api/',
 	// baseURL: `${import.meta.env.VITE_APP_API_URL}`,
-	// baseURL: '/api/',
-	baseURL: 'https://visualapp.ru/api/',
+	baseURL: '/api/',
+	// baseURL: 'https://visualapp.ru/api/',
 })
 
 export const normalAccess = access => {
@@ -14,7 +14,6 @@ export const normalAccess = access => {
 
 instance.interceptors.request.use(config => {
 	let token = window.localStorage.getItem('accessff')
-	console.log(token)
 
 	if (token) {
 		const decodedToken = jwtDecode(token)

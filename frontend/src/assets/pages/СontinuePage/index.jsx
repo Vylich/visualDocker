@@ -28,10 +28,13 @@ const ContinuePage = () => {
 	}
 
 	useEffect(() => {
-		const arrUsers = window.localStorage.getItem('users')
+		const arrUsers = window.localStorage.getItem('users') || null
 		setUsersActive(JSON.parse(arrUsers))
 		setAvatar(window.localStorage.getItem('avatar'))
 		setUsername(window.localStorage.getItem('username'))
+		if (!arrUsers) {
+			return navigate('/login')
+		}
 	}, [])
 
 	useEffect(() => {
