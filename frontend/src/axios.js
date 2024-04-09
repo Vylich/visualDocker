@@ -25,23 +25,31 @@ instance.interceptors.request.use(config => {
 			const value = {
 				refresh: refresh,
 			}
-			axios.post(`/api/auth/refresh_token/`, value).then(res => {
-				window.localStorage.setItem('accessff', res.data.access)
-				const users = JSON.parse(localStorage.getItem('users')) || []
-				const invalidObj = users.find(item => item.refresh === refresh)
-				const newUsers = users.splice(users.indexOf(invalidObj), 1)
-				window.localStorage.setItem('users', JSON.stringify(newUsers))
+			axios
+				.post(`/api/auth/refresh_token/`, value)
+				.then(res => {
+					window.localStorage.setItem('accessff', res.data.access)
+					const users = JSON.parse(localStorage.getItem('users')) || []
+					const invalidObj = users.find(item => item.refresh === refresh)
+					const newUsers = users.splice(users.indexOf(invalidObj), 1)
+					window.localStorage.setItem('users', JSON.stringify(newUsers))
 
-				const obj = {
-					id: invalidObj.id,
-					username: invalidObj.username,
-					avatar: invalidObj.avatar,
-					refresh: invalidObj.refresh,
-					accessff: res.data.access,
-				}
-				users.push(obj)
-				window.localStorage.setItem('users', JSON.stringify(users))
-			})
+					const obj = {
+						id: invalidObj.id,
+						username: invalidObj.username,
+						avatar: invalidObj.avatar,
+						refresh: invalidObj.refresh,
+						accessff: res.data.access,
+					}
+					users.push(obj)
+					window.localStorage.setItem('users', JSON.stringify(users))
+				})
+				.catch(() => {
+					const users = JSON.parse(localStorage.getItem('users')) || []
+					const invalidObj = users.find(item => item.refresh === refresh)
+					const newUsers = users.splice(users.indexOf(invalidObj), 1)
+					window.localStorage.setItem('users', JSON.stringify(newUsers))
+				})
 		}
 
 		if (decodedToken.exp <= currentTime) {
