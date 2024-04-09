@@ -57,6 +57,10 @@ const AddPost = () => {
 	const [crop, setCrop] = useState({})
 	const isEditing = Boolean(id)
 
+	const [errorMessageTitle, setErrorMessageTitle] = useState(false)
+	const [errorMessageTags, setErrorMessageTags] = useState(false)
+	const [errorMessageImages, setErrorMessageImages] = useState(false)
+
 	function getMeta(imageUrl, callback) {
 		const img = new Image()
 		img.src = imageUrl
@@ -147,11 +151,24 @@ const AddPost = () => {
 
 			console.log(formData)
 
-			const { data } = isEditing
-				? await axios.patch(`/posts/${id}/`, formData)
-				: await axios.post('/posts/', formData)
-			console.log(data)
-			navigate(`/posts/${data.slug}`)
+			if (title && tags && image.length) {
+				const { data } = isEditing
+					? await axios.patch(`/posts/${id}/`, formData)
+					: await axios.post('/posts/', formData)
+				console.log(data)
+				navigate(`/posts/${data.slug}`)
+			} else {
+				if (!title) {
+					setErrorMessageTitle(true)
+				}
+				if (!tags) {
+					setErrorMessageTags(true)
+				}
+				if (!image.length) {
+					setErrorMessageImages(true)
+				}
+				alert('Заполните обязательные поля')
+			}
 		} catch (err) {
 			console.warn(err)
 			alert('Не удалось создать пост')
@@ -244,105 +261,110 @@ const AddPost = () => {
 			</header>
 			<div className={styles.wrap}>
 				<div className={styles.fileWrapper}>
-					<div className={styles.imageBlock}>
-						{!imageUrl.length && !videoUrls.length && (
-							<button
-								className={styles.buttonImage}
-								onClick={() => inputFileRef.current.click()}
-							>
-								<FontAwesomeIcon icon={faFileArrowUp} />
-								<span>Выберите файл</span>{' '}
-								<span>
-									Рекомендуем использовать файлы высокого качества в формате
-									.jpg (размером меньше 20MB) или .mp4 (размером меньше 200MB)
-								</span>
-							</button>
-						)}
-
-						<input
-							ref={inputFileRef}
-							type='file'
-							multiple
-							onChange={handleChangeFile}
-							hidden
-						/>
-
-						{image.length || video.length ? (
-							<>
-								<button className='prev'>
-									<FontAwesomeIcon icon={faChevronLeft} />
-								</button>
-								<button className='next'>
-									<FontAwesomeIcon icon={faChevronRight} />
-								</button>
+					<div className={styles.imageBlockWrap}>
+						<div className={styles.imageBlock}>
+							{!imageUrl.length && !videoUrls.length && (
 								<button
-									className={styles.buttonAddMore}
+									className={styles.buttonImage}
 									onClick={() => inputFileRef.current.click()}
 								>
-									<FontAwesomeIcon icon={faPlus} />
+									<FontAwesomeIcon icon={faFileArrowUp} />
+									<span>Выберите файл</span>{' '}
+									<span>
+										Рекомендуем использовать файлы высокого качества в формате
+										.jpg (размером меньше 20MB) или .mp4 (размером меньше 200MB)
+									</span>
 								</button>
-								<Swiper
-									modules={[Navigation]}
-									spaceBetween={0}
-									slidesPerView={1}
-									initialSlide={0}
-									navigation={{
-										prevEl: '.prev',
-										nextEl: '.next',
-									}}
-									allowTouchMove={true}
-									loop
-									className={styles.sliderWrap}
+							)}
+
+							<input
+								ref={inputFileRef}
+								type='file'
+								multiple
+								onChange={handleChangeFile}
+								hidden
+							/>
+
+							{image.length || video.length ? (
+								<>
+									<button className='prev'>
+										<FontAwesomeIcon icon={faChevronLeft} />
+									</button>
+									<button className='next'>
+										<FontAwesomeIcon icon={faChevronRight} />
+									</button>
+									<button
+										className={styles.buttonAddMore}
+										onClick={() => inputFileRef.current.click()}
+									>
+										<FontAwesomeIcon icon={faPlus} />
+									</button>
+									<Swiper
+										modules={[Navigation]}
+										spaceBetween={0}
+										slidesPerView={1}
+										initialSlide={0}
+										navigation={{
+											prevEl: '.prev',
+											nextEl: '.next',
+										}}
+										allowTouchMove={true}
+										loop
+										className={styles.sliderWrap}
+									>
+										{imageUrl.map((link, i) => (
+											<SwiperSlide
+												className={styles.slide}
+												style={{ aspectRatio: aspectRatio[link] }}
+												key={i}
+											>
+												<img
+													className={styles.image}
+													src={
+														isEditing && typeof link === 'object'
+															? `${removeApiUrl(link.image)}`
+															: `${link}`
+													}
+													alt={'uploaded'}
+													style={{ aspectRatio: aspectRatio[link] }}
+												/>
+											</SwiperSlide>
+										))}
+										{videoUrls.map((link, i) => (
+											<SwiperSlide
+												className={styles.slideVideo}
+												style={{ aspectRatio: aspectRatio[link] }}
+												key={i}
+											>
+												<video
+													className={styles.video}
+													src={
+														isEditing && typeof link === 'object'
+															? `${removeApiUrl(link.video)}`
+															: `${link}`
+													}
+													autoPlay
+													controls
+													style={{ aspectRatio: aspectRatio[link] }}
+													alt='Uploaded'
+												/>
+											</SwiperSlide>
+										))}
+									</Swiper>
+								</>
+							) : null}
+							{(imageUrl && imageUrl.length) || videoUrls.length ? (
+								<button
+									className={styles.buttonImageDel}
+									onClick={onClickRemoveImage}
 								>
-									{imageUrl.map((link, i) => (
-										<SwiperSlide
-											className={styles.slide}
-											style={{ aspectRatio: aspectRatio[link] }}
-											key={i}
-										>
-											<img
-												className={styles.image}
-												src={
-													isEditing && typeof link === 'object'
-														? `${removeApiUrl(link.image)}`
-														: `${link}`
-												}
-												alt={'uploaded'}
-												style={{ aspectRatio: aspectRatio[link] }}
-											/>
-										</SwiperSlide>
-									))}
-									{videoUrls.map((link, i) => (
-										<SwiperSlide
-											className={styles.slideVideo}
-											style={{ aspectRatio: aspectRatio[link] }}
-											key={i}
-										>
-											<video
-												className={styles.video}
-												src={
-													isEditing && typeof link === 'object'
-														? `${removeApiUrl(link.video)}`
-														: `${link}`
-												}
-												autoPlay
-												controls
-												style={{ aspectRatio: aspectRatio[link] }}
-												alt='Uploaded'
-											/>
-										</SwiperSlide>
-									))}
-								</Swiper>
-							</>
-						) : null}
-						{(imageUrl && imageUrl.length) || videoUrls.length ? (
-							<button
-								className={styles.buttonImageDel}
-								onClick={onClickRemoveImage}
-							>
-								Удалить
-							</button>
-						) : null}
+									Удалить
+								</button>
+							) : null}
+						</div>
+						{errorMessageImages && (
+							<span className={styles.error}>Загрузите хотя бы один файл</span>
+						)}
 					</div>
 
 					{saveFromLink && (
@@ -378,11 +400,24 @@ const AddPost = () => {
 						<input
 							type='text'
 							name='title'
+							required
 							placeholder='Добавить название'
 							value={title}
-							onChange={e => setTitle(e.target.value)}
+							onChange={e => {
+								setTitle(e.target.value)
+							}}
+							onBlur={() => {
+								if (title) {
+									setErrorMessageTitle(false)
+								} else {
+									setErrorMessageTitle(true)
+								}
+							}}
 							id='upload-title'
 						/>
+						{errorMessageTitle && (
+							<span className={styles.error}>обязательное поле</span>
+						)}
 					</div>
 					<div className={styles.field}>
 						<label htmlFor='upload-text'>Описание</label>
@@ -411,11 +446,22 @@ const AddPost = () => {
 						<input
 							type='text'
 							name='tags'
+							required
 							id='upload-tags'
 							placeholder='Добавить теги (через запятую)'
 							value={tags}
 							onChange={e => setTags(e.target.value)}
+							onBlur={() => {
+								if (tags) {
+									setErrorMessageTags(false)
+								} else {
+									setErrorMessageTags(true)
+								}
+							}}
 						/>
+						{errorMessageTags && (
+							<span className={styles.error}>обязательное поле</span>
+						)}
 					</div>
 					<div className={styles.moreOption}>
 						<div className={styles.select} onClick={openOptions}>

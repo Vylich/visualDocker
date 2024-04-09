@@ -8,6 +8,13 @@
 	}
 }
 
+.error {
+	color: red;
+	position: absolute;
+	bottom: -20px;
+	left: 10px;
+}
+
 .slide {
 	height: 100%;
 	img {
@@ -70,11 +77,15 @@
 	}
 }
 
+.imageBlockWrap {
+	margin-bottom: 30px;
+	position: relative;
+}
+
 .imageBlock {
 	width: 350px;
 	height: auto;
 	max-height: 600px;
-	margin-bottom: 30px;
 	border-bottom: 1px solid #e1e1e1;
 	position: relative;
 	overflow: hidden;
@@ -178,6 +189,7 @@
 	margin-top: 20px;
 	margin-bottom: 16px;
 	margin-right: 48px;
+	position: relative;
 
 	@include vp-1023 {
 		margin-right: 0;
