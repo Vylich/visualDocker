@@ -104,4 +104,4 @@ const WebSocketComponent = () => {
 	return <></>
 }
 
-export default WebSocketComponent
+export {WebSocketComponent}

@@ -89,4 +89,4 @@ const ContinuePage = () => {
 	)
 }
 
-export default ContinuePage
+export {ContinuePage}

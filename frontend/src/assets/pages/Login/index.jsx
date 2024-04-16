@@ -24,7 +24,7 @@ import {
 } from '../../../redux/slices/auth'
 import { removePostsState } from '../../../redux/slices/posts'
 
-export const Login = () => {
+const Login = () => {
 	const isAuth = useSelector(selectIsAuth)
 	const dispatch = useDispatch()
 	const [isChecked, setIsChecked] = useState(false)
@@ -218,3 +218,5 @@ export const Login = () => {
 		</div>
 	)
 }
+
+export {Login}

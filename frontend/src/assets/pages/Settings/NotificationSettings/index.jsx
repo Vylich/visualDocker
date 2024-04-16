@@ -44,4 +44,4 @@ const NotificationSettings = () => {
 	)
 }
 
-export default NotificationSettings
+export {NotificationSettings}

@@ -12,7 +12,7 @@ import styles from './Registration.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
-export const Registration = () => {
+const Registration = () => {
 	const isAuth = useSelector(selectIsAuth)
 	const dispatch = useDispatch()
 	// const inputFileRef = React.useRef(null)
@@ -215,3 +215,5 @@ export const Registration = () => {
 		</div>
 	)
 }
+
+export {Registration}

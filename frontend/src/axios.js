@@ -28,7 +28,7 @@ instance.interceptors.request.use(config => {
 			axios
 				.post(`https://visualapp.ru/api/auth/refresh_token/`, value)
 				.then(res => {
-					window.localStorage.setItem('accessff', res.data.access)
+					window.localStorage.setItem('accessff', `fdsafhrwodddddddd${res.data.access}`)
 					const users = JSON.parse(localStorage.getItem('users')) || []
 					const invalidObj = users.find(item => item.refresh === refresh)
 					const newUsers = users.splice(users.indexOf(invalidObj), 1)
@@ -39,7 +39,7 @@ instance.interceptors.request.use(config => {
 						username: invalidObj.username,
 						avatar: invalidObj.avatar,
 						refresh: invalidObj.refresh,
-						accessff: res.data.access,
+						accessff: `fdsafhrwodddddddd${res.data.access}`,
 					}
 					users.push(obj)
 					window.localStorage.setItem('users', JSON.stringify(users))

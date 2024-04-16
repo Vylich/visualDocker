@@ -8,31 +8,13 @@ import {
 } from './redux/slices/auth'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Login } from './assets/pages/Login'
-import { Registration } from './assets/pages/Registration'
-import Home from './assets/pages/Home'
-import UserProfile from './assets/pages/UserProfile'
-import FullPost from './assets/pages/FullPost'
-import SettingsProfile from './assets/pages/Settings/SettingsProfile'
-import {Header} from '@components'
+import {Header, Search, WebSocketComponent} from '@components'
 import './index.scss'
-import AddPost from './assets/pages/AddPost'
-import EditProfile from './assets/pages/Settings/EditProfile'
-import ManageAccount from './assets/pages/Settings/ManageAccount'
-import Security from './assets/pages/Settings/Security'
-import NotificationSettings from './assets/pages/Settings/NotificationSettings'
-import VisibilityProfile from './assets/pages/Settings/VisibilityProfile'
-import Confidentiality from './assets/pages/Settings/Confidentiality'
-import {Search} from '@components'
-import Notification from './assets/pages/Notification'
-import ContinuePage from './assets/pages/СontinuePage'
-import WebSocketComponent from './assets/components/notifications.jsx'
-import ChangeAccount from './assets/pages/Settings/ChangeAccount/index.jsx'
-import SearchPage from './assets/pages/SearchPage/index.jsx'
-import Subs from './assets/pages/Subs/index.jsx'
-import SuccessfulPage from './assets/pages/Subs/SuccessfulPage.jsx'
+
+import { Login, Registration, Home, UserProfile, FullPost, SettingsProfile, AddPost, EditProfile, ManageAccount, Security, NotificationSettings, VisibilityProfile, Confidentiality, Notification, ContinuePage, ChangeAccount, SearchPage, Subs, SuccessfulPage, ErrorPage } from '@pages'
+
 import { useNavigate } from 'react-router-dom'
-import ErrorPage from './assets/pages/ErrorPage/index.jsx'
+
 
 function App() {
 	const dispatch = useDispatch()

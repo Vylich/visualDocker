@@ -41,4 +41,4 @@ const VisibilityProfile = () => {
 	)
 }
 
-export default VisibilityProfile
+export {VisibilityProfile}

@@ -160,4 +160,4 @@ const EditProfile = ({
 	)
 }
 
-export default EditProfile
+export {EditProfile}

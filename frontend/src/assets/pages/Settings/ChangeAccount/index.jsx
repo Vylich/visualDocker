@@ -77,4 +77,4 @@ const ChangeAccount = () => {
 	)
 }
 
-export default ChangeAccount
+export {ChangeAccount}

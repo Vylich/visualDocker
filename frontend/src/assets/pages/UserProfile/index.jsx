@@ -24,7 +24,7 @@ import {
 	fetchSubscriptions,
 } from '../../../redux/slices/socialGraph'
 
-import { Columns } from '../Home'
+import { Columns } from '@pages'
 
 function UserProfile() {
 	const dispatch = useDispatch()
@@ -174,4 +174,4 @@ function UserProfile() {
 	)
 }
 
-export default UserProfile
+export {UserProfile}

@@ -205,7 +205,7 @@ const ManageAccount = ({
 	)
 }
 
-export default ManageAccount
+export {ManageAccount}
 
 //      <div className={styles.field}>
 //        <label className={styles.labelText} htmlFor="pass">

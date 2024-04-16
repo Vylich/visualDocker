@@ -20,7 +20,7 @@ import { useInView } from 'react-intersection-observer'
 import axios from '../../../axios.js'
 
 
-export const Columns = ({ posts }) => {
+const Columns = ({ posts }) => {
 	const [width, setWidth] = useState(window.innerWidth)
 	const [widthColumn, setWidthColumn] = useState(260)
 	// const dispatch = useDispatch()
@@ -189,4 +189,4 @@ const Home = () => {
 	)
 }
 
-export default Home
+export {Home, Columns}

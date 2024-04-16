@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styles from './SettingsProfile.module.scss'
-import NavSettings from '../NavSettings'
+
 import {
 	Routes,
 	Route,
@@ -9,19 +9,15 @@ import {
 	Navigate,
 	useNavigate,
 } from 'react-router-dom'
-import EditProfile from '../EditProfile'
-import ManageAccount from '../ManageAccount'
-import VisibilityProfile from '../VisibilityProfile'
-import NotificationSettings from '../NotificationSettings'
-import Security from '../Security'
-import Confidentiality from '../Confidentiality'
+import {EditProfile, ManageAccount, VisibilityProfile, NotificationSettings, Security, Confidentiality, ChangeAccount, NavSettings} from '@pages'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from '../../../../axios'
 import { fetchLogin } from '../../../../redux/slices/auth'
-import ChangeAccount from '../ChangeAccount'
+
 
 const SettingsProfile = () => {
 	const { pathname } = useLocation()
@@ -245,4 +241,4 @@ const SettingsProfile = () => {
 	)
 }
 
-export default SettingsProfile
+export {SettingsProfile}

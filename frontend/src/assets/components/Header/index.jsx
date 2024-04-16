@@ -29,8 +29,9 @@ import {
 	Search,
 	Card,
 	Notif,
+	WebSocketComponent
 } from '@components'
-import WebSocketComponent from '../notifications'
+
 
 function Header() {
 	const [searchedText, setSearchedText] = useState('')

@@ -10,4 +10,4 @@ const SuccessfulPage = () => {
 	)
 }
 
-export default SuccessfulPage
+export {SuccessfulPage}

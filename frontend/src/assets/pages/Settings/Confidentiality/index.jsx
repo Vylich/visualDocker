@@ -7,4 +7,4 @@ const Confidentiality = () => {
 	)
 }
 
-export default Confidentiality
+export {Confidentiality}

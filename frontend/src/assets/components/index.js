@@ -19,8 +19,10 @@ import { Settings } from './Settings/index'
 import { Tag } from './Tags/index'
 import { UserInfo } from './UserInfo/index'
 import { UserMessage } from './UserInfo/UserMessage'
+import { WebSocketComponent } from './notifications'
 
 
 
 
-export {AddComment, ButtonSubs, CommentsBlock, CommentsList, Header, ListUsers, Loading, Messages, Modal, AuthErrorModal, Notif, Notification, Notifications, Post, PostDetails, Search, Card, Settings, Tag, UserInfo, UserMessage}
+
+export {AddComment, ButtonSubs, CommentsBlock, CommentsList, Header, ListUsers, Loading, Messages, Modal, AuthErrorModal, Notif, Notification, Notifications, Post, PostDetails, Search, Card, Settings, Tag, UserInfo, UserMessage, WebSocketComponent}

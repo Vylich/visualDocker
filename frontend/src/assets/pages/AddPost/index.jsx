@@ -500,4 +500,4 @@ const AddPost = () => {
 	)
 }
 
-export default AddPost
+export {AddPost}

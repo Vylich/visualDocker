@@ -123,4 +123,4 @@ const NavSettings = ({ isNavVisible, hideNavOnClick, isNavVisibleOnClick }) => {
 	)
 }
 
-export default NavSettings
+export {NavSettings}

@@ -162,4 +162,4 @@ const FullPost = () => {
   );
 };
 
-export default FullPost;
+export {FullPost};
