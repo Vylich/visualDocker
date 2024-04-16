@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import styles from './ListUsers.module.scss'
 import { Link } from 'react-router-dom'
-import UserInfo from '../UserInfo'
 import axios from '../../../axios'
+
+import {UserInfo} from '@components'
+
+import styles from './ListUsers.module.scss'
 
 const ListUsers = ({ users, typeMessage, type }) => {
 	const [usersRender, setUsersRender] = useState([])
@@ -43,4 +45,4 @@ const ListUsers = ({ users, typeMessage, type }) => {
 	)
 }
 
-export default ListUsers
+export {ListUsers}

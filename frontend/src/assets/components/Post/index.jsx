@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react'
-import styles from './Post.module.scss'
-import clsx from 'clsx'
-import UserInfo from '../../components/UserInfo'
+import React, { useEffect, useRef, useState, Suspense, lazy } from 'react'
 import { Link } from 'react-router-dom'
-import { Suspense, lazy } from 'react'
+import clsx from 'clsx'
+
+
+import styles from './Post.module.scss'
+import {UserInfo, Loading} from '@components'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
@@ -13,7 +14,7 @@ import {
 	faChevronLeft,
 	faChevronRight,
 } from '@fortawesome/free-solid-svg-icons'
-import Loading from '../Loading/Loading'
+
 
 export const removeApiUrl = url => {
 	return url.replace('http://api:8000', 'https://visualapp.ru')
@@ -223,4 +224,4 @@ const Post = ({ isHomePost, isFullPost, title, images, videos, slug, i }) => {
 	)
 }
 
-export default Post
+export {Post}

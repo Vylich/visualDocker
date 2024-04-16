@@ -1,4 +1,5 @@
 import React from 'react'
+
 import styles from './Loading.module.scss'
 
 const Loading = () => {
@@ -12,4 +13,4 @@ const Loading = () => {
 	)
 }
 
-export default Loading
+export {Loading}

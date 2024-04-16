@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+
 import styles from './Modal.module.scss'
 
 const Modal = ({isVisible = false, title, content, footer, onClose}) => {
@@ -36,4 +37,4 @@ const Modal = ({isVisible = false, title, content, footer, onClose}) => {
   );
 }
 
-export default Modal
+export {Modal}

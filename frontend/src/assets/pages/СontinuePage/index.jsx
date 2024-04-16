@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './ContinuePage.module.scss'
 import logo from '../../../img/logo/Logo.svg'
-import UserInfo from '../../components/UserInfo'
+import {UserInfo} from '@components'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchLogin, selectIsAuth } from '../../../redux/slices/auth'
 import { removePostsState } from '../../../redux/slices/posts'
 import { jwtDecode } from 'jwt-decode'
-
+import Error from '../../components/errorContinue/Error'
 
 const ContinuePage = () => {
 	const isAuth = useSelector(selectIsAuth)
@@ -20,11 +20,28 @@ const ContinuePage = () => {
 
 	const onSubmit = username => {
 		const obj = usersActive.find(ob => ob.username === username)
-		window.localStorage.setItem('accessff', obj.accessff)
-		window.localStorage.setItem('refresh', obj.refresh)
-		dispatch(fetchLogin())
-		dispatch(removePostsState())
-		navigate('/home')
+
+		const refresh = obj.refresh
+		if (refresh) {
+			const decodedToken = jwtDecode(refresh)
+			const currentTime = Math.floor(Date.now() / 1000)
+			if (decodedToken.exp <= currentTime) {
+				navigate('/login')
+				alert(
+					'Вас давно не было, пожалуйста, войдите при помощи логина и пароля'
+				)
+			} else {
+				window.localStorage.setItem('accessff', obj.accessff)
+				window.localStorage.setItem('refresh', obj.refresh)
+				window.localStorage.setItem('avatar', obj.avatar)
+				window.localStorage.setItem('username', obj.username)
+
+				dispatch(fetchLogin())
+				console.log(isAuth)
+				dispatch(removePostsState())
+				navigate('/home')
+			}
+		}
 	}
 
 	useEffect(() => {
@@ -34,18 +51,6 @@ const ContinuePage = () => {
 		setUsername(window.localStorage.getItem('username'))
 		if (!arrUsers) {
 			return navigate('/login')
-		}
-	}, [])
-
-	useEffect(() => {
-		const refresh = window.localStorage.getItem('refresh')
-
-		if (refresh) {
-			const decodedToken = jwtDecode(refresh)
-			const currentTime = Math.floor(Date.now() / 1000)
-			if (decodedToken.exp <= currentTime) {
-				return navigate('/login')
-			}
 		}
 	}, [])
 

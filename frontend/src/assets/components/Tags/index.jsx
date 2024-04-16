@@ -7,4 +7,4 @@ const Tag = ({text}) => {
 	)
 }
 
-export default Tag
+export {Tag}

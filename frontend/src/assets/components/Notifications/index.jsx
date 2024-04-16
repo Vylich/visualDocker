@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styles from './Notification.module.scss'
-import Notification from '../Notification'
+import {Notification} from '@components'
 import axios from '../../../axios'
 import { useDispatch, useSelector } from 'react-redux';
 import { addNotificationsAll, removeNotificationsCount } from '../../../redux/slices/notification';
@@ -49,4 +49,4 @@ const Notifications = () => {
 	)
 }
 
-export default Notifications
+export {Notifications}

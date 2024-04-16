@@ -1,17 +1,25 @@
 @import '../../scss/utils/mixins';
 
 .root {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: auto;
+	overflow-y: overlay;
+}
+
+.columnsWrapper {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, 236px);
 	margin: 0 auto;
 	grid-gap: 10px;
 	width: 100%;
-	height: 100vh;
+	height: auto;
 	padding: 10px 3vw;
 	justify-content: center;
 	grid-template-rows: masonry;
 	position: relative;
-	overflow-y: overlay;
+
 
 	@include vp-1023 {
 		grid-template-columns: repeat(auto-fit, 30.788530466%);
@@ -32,6 +40,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
+	flex-grow: 1;
 }
 
 .border {

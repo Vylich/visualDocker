@@ -1,14 +1,18 @@
 import React, { useState } from 'react'
-import styles from './Comments.module.scss'
-import UserInfo from '../UserInfo'
-import AddComment from '../AddComment'
-import axios from '../../../axios'
 import { useParams } from 'react-router-dom'
 import clsx from 'clsx'
-import avatarDefault from '../../../img/avatar-default.svg'
 import { useSelector } from 'react-redux'
+
+import axios from '../../../axios'
+
+import avatarDefault from '../../../img/avatar-default.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+
+import {AddComment, UserInfo} from '@components'
+
+import styles from './Comments.module.scss'
+
 
 const CommentsBlock = ({
 	text,
@@ -108,4 +112,4 @@ const CommentsBlock = ({
 	)
 }
 
-export default CommentsBlock
+export { CommentsBlock }

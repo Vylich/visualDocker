@@ -19,4 +19,4 @@ const UserMessage = ({ username, avatar, text, isNewMessage, isUnread }) => {
 	)
 }
 
-export default UserMessage
+export {UserMessage}

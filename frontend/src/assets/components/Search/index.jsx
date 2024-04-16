@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import styles from './Search.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import Card from '../SearchigCard'
-import UserInfo from '../UserInfo'
+import {Card, UserInfo} from '@components'
+
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -18,7 +18,8 @@ const Search = ({
 	isNavVisible,
 	searchedItems,
 	foundItems,
-	navigateToSearchedItems
+	navigateToSearchedItems,
+	setSearchedTextDesktop,
 }) => {
 	const [foundItemsMobile, setFoundItemsMobile] = useState(null)
 	const [searchedText, setSearchedText] = useState('')
@@ -34,6 +35,12 @@ const Search = ({
 		setFoundItemsMobile(null)
 	}
 
+	const navigateToSearchedItemsMobile = () => {
+		setViewSearchedPosts(true)
+		setFoundItemsMobile(null)
+		foundItemsMobile(null)
+	}
+
 	useEffect(() => {
 		if (!searchedText) {
 			dispatch(delSearch())
@@ -42,11 +49,11 @@ const Search = ({
 		} else {
 			axios.get(`/search/?search=${searchedText}`).then(res => {
 				setFoundItemsMobile(res.data)
+				console.log(res.data)
 				dispatch(addSearch(res.data.post_tag))
 			})
 		}
 	}, [searchedText])
-
 
 	return (
 		<div className={styles.root}>
@@ -86,10 +93,20 @@ const Search = ({
 					{foundItems &&
 						foundItems.post_tag &&
 						foundItems.post_tag.map((item, i) => (
-							<div className={styles.searchedItem} onClick={() => navigateToSearchedItems(item.name)} key={i}><FontAwesomeIcon
-							className={styles.iconSearched}
-							icon={faMagnifyingGlass}
-						/><span>{item.name}</span></div>
+							<div
+								className={styles.searchedItem}
+								onClick={() => {
+									setSearchedTextDesktop(item.name)
+									navigateToSearchedItems(item.name)
+								}}
+								key={i}
+							>
+								<FontAwesomeIcon
+									className={styles.iconSearched}
+									icon={faMagnifyingGlass}
+								/>
+								<span>{item.name}</span>
+							</div>
 						))}
 					{foundItems &&
 						foundItems.user &&
@@ -109,10 +126,17 @@ const Search = ({
 					{foundItemsMobile &&
 						foundItemsMobile.post_tag &&
 						foundItemsMobile.post_tag.map((item, i) => (
-							<div className={styles.searchedItem} key={i}><FontAwesomeIcon
-							className={styles.iconSearched}
-							icon={faMagnifyingGlass}
-						/><span>{item.name}</span></div>
+							<div
+								className={styles.searchedItem}
+								onClick={() => navigateToSearchedItemsMobile()}
+								key={i}
+							>
+								<FontAwesomeIcon
+									className={styles.iconSearched}
+									icon={faMagnifyingGlass}
+								/>
+								<span>{item.name}</span>
+							</div>
 						))}
 					{foundItemsMobile &&
 						foundItemsMobile.user &&
@@ -139,7 +163,14 @@ const Search = ({
 								{items &&
 									items.map((obj, i) => (
 										<div key={i} className={styles.searchesItem}>
-											<span onClick={() => onClickSearch(obj)}>{obj}</span>
+											<span
+												onClick={() => {
+													setSearchedTextDesktop(obj)
+													// onClickSearch(obj)
+												}}
+											>
+												{obj}
+											</span>
 											<button onClick={() => onDelete({ obj })}>
 												<FontAwesomeIcon icon={faXmark} />
 											</button>
@@ -148,7 +179,7 @@ const Search = ({
 							</div>
 						</div>
 					</div>
-					<div className={styles.wrapper}>
+					{/* <div className={styles.wrapper}>
 						<h3>Идеи для вас</h3>
 						<div className={styles.cards}>
 							{searchedItems && searchedItems()}
@@ -159,7 +190,7 @@ const Search = ({
 						<div className={styles.cards}>
 							{searchedItems && searchedItems()}
 						</div>
-					</div>
+					</div> */}
 				</>
 			)}
 			<div className={styles.wrapSearchedCard}>
@@ -171,4 +202,4 @@ const Search = ({
 	)
 }
 
-export default Search
+export { Search }

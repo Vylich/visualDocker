@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
+
 import styles from './PostDetails.module.scss'
-import UserInfo from '../UserInfo/index'
+
+import {UserInfo, CommentsBlock, AddComment, Tag, CommentsList} from '@components'
+
 import avatar from '../../../img/avatar-default.svg'
-import Comment from '../Comment'
-import AddComment from '../AddComment'
+
 import axios from '../../../axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
@@ -12,11 +14,11 @@ import {
 	getLikesWord,
 	getViewsWord,
 } from '../../../utils/declination'
+
 import { jwtDecode as jwt } from 'jwt-decode'
-import Tag from '../Tags'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchOtherUser } from '../../../redux/slices/auth'
-import CommentList from '../CommentsList'
 
 const PostDetails = ({
 	username,
@@ -82,7 +84,7 @@ const PostDetails = ({
 			</div>
 
 			<div className={styles.comments}>
-				<CommentList
+				<CommentsList
 					comments={comments}
 					onDeleteComment={onDeleteComment}
 					onSubmitChild={onSubmitChild}
@@ -137,4 +139,4 @@ const PostDetails = ({
 	)
 }
 
-export default PostDetails
+export {PostDetails}

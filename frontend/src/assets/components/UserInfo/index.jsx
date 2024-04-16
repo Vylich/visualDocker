@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+
+
 import styles from './UserInfo.module.scss'
+
 import clsx from 'clsx'
 import avatarDefault from '../../../img/avatar-default.svg'
 import {
@@ -7,14 +13,11 @@ import {
 	getPostsWord,
 	getSubscriptionsWord,
 } from '../../../utils/declination'
-import ButtonSubs from '../ButtonSubs/ButtonSubs'
+
+import {ButtonSubs, Modal, ListUsers} from '@components'
+
 import axios from '../../../axios'
-import { useSelector } from 'react-redux'
 import { fetchRemovePost } from '../../../redux/slices/posts'
-import { Link, useNavigate, useParams } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import Modal from '../Modal/Modal'
-import ListUsers from '../ListUsers/ListUsers'
 
 function UserInfo({
 	avatar,
@@ -230,4 +233,4 @@ function UserInfo({
 	)
 }
 
-export default UserInfo
+export {UserInfo}

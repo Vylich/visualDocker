@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './ChangeAccount.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import UserInfo from '../../../components/UserInfo'
+import {UserInfo} from '@components'
 import { fetchLogin } from '../../../../redux/slices/auth'
 
 const ChangeAccount = () => {

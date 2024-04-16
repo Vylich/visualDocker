@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Post from "../../components/Post";
-import PostDetails from "../../components/PostDetails";
+
+import {Post, PostDetails} from "@components";
+
 import styles from "./FullPost.module.scss";
+
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "../../../axios";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 

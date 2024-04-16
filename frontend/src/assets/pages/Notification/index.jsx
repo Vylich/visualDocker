@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import styles from './Notification.module.scss'
 import { NavLink, Routes, Route, Navigate } from 'react-router-dom'
-import Notifications from '../../components/Notifications'
-import Messages from '../../components/Messages'
+import {Notifications, Messages, Notif} from '@components'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchLogin } from '../../../redux/slices/auth'
-import Notif from '../../components/Notif/Notif'
+
 
 const Nav = () => {
 	const unreadCount = useSelector(state => state.notif.unreadCount)

@@ -1,4 +1,6 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
 import styles from './Messages.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -8,11 +10,11 @@ import {
 	faPenToSquare,
 	faUserPlus,
 } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react'
+
 import axios, { normalAccess } from '../../../axios'
-import UserInfo from '../UserInfo'
-import UserMessage from '../UserInfo/UserMessage'
-import { useDispatch, useSelector } from 'react-redux'
+import {UserInfo, UserMessage} from '@components'
+
+
 // import { removeReadMessage } from '../../../redux/slices/notification'
 
 const Messages = ({ id }) => {
@@ -328,4 +330,4 @@ const Messages = ({ id }) => {
 	)
 }
 
-export default Messages
+export {Messages}

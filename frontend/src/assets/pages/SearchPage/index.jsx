@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './SearchPage.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { Columns } from '../Home/index'
-import Loading from '../../components/Loading/Loading'
+import {Loading} from '@components'
 import { useParams } from 'react-router-dom';
 import axios from '../../../axios'
 import { addSearch } from '../../../redux/slices/search'

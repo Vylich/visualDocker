@@ -7,13 +7,14 @@ import {
 	selectIsAuthStatus,
 } from './redux/slices/auth'
 import { useDispatch, useSelector } from 'react-redux'
+
 import { Login } from './assets/pages/Login'
 import { Registration } from './assets/pages/Registration'
 import Home from './assets/pages/Home'
 import UserProfile from './assets/pages/UserProfile'
 import FullPost from './assets/pages/FullPost'
 import SettingsProfile from './assets/pages/Settings/SettingsProfile'
-import Header from './assets/components/Header'
+import {Header} from '@components'
 import './index.scss'
 import AddPost from './assets/pages/AddPost'
 import EditProfile from './assets/pages/Settings/EditProfile'
@@ -22,7 +23,7 @@ import Security from './assets/pages/Settings/Security'
 import NotificationSettings from './assets/pages/Settings/NotificationSettings'
 import VisibilityProfile from './assets/pages/Settings/VisibilityProfile'
 import Confidentiality from './assets/pages/Settings/Confidentiality'
-import Search from './assets/components/Search'
+import {Search} from '@components'
 import Notification from './assets/pages/Notification'
 import ContinuePage from './assets/pages/СontinuePage'
 import WebSocketComponent from './assets/components/notifications.jsx'
@@ -59,7 +60,7 @@ function App() {
 
 	useEffect(() => {
 		dispatch(fetchLogin()).then(res => {
-			if (!res.payload) {
+			if (!res.payload ) {
 				navigate('/continue')
 			}
 		})

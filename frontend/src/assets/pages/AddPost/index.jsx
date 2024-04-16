@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import styles from './AddPost.module.scss'
 import { Link, useParams, useNavigate, Navigate } from 'react-router-dom'
+
+import styles from './AddPost.module.scss'
+
 import axios from '../../../axios'
-import { default as myAxios } from 'axios'
 import { useSelector } from 'react-redux'
 import { selectIsAuth } from '../../../redux/slices/auth'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
 	faChevronDown,
@@ -151,7 +153,7 @@ const AddPost = () => {
 
 			console.log(formData)
 
-			if (title && tags && image.length) {
+			if (title && tags && (image.length || video.length)) {
 				const { data } = isEditing
 					? await axios.patch(`/posts/${id}/`, formData)
 					: await axios.post('/posts/', formData)
@@ -164,7 +166,11 @@ const AddPost = () => {
 				if (!tags) {
 					setErrorMessageTags(true)
 				}
-				if (!image.length) {
+				if (!image.length && video.length) {
+					setErrorMessageImages(false)
+				} else if (image.length && !video.length) {
+					setErrorMessageImages(false)
+				} else {
 					setErrorMessageImages(true)
 				}
 				alert('Заполните обязательные поля')

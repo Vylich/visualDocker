@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import CommentsBlock from '../Comment'
+
+import {CommentsBlock} from '@components'
+
 import styles from './CommentsList.module.scss'
 
 const CommentsList = ({ comments, onSubmitChild, onDeleteComment }) => {
@@ -127,4 +129,4 @@ const CommentsList = ({ comments, onSubmitChild, onDeleteComment }) => {
 	)
 }
 
-export default CommentsList
+export {CommentsList}

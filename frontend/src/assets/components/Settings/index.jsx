@@ -1,5 +1,5 @@
 import styles from './Settings.module.scss'
-import UserInfo from '../UserInfo'
+import {UserInfo} from '@components'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { fetchLogin, logout } from '../../../redux/slices/auth'
@@ -7,6 +7,10 @@ import avatarDefault from '../../../img/avatar-default.svg'
 import { useEffect, useState } from 'react'
 import { clearMessages } from '../../../redux/slices/notification'
 import { removePostsState } from '../../../redux/slices/posts'
+import { jwtDecode } from 'jwt-decode'
+
+import Error from '../errorContinue/Error'
+
 const Settings = ({ user, handleSettings }) => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
@@ -36,11 +40,23 @@ const Settings = ({ user, handleSettings }) => {
 
 	const onSubmit = username => {
 		const obj = usersActive.find(ob => ob.username === username)
-		window.localStorage.setItem('accessff', obj.accessff)
-		window.localStorage.setItem('refresh', obj.refresh)
-		dispatch(fetchLogin())
-		dispatch(removePostsState())
-		navigate('/home')
+		const refresh = obj.refresh
+		if (refresh) {
+			const decodedToken = jwtDecode(refresh)
+			const currentTime = Math.floor(Date.now() / 1000)
+			if (decodedToken.exp <= currentTime) {
+				navigate('/login')
+				alert('Вас давно не было, пожалуйста, войдите при помощи логина и пароля')
+			} else {
+				window.localStorage.setItem('accessff', obj.accessff)
+				window.localStorage.setItem('refresh', obj.refresh)
+				window.localStorage.setItem('avatar', obj.avatar)
+				window.localStorage.setItem('username', obj.username)
+				dispatch(fetchLogin())
+				dispatch(removePostsState())
+				navigate('/home')
+			}
+		}
 	}
 
 	useEffect(() => {
@@ -102,4 +118,4 @@ const Settings = ({ user, handleSettings }) => {
 	)
 }
 
-export default Settings
+export {Settings}

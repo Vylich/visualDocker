@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
 import styles from './UserProfile.module.scss'
-import UserInfo from '../../components/UserInfo'
-import Post from '../../components/Post'
+
+import {UserInfo, Post, ButtonSubs} from '@components'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGear, faPlus } from '@fortawesome/free-solid-svg-icons'
 
@@ -21,8 +23,7 @@ import {
 	fetchSubscribe,
 	fetchSubscriptions,
 } from '../../../redux/slices/socialGraph'
-import ButtonSubs from '../../components/ButtonSubs/ButtonSubs'
-import Skeleton from '../../components/Post/Skeleton'
+
 import { Columns } from '../Home'
 
 function UserProfile() {
@@ -74,6 +75,9 @@ function UserProfile() {
 						res.data.some(item => item.follower === Number(userData.user.id))
 					) {
 						setIsFollow(true)
+						console.log('true')
+					} else {
+						setIsFollow(false)
 					}
 				})
 

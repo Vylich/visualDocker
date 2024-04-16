@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+
 import styles from '../ModalLogin.module.scss'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+
 function AuthErrorModal({ isOpen, onClose, errorMessage }) {
   if (!isOpen) return null;
 
@@ -16,4 +19,4 @@ function AuthErrorModal({ isOpen, onClose, errorMessage }) {
   );
 }
 
-export default AuthErrorModal;
+export {AuthErrorModal};

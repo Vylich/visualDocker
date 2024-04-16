@@ -23,4 +23,4 @@ const Card = ({ onClickSearch, title, images }) => {
 	);
 };
 
-export default Card;
+export {Card};

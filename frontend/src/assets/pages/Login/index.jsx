@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-import AuthErrorModal from '../../components/ModalLogin/Error'
+import {AuthErrorModal} from '@components'
 import AuthSuccessModal from '../../components/ModalLogin/Success'
 import axios from '../../../axios'
 

@@ -1,4 +1,5 @@
 import React from 'react'
+
 import styles from './ButtonSubs.module.scss'
 
 const ButtonSubs = ({ handleSubscribe, isFollow }) => {
@@ -12,4 +13,4 @@ const ButtonSubs = ({ handleSubscribe, isFollow }) => {
 	)
 }
 
-export default ButtonSubs
+export { ButtonSubs }

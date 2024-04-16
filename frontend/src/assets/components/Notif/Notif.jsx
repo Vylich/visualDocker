@@ -1,6 +1,7 @@
 import React from 'react'
-import styles from './Notif.module.scss'
 import clsx from 'clsx'
+
+import styles from './Notif.module.scss'
 
 const Notif = ({ isTab, unreadCount }) => {
 	return (
@@ -16,4 +17,4 @@ const Notif = ({ isTab, unreadCount }) => {
 	)
 }
 
-export default Notif
+export {Notif}

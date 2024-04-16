@@ -1,13 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from '../../axios'
 
-export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (params) => {
 	const token = window.localStorage.getItem('accessff')
 	const config = {}
 	if (!token) {
 		config.skipAuthorization = true
 	}
-	const { data } = await axios.get('/posts/', config)
+	const { data } = await axios.get(`/posts/${params}`, config)
 	return data
 })
 
@@ -47,6 +47,9 @@ const initialState = {
 		items: [],
 		status: 'loading',
 	},
+	postsPage: {
+		page: ''
+	},
 	userPosts: {
 		items: [],
 		status: 'loading',
@@ -68,6 +71,12 @@ const postsSlice = createSlice({
 		removePostsState(state) {
 			state.posts.items = []
 		},
+		updatePagePosts(state, action) {
+			state.postsPage.page = action.payload
+		},
+		endPagePosts(state) {
+			state.postsPage.page = 'end'
+		}
 	},
 	extraReducers: builder => {
 		builder.addCase(fetchPosts.fulfilled, (state, action) => {
@@ -127,6 +136,6 @@ const postsSlice = createSlice({
 	},
 })
 
-export const { removePostsState } = postsSlice.actions
+export const { removePostsState, updatePagePosts, endPagePosts } = postsSlice.actions
 
 export const postsReducer = postsSlice.reducer

@@ -1,6 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
-
 import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { isAction } from '@reduxjs/toolkit'
+import useOnclickOutside from 'react-cool-onclickoutside'
+import { useDispatch, useSelector } from 'react-redux'
+
+import axios from '../../../axios'
+import { addSearch } from '../../../redux/slices/search'
+import { fetchLogin, selectIsAuth } from '../../../redux/slices/auth'
+
 import styles from './Header.module.scss'
 import logo from '../../../img/logo/Logo.svg'
 import avatar from '../../../img/avatar-default.svg'
@@ -14,20 +21,16 @@ import {
 	faHouse,
 	faSquarePlus,
 } from '@fortawesome/free-solid-svg-icons'
-import { isAction } from '@reduxjs/toolkit'
-import Settings from '../Settings'
-import Messages from '../Messages'
-import Notifications from '../Notifications'
-import Search from '../Search'
-import { useDispatch, useSelector } from 'react-redux'
 
-import Card from '../SearchigCard'
-import { fetchLogin, selectIsAuth } from '../../../redux/slices/auth'
-import useOnclickOutside from 'react-cool-onclickoutside'
+import {
+	Settings,
+	Messages,
+	Notifications,
+	Search,
+	Card,
+	Notif,
+} from '@components'
 import WebSocketComponent from '../notifications'
-import Notif from '../Notif/Notif'
-import axios from '../../../axios'
-import { addSearch } from '../../../redux/slices/search'
 
 function Header() {
 	const [searchedText, setSearchedText] = useState('')
@@ -84,6 +87,8 @@ function Header() {
 	const handleSearch = () => {
 		setSearchOpened(true)
 		hideNavOnClick()
+		setSearchedText('')
+		setFoundItems(null)
 	}
 
 	const onClickSearch = obj => {
@@ -93,12 +98,20 @@ function Header() {
 
 	const onSubmit = e => {
 		e.preventDefault()
-		const filteredItems = itemsSearch.filter(str => str.trim() !== '')
-		setItemsSearch([...filteredItems, searchedText])
-		setSearchOpened(false)
+		const uniqueItems = new Set(itemsSearch)
 		if (searchedText !== '') {
 			navigate(`/search/${searchedText}`)
 		}
+
+		// Проверяем, есть ли уже введенный элемент в уникальных элементах
+		if (uniqueItems.has(searchedText)) {
+			console.log('Дубликат элемента найден. Не добавляем.')
+			return // Выходим из функции, не добавляя дубликат
+		}
+
+		// Если нет дубликатов, добавляем новый элемент
+		setItemsSearch([...uniqueItems, searchedText])
+		setSearchOpened(false)
 	}
 
 	const onDelete = obj => {
@@ -136,20 +149,39 @@ function Header() {
 		)
 	}
 
+	const removeDuplicatesByName = data => {
+		const uniqueNames = {}
+		const filteredPostTag = data.post_tag.filter(obj => {
+			if (!uniqueNames[obj.name]) {
+				uniqueNames[obj.name] = true
+				return true
+			}
+			return false
+		})
+		return { post_tag: filteredPostTag, user: data.user }
+	}
+
 	useEffect(() => {
 		if (searchedText) {
 			axios.get(`/search/?search=${searchedText}`).then(res => {
-				setFoundItems(res.data)
+				setFoundItems(removeDuplicatesByName(res.data))
 				dispatch(addSearch(res.data.post_tag))
 			})
 		}
 	}, [searchedText])
 
 	const navigateToSearchedItems = item => {
-		setItemsSearch(prev => [...prev, item])
+		const uniqueItems = new Set(itemsSearch)
+
 		navigate(`/search/${item}`)
 		setSearchOpened(false)
 		setFoundItems(null)
+
+		if (uniqueItems.has(item)) {
+			return
+		}
+
+		setItemsSearch(prev => [...prev, item])
 	}
 
 	return (
@@ -270,7 +302,7 @@ function Header() {
 									searchedItems={renderItems}
 									foundItems={foundItems}
 									searchedText={searchedText}
-									setSearchedText={setSearchedText}
+									setSearchedTextDesktop={setSearchedText}
 									onSubmit={onSubmit}
 									navigateToSearchedItems={navigateToSearchedItems}
 								/>
@@ -350,4 +382,4 @@ function Header() {
 	)
 }
 
-export default Header
+export { Header }

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+
 import styles from './Notification.module.scss'
+
 import axios from '../../../axios'
 import avatarDefault from '../../../img/avatar-default.svg'
-import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+
 import { removeApiUrl } from '../Post'
 
 const Notification = ({ type, post, user, avatar }) => {
@@ -138,4 +141,4 @@ const Notification = ({ type, post, user, avatar }) => {
 	)
 }
 
-export default Notification
+export {Notification}
