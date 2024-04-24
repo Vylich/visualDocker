@@ -26,18 +26,14 @@ SECRET_KEY = 'django-insecure-&v#9*%6jn!80jx0w8-=6hvv&2bk!g5q6hd&0x)39d5t*7t*&%@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ["*"]
-# CORS_ORIGIN_ALLOW_ALL = True
-
-ALLOWED_HOSTS = ["localhost", "api", "visualapp.ru", "visualapp.ru", "www.visualapp.ru", "www.visualapp.ru", "192.168.0.192"]
-
-
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'daphne',
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,7 +51,7 @@ INSTALLED_APPS = [
     'taggit',
     'chat',
     'notifications',
-    'followers'
+    'followers',
 ]
 
 MIDDLEWARE = [
@@ -106,7 +102,7 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=2),
 }
 
-CORS_ORIGIN_WHITELIST = ["http://visualapp.ru", "https://visualapp.ru", "http://www.visualapp.ru", "https://www.visualapp.ru", "http://192.168.0.192:3000"]
+CORS_ORIGIN_WHITELIST = ["http://localhost:3000", "http://127.0.0.1:3000", "http://192.168.217.49:3000", "http://192.168.122.49:3000"]
 # конец настроек JWT токена
 
 
@@ -236,3 +232,28 @@ CHANNEL_LAYERS = {
 #     'BACKEND': 'channels.layers.InMemoryChannelLayer'
 #   },
 }
+
+# mxed msfg cebb rxub
+
+SITE_ID = 1
+
+# Email settings
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'aatevs@gmail.com'
+
+EMAIL_HOST_PASSWORD = 'mxed msfg cebb rxub'
+EMAIL_SERVER = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_ADMIN = ['aatevs@gmail.com']
+
+SOCIAL_AUTH_VK_SECRET_KEY = 'R7N5jmhZLiaKq8n44jgW'
+SOCIAL_AUTH_VK_SERVICE_ACCESS_KEY = '58954ee458954ee458954ee4895b8290575589558954ee43e9a88378ea1cd56b74c8c7e'
+SOCIAL_AUTH_VK_CLIENT_ID = '51895987'
+
+SOCIAL_AUTH_GOOGLE_CLIENT_ID = '386092252274-08se1jefa0q7255ubqsbto3hf312eb8o.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_CLIENT_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_PROJECT_ID = 'zippy-brand-420108'

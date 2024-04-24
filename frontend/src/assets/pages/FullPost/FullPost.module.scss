@@ -3,7 +3,9 @@
 .root {
 	width: 100%;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 	position: relative;
 
 	@include vp-1023 {
@@ -13,9 +15,9 @@
 }
 
 .backBtn {
-	position: absolute;
+	position: fixed;
 	left: 40px;
-	top: 0;
+	top: 80px;
 	width: 48px;
 	height: 48px;
 	border-radius: 50%;
@@ -23,6 +25,7 @@
 	background-color: transparent;
 	cursor: pointer;
 	transition: all 0.3s;
+	z-index: 9999;
 
 	svg {
 		height: 24px;
@@ -56,5 +59,44 @@
 		box-shadow: none;
 
 		max-height: 100%;
+	}
+}
+
+.postWrapper {
+	width: 100%;
+	// display: flex;
+	// flex-wrap: wrap;
+	// align-items: center;
+	// justify-content: start;
+	margin-top: 40px;
+}
+
+
+.wrap {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 236px);
+	margin: 0 auto;
+	grid-gap: 10px;
+	width: 100%;
+	height: 100vh;
+	padding: 10px 3vw;
+	justify-content: center;
+	grid-template-rows: masonry;
+	position: relative;
+
+	@include vp-1023 {
+		grid-template-columns: repeat(auto-fit, 30.788530466%);
+		padding: 0 2.840909091%;
+		padding-top: 10px;
+		padding-bottom: 0;
+		height: auto;
+	}
+
+	@include vp-767 {
+		grid-template-columns: repeat(auto-fit, 47.75%);
+		padding: 0 2.840909091%;
+		padding-top: 10px;
+		padding-bottom: 0;
+
 	}
 }

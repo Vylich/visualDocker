@@ -6,7 +6,7 @@ import { fetchLogin, logout } from '../../../redux/slices/auth'
 import avatarDefault from '../../../img/avatar-default.svg'
 import { useEffect, useState } from 'react'
 import { clearMessages } from '../../../redux/slices/notification'
-import { removePostsState } from '../../../redux/slices/posts'
+import { removePostsState, updatePagePosts } from '../../../redux/slices/posts'
 import { jwtDecode } from 'jwt-decode'
 
 import Error from '../errorContinue/Error'
@@ -54,6 +54,7 @@ const Settings = ({ user, handleSettings }) => {
 				window.localStorage.setItem('username', obj.username)
 				dispatch(fetchLogin())
 				dispatch(removePostsState())
+				dispatch(updatePagePosts(' '))
 				navigate('/home')
 			}
 		}

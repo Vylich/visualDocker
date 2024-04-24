@@ -6,7 +6,8 @@ const messagesSlice = createSlice({
     unreadMessages: [],
     unreadCount: 0,
     notificationsCount: 0,
-    notificationsAll: {}
+    notificationsAll: {},
+    startChat: ''
   },
   reducers: {
     updateUnreadCount(state, action) {
@@ -36,9 +37,12 @@ const messagesSlice = createSlice({
     clearMessages(state) {
       state.unreadMessages = [];
     },
+    openMessages(state, action) {
+      state.startChat = action.payload;
+    },
   },
 });
 
-export const { addUnreadMessage, removeReadMessage, clearMessages, incrementUnreadCount, updateUnreadCount, addUnreadCount, addNotificationsCount, addNotificationsAll, removeNotificationsCount } = messagesSlice.actions;
+export const { addUnreadMessage, removeReadMessage, clearMessages, incrementUnreadCount, updateUnreadCount, addUnreadCount, addNotificationsCount, addNotificationsAll, removeNotificationsCount, openMessages } = messagesSlice.actions;
 
 export const notifReducer =  messagesSlice.reducer;

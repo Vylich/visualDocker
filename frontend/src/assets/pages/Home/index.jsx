@@ -12,13 +12,12 @@ import {
 	updatePagePosts,
 } from '../../../redux/slices/posts'
 
-import {Post, Loading} from '@components'
+import { Post, Loading } from '@components'
 
 import styles from './Home.module.scss'
 import { useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import axios from '../../../axios.js'
-
 
 const Columns = ({ posts }) => {
 	const [width, setWidth] = useState(window.innerWidth)
@@ -131,6 +130,8 @@ const Home = () => {
 	const [loading, setLoading] = useState(false)
 	const [loadingPost, setLoadingPost] = useState(false)
 
+	const [nonePosts, setNonePosts] = useState(false)
+
 	const getNextPage = link => {
 		if (link) {
 			const queryString = link.split('?')[1]
@@ -148,9 +149,15 @@ const Home = () => {
 
 	useEffect(() => {
 		if (inView) {
-			if (isAuth) {
-				dispatch(fetchPosts('')).then(res => {
+			if (isAuth && !nonePosts) {
+				dispatch(fetchPosts(false)).then(res => {
 					setLoadingPost(true)
+					if (!res.payload.length || res.payload.length < 10) {
+						setNonePosts(true)
+						console.log('df')
+					} else {
+						setNonePosts(false)
+					}
 				})
 				// setLoadingPost(false)
 				setLoading(false)
@@ -160,7 +167,6 @@ const Home = () => {
 						if (res.payload.next !== null) {
 							dispatch(updatePagePosts(getNextPage(res.payload.next)))
 							setLoadingPost(true)
-							console.log(res.payload.next)
 						}
 
 						if (res.payload.next === null) {
@@ -171,7 +177,7 @@ const Home = () => {
 				}
 			}
 		}
-	}, [inView, isAuth, page])
+	}, [inView, isAuth, page, nonePosts])
 
 	return (
 		<Wrapper>
@@ -189,4 +195,4 @@ const Home = () => {
 	)
 }
 
-export {Home, Columns}
+export { Home, Columns }

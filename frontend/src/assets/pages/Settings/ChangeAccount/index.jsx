@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import {UserInfo} from '@components'
 import { fetchLogin } from '../../../../redux/slices/auth'
+import { removePostsState, updatePagePosts } from '../../../../redux/slices/posts'
 
 const ChangeAccount = () => {
 	const dispatch = useDispatch()
@@ -23,6 +24,8 @@ const ChangeAccount = () => {
 		window.localStorage.setItem('accessff', obj.accessff)
 		window.localStorage.setItem('refresh', obj.refresh)
 		dispatch(fetchLogin())
+		dispatch(removePostsState())
+		dispatch(updatePagePosts(' '))
 		navigate('/home')
 	}
 

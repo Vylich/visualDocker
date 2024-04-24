@@ -57,7 +57,7 @@ function Header() {
 		useOnclickOutside(() => setMessagesOpened(false)),
 		useOnclickOutside(() => setSettingsOpened(false)),
 	]
-
+	const isStartMessage = useSelector(state => state.notif.startChat)
 	const { posts } = useSelector(state => state.posts)
 	const isPostsLoading = posts.status === 'loading'
 	const dispatch = useDispatch()
@@ -104,13 +104,12 @@ function Header() {
 			navigate(`/search/${searchedText}`)
 		}
 
-		// Проверяем, есть ли уже введенный элемент в уникальных элементах
+
 		if (uniqueItems.has(searchedText)) {
-			console.log('Дубликат элемента найден. Не добавляем.')
-			return // Выходим из функции, не добавляя дубликат
+			return
 		}
 
-		// Если нет дубликатов, добавляем новый элемент
+
 		setItemsSearch([...uniqueItems, searchedText])
 		setSearchOpened(false)
 	}
@@ -184,6 +183,13 @@ function Header() {
 
 		setItemsSearch(prev => [...prev, item])
 	}
+
+	useEffect(() => {
+		if(isStartMessage !== '') {
+			setMessagesOpened(true)
+		}
+	}, [isStartMessage])
+
 
 	return (
 		<div className={styles.root}>

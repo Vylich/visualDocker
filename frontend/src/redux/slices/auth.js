@@ -78,11 +78,6 @@ const authSlice = createSlice({
       state.status = "error";
       state.data = null;
     });
-
-    builder.addCase(fetchLogin.pending, (state) => {
-      state.status = "loading";
-      state.data = null;
-    });
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
       state.status = "loaded";
       state.data = action.payload;

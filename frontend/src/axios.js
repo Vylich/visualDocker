@@ -4,7 +4,7 @@ import { jwtDecode } from 'jwt-decode'
 const instance = axios.create({
 	// baseURL: 'http://192.168.122.96:8000/api/',
 	// baseURL: `${import.meta.env.VITE_APP_API_URL}`,
-	// baseURL: '/api/',
+	// baseURL: 'http://localhost/api/',
 	baseURL: 'https://visualapp.ru/api/',
 })
 
@@ -26,7 +26,7 @@ instance.interceptors.request.use(config => {
 				refresh: refresh,
 			}
 			axios
-				.post(`https://visualapp.ru/api/auth/refresh_token/`, value)
+				.post(`http://localhost/api/auth/refresh_token/`, value)
 				.then(res => {
 					window.localStorage.setItem('accessff', `fdsafhrwodddddddd${res.data.access}`)
 					const users = JSON.parse(localStorage.getItem('users')) || []

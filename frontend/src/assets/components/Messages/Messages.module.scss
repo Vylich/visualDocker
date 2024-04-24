@@ -306,6 +306,7 @@
 	max-height: 100%;
 	width: 100%;
 	overflow-y: overlay;
+	height: 100%;
 }
 
 .linkUser {
@@ -319,14 +320,18 @@
 	}
 
 	img {
-		width: 30px;
-		height: 30px;
+		width: 30px !important;
+		height: 30px !important;
 		border-radius: 50%;
 	}
 
 	span {
 		font-size: 20px;
 	}
+}
+
+.userTalker {
+	cursor: pointer;
 }
 
 .talkers {
@@ -340,6 +345,10 @@
 .talker {
 	cursor: pointer;
 	border-radius: 8px;
+
+	img {
+		flex-shrink: 0;
+	}
 
 	@include hover {
 		background-color: #e1e1e1;

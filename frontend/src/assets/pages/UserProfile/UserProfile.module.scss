@@ -15,6 +15,30 @@
 	}
 }
 
+.wrapBtn {
+	display: flex;
+	gap: 20px;
+
+}
+
+.btnWrite {
+	background-color: #7a4ad8;
+	padding: 10px;
+	border-radius: 7px;
+	text-decoration: none;
+	border: 1px solid #7a4ad8;
+	color: #ffffff;
+	margin-top: 20px;
+	font-weight: 600;
+	font-size: 16px;
+	text-transform: capitalize;
+	cursor: pointer;
+
+	@include vp-1023 {
+		display: none;
+	}
+}
+
 .btnSettings {
 	background-color: #7a4ad8;
 	padding: 10px;

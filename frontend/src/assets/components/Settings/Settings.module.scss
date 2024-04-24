@@ -1,7 +1,7 @@
 @import '../../scss/utils/mixins';
 
 .root {
-	height: auto;
+	height: 100%;
 	width: auto;
 	display: flex;
 	flex-direction: column;
@@ -13,6 +13,7 @@
 	-webkit-box-shadow: 0px 0px 19px -6px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 0px 0px 19px -6px rgba(0, 0, 0, 0.5);
 	box-shadow: 0px 0px 19px -6px rgba(0, 0, 0, 0.5);
+	max-height: 422px;
 }
 
 .link {
@@ -22,7 +23,7 @@
 	border: none;
 	border-radius: 8px;
 	background-color: transparent;
-	
+
 	div {
 		pointer-events: none;
 	}

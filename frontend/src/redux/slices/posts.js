@@ -3,11 +3,15 @@ import axios from '../../axios'
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (params) => {
 	const token = window.localStorage.getItem('accessff')
+	let par = ''
 	const config = {}
-	if (!token) {
+	if (!token || params !== false) {
 		config.skipAuthorization = true
+		par = params
 	}
-	const { data } = await axios.get(`/posts/${params}`, config)
+
+	console.log()
+	const { data } = await axios.get(`/posts/${par}`, config)
 	return data
 })
 
@@ -48,7 +52,7 @@ const initialState = {
 		status: 'loading',
 	},
 	postsPage: {
-		page: ''
+		page: " ",
 	},
 	userPosts: {
 		items: [],
@@ -80,13 +84,19 @@ const postsSlice = createSlice({
 	},
 	extraReducers: builder => {
 		builder.addCase(fetchPosts.fulfilled, (state, action) => {
-			if (window.localStorage.getItem('accessff')) {
-				state.posts.items = [...state.posts.items, ...action.payload]
+			if (action.payload.results) {
+					const uniqueResults = action.payload.results.filter(newItem =>
+							!state.posts.items.some(existingItem => existingItem.id === newItem.id)
+					);
+					state.posts.items = [...state.posts.items, ...uniqueResults];
 			} else {
-				state.posts.items = [...state.posts.items, ...action.payload.results]
+					const uniquePayload = action.payload.filter(newItem =>
+							!state.posts.items.some(existingItem => existingItem.id === newItem.id)
+					);
+					state.posts.items = [...state.posts.items, ...uniquePayload];
 			}
-			state.posts.status = 'loaded'
-		}),
+			state.posts.status = 'loaded';
+	}),
 			builder.addCase(fetchPosts.rejected, state => {
 				state.posts.items = []
 				state.posts.status = 'loaded'

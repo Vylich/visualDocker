@@ -19,14 +19,14 @@ services:
       start_period: 30s
     networks:
       - visual
-  db-backup:
-    image: localhost:5000/cron
-    environment:
-      PGPASSWORD: w^wHcf+M9HtN@r
-    volumes:
-      - './backup:/backup'
-    networks:
-      - visual
+  # db-backup:
+  #   image: localhost:5000/cron
+  #   environment:
+  #     PGPASSWORD: w^wHcf+M9HtN@r
+  #   volumes:
+  #     - './backup:/backup'
+  #   networks:
+  #     - visual
 
 
   frontend:
@@ -91,6 +91,22 @@ services:
     depends_on:
       db:
         condition: service_started
+    networks:
+      - visual
+
+  minio:
+    container_name: "minio"
+    image: minio/minio
+    command: server /data --console-address ":9090"
+    restart: always
+    ports:
+      - "9090:9090"
+      - "9000:9000"
+    environment:
+      MINIO_ROOT_USER: WFUtKPfoopYz6avWKuO3
+      MINIO_ROOT_PASSWORD: x1J9LOYWG2U7t4mQclWMLjlNts837KHsZFMT4Yyd
+    volumes:
+      - ./minio-data:/data
     networks:
       - visual
 

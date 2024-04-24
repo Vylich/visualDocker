@@ -13,6 +13,7 @@ import {
 
 import axios, { normalAccess } from '../../../axios'
 import {UserInfo, UserMessage} from '@components'
+import { useNavigate } from 'react-router-dom'
 
 
 // import { removeReadMessage } from '../../../redux/slices/notification'
@@ -31,11 +32,14 @@ const Messages = ({ id }) => {
 		me: 'none',
 		interlocutor: 'none',
 	})
+	const isStartMessage = useSelector(state => state.notif.startChat)
+	const [userTalker, setUserTalker ] =useState({})
 	const notifUserMess = useSelector(state => state.notif.unreadCount)
 	const [talkers, setTalkers] = useState([])
 	const [idReceiver, setIdReceiver] = useState('')
 	// const notif = useSelector(state => state.notif.unreadMessages)
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
 
 	const socketRef = useRef()
 
@@ -174,6 +178,19 @@ const Messages = ({ id }) => {
 		socketRef.current.close()
 	}
 
+	const goUser = () => {
+		navigate(`/profile/${userTalker.id}`)
+	}
+
+	useEffect(() => {
+		if(isStartMessage !== '') {
+			startChat(isStartMessage.username)
+			setIdReceiver(isStartMessage.id)
+			setUserTalker(isStartMessage)
+		}
+	}, [isStartMessage])
+
+
 	return (
 		<div className={styles.root}>
 			<div className={styles.wrapper}>
@@ -209,9 +226,9 @@ const Messages = ({ id }) => {
 									<div
 										className={styles.talker}
 										onClick={() => {
-											setSearchValue(talker.user.username)
 											setIdReceiver(talker.user.id)
 											startChat(talker.user.username)
+											setUserTalker(talker.user)
 										}}
 										key={i}
 									>
@@ -286,7 +303,7 @@ const Messages = ({ id }) => {
 							<span onClick={handleClick} className={styles.backBtn}>
 								<FontAwesomeIcon icon={faChevronLeft} />
 							</span>
-							<h3>{searchValue}</h3>
+							<h3 onClick={goUser} className={styles.userTalker}>{userTalker.username}</h3>
 						</div>
 						<div className={styles.messages}>
 							{!!history &&

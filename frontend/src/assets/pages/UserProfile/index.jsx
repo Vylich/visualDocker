@@ -25,6 +25,7 @@ import {
 } from '../../../redux/slices/socialGraph'
 
 import { Columns } from '@pages'
+import { openMessages } from '../../../redux/slices/notification'
 
 function UserProfile() {
 	const dispatch = useDispatch()
@@ -131,6 +132,10 @@ function UserProfile() {
 		}
 	}
 
+	const messageUser = () => {
+
+	}
+
 	return (
 		<div className={styles.profile}>
 			{otherUserData && (
@@ -161,13 +166,15 @@ function UserProfile() {
 					</div>
 				</>
 			) : (
+				<div className={styles.wrapBtn}>
 				<ButtonSubs handleSubscribe={handleSubscribe} isFollow={isFollow} />
+				<button onClick={() => dispatch(openMessages(otherUserData))} onMouseOut={() => dispatch(openMessages(''))} className={styles.btnWrite}>написать</button>
+				</div>
 			)}
 
 			<div className={styles.postWrapper}>
 				<div className={styles.wrapper}>
 					<Columns posts={posts.items} />
-
 				</div>
 			</div>
 		</div>

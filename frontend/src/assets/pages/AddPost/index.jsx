@@ -45,8 +45,8 @@ const AddPost = () => {
 	const [link, setLinks] = React.useState('')
 	const [title, setTitle] = React.useState('')
 	const [tags, setTags] = React.useState('')
-	const [linkImg, setLinkImg] = React.useState('')
-	const [isValidLinkImg, setIsValidLinkImg] = useState(true)
+	const [linkMedia, setLinkMedia] = React.useState('')
+	const [isValidLinkMedia, setIsValidLinkMedia] = useState(true)
 	const [isSlider, setIsSlider] = useState(false)
 
 	const [image, setImage] = useState([])
@@ -228,28 +228,44 @@ const AddPost = () => {
 		}
 	}
 
-	const addLinkImg = async () => {
+	const addLinkMedia = async () => {
 		try {
-			const response = await fetch(linkImg)
-			const blob = await response.blob()
-			const file = new File([blob], 'image.jpg', { type: 'image/jpeg' })
+			const response = await fetch(linkMedia); // Загружаем медиа-файл по ссылке
+			const blob = await response.blob(); // Получаем объект Blob
+			const extension = linkMedia.split('.').pop().toLowerCase(); // Получаем расширение файла
 
-			setImage(file)
-			setImageUrl(linkImg)
-		} catch (err) {
-			alert('неверная ссылка на изображение')
-		}
+			// Определяем тип файла (изображение или видео) по расширению
+			const isImage = ['jpeg', 'jpg', 'gif', 'png'].includes(extension);
+			const isVideo = ['mp4', 'avi', 'mov', 'wmv', 'flv'].includes(extension);
+
+			if (isImage) {
+					const file = new File([blob], 'image.jpg', { type: 'image/jpeg' }); // Создаем объект File для изображения
+					setImage(prev => [...prev, file]); // Добавляем изображение в массив
+					setImageUrl(prev => [...prev, linkMedia]); // Добавляем ссылку на изображение в массив
+			} else if (isVideo) {
+					const file = new File([blob], 'video.mp4', { type: 'video/mp4' }); // Создаем объект File для видео
+					setVideo(prev => [...prev, file]); // Добавляем видео в массив
+					setVideoUrls(prev => [...prev, linkMedia]); // Добавляем ссылку на видео в массив
+			} else {
+					throw new Error('Неподдерживаемый формат медиа-файла');
+			}
+
+			setIsValidLinkMedia(true); // Устанавливаем флаг валидности ссылки на медиа-файл
+	} catch (err) {
+			alert('Неверная ссылка на медиа-файл');
+			setIsValidLinkMedia(false); // Устанавливаем флаг невалидности ссылки на медиа-файл в случае ошибки
+	}
 	}
 
-	const handleImageUrlChange = val => {
-		setLinkImg(val)
-		const urlPattern =
-			/^((http|https):\/\/.*\.(jpeg|jpg|gif|png))|(data:image\/(jpeg|jpg|gif|png);base64,([A-Za-z0-9+/=]+))$/
+	const handleMediaUrlChange = val => {
+		setLinkMedia(val)
+    const urlPattern =
+        /^((http|https):\/\/.*\.(jpeg|jpg|gif|png|mp4|avi|mov|wmv|flv))|(data:(image|video)\/(jpeg|jpg|gif|png|mp4|avi|mov|wmv|flv);base64,([A-Za-z0-9+/=]+))$/
 
 		if (urlPattern.test(val)) {
-			setIsValidLinkImg(true)
+			setIsValidLinkMedia(true)
 		} else {
-			setIsValidLinkImg(false)
+			setIsValidLinkMedia(false)
 		}
 	}
 
@@ -382,15 +398,15 @@ const AddPost = () => {
 									name='tags'
 									id='upload-tags'
 									placeholder='Добавить ссылку на изображение'
-									value={linkImg}
-									onChange={e => handleImageUrlChange(e.target.value)}
+									value={linkMedia}
+									onChange={e => handleMediaUrlChange(e.target.value)}
 								/>
-								{!isValidLinkImg && (
+								{!isValidLinkMedia && (
 									<p style={{ color: 'red' }}>
 										Please enter a valid image URL for
 									</p>
 								)}
-								<button className={styles.addLink} onClick={addLinkImg}>
+								<button className={styles.addLink} onClick={addLinkMedia}>
 									Добавить
 								</button>
 							</div>

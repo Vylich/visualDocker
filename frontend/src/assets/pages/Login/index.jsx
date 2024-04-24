@@ -22,7 +22,7 @@ import {
 	fetchUserData,
 	selectIsAuth,
 } from '../../../redux/slices/auth'
-import { removePostsState } from '../../../redux/slices/posts'
+import { removePostsState, updatePagePosts } from '../../../redux/slices/posts'
 
 const Login = () => {
 	const isAuth = useSelector(selectIsAuth)
@@ -51,6 +51,21 @@ const Login = () => {
 		setIsSuccessModalOpen(true)
 	}
 
+	const onRegVk = () => {
+		axios.get('auth/reg/redirect/').then(res => {
+			console.log(res.data)
+			window.location.href  = res.data
+		})
+	}
+
+	const onRegGoogle = () => {
+		axios.get('auth/reg/redirect_google/').then(res => {
+			console.log(res.data)
+			window.location.href  = res.data
+		})
+	}
+
+
 	const {
 		register,
 		handleSubmit,
@@ -66,6 +81,7 @@ const Login = () => {
 	const onSubmit = async values => {
 		const data = await dispatch(fetchUserData(values))
 		dispatch(removePostsState())
+		dispatch(updatePagePosts(' '))
 
 		console.log(data)
 		if (!data.payload) {
@@ -94,7 +110,7 @@ const Login = () => {
 					window.localStorage.setItem('users', JSON.stringify(users))
 					window.localStorage.setItem('username', user.payload.user.username)
 					window.localStorage.setItem('avatar', user.payload.user.avatar)
-					console.log(user.payload)
+
 					navigate('/home')
 				}
 			}
@@ -196,12 +212,12 @@ const Login = () => {
 				<div className={styles.container__login}>
 					<p>Войти с помощью:</p>
 					<div className={styles.wrapLogin}>
-						<Link to='/login/reg'>
+						<span onClick={onRegGoogle}>
 							<FontAwesomeIcon icon={faGoogle} />
-						</Link>
-						<Link to='/login/reg'>
+						</span>
+						<span onClick={onRegVk}>
 							<FontAwesomeIcon icon={faVk} />
-						</Link>
+						</span>
 					</div>
 				</div>
 			</div>
