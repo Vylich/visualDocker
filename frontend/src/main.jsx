@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux';
 import App from './App.jsx'
 import './index.scss'
+import './assets/themes/theme.css'
 import { BrowserRouter, HashRouter, useLocation } from 'react-router-dom'
 import store from './redux/store';
 import { useEffect } from 'react';

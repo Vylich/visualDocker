@@ -8,7 +8,7 @@ import {
 } from './redux/slices/auth'
 import { useDispatch, useSelector } from 'react-redux'
 
-import {Header, Search, WebSocketComponent} from '@components'
+import {Header, Search, WebSocketComponent, ThemeMode} from '@components'
 import './index.scss'
 
 import { Login, Registration, Home, UserProfile, FullPost, SettingsProfile, AddPost, EditProfile, ManageAccount, Security, NotificationSettings, VisibilityProfile, Confidentiality, Notification, ContinuePage, ChangeAccount, SearchPage, Subs, SuccessfulPage, ErrorPage } from '@pages'
@@ -53,6 +53,7 @@ function App() {
 			<div className='wrapper'>
 				<WebSocketComponent />
 				<Header />
+				<ThemeMode />
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route path='/home' element={<Home />} />

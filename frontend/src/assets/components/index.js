@@ -20,9 +20,11 @@ import { Tag } from './Tags/index'
 import { UserInfo } from './UserInfo/index'
 import { UserMessage } from './UserInfo/UserMessage'
 import { WebSocketComponent } from './notifications'
+import { ThemeMode } from './ThemeMode/ThemeMode'
 
 
 
 
 
-export {AddComment, ButtonSubs, CommentsBlock, CommentsList, Header, ListUsers, Loading, Messages, Modal, AuthErrorModal, Notif, Notification, Notifications, Post, PostDetails, Search, Card, Settings, Tag, UserInfo, UserMessage, WebSocketComponent}
+
+export {AddComment, ButtonSubs, CommentsBlock, CommentsList, Header, ListUsers, Loading, Messages, Modal, AuthErrorModal, Notif, Notification, Notifications, Post, PostDetails, Search, Card, Settings, Tag, UserInfo, UserMessage, WebSocketComponent, ThemeMode}

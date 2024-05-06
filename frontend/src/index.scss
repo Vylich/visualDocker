@@ -27,7 +27,8 @@ body {
   font-family: 'Manrope', 'Arial', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-	background-color: #ffffff;
+	background-color: var(--bg);
+	color: var(--text);
 	padding: 0;
 }
 

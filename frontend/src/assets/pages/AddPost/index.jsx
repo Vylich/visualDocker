@@ -230,30 +230,30 @@ const AddPost = () => {
 
 	const addLinkMedia = async () => {
 		try {
-			const response = await fetch(linkMedia); // Загружаем медиа-файл по ссылке
-			const blob = await response.blob(); // Получаем объект Blob
-			const extension = linkMedia.split('.').pop().toLowerCase(); // Получаем расширение файла
+			const response = await fetch(linkMedia);
+			const blob = await response.blob();
+			const extension = linkMedia.split('.').pop().toLowerCase();
 
-			// Определяем тип файла (изображение или видео) по расширению
+
 			const isImage = ['jpeg', 'jpg', 'gif', 'png'].includes(extension);
 			const isVideo = ['mp4', 'avi', 'mov', 'wmv', 'flv'].includes(extension);
 
 			if (isImage) {
-					const file = new File([blob], 'image.jpg', { type: 'image/jpeg' }); // Создаем объект File для изображения
-					setImage(prev => [...prev, file]); // Добавляем изображение в массив
-					setImageUrl(prev => [...prev, linkMedia]); // Добавляем ссылку на изображение в массив
+					const file = new File([blob], 'image.jpg', { type: 'image/jpeg' });
+					setImage(prev => [...prev, file]);
+					setImageUrl(prev => [...prev, linkMedia]);
 			} else if (isVideo) {
-					const file = new File([blob], 'video.mp4', { type: 'video/mp4' }); // Создаем объект File для видео
-					setVideo(prev => [...prev, file]); // Добавляем видео в массив
-					setVideoUrls(prev => [...prev, linkMedia]); // Добавляем ссылку на видео в массив
+					const file = new File([blob], 'video.mp4', { type: 'video/mp4' });
+					setVideo(prev => [...prev, file]);
+					setVideoUrls(prev => [...prev, linkMedia]);
 			} else {
 					throw new Error('Неподдерживаемый формат медиа-файла');
 			}
 
-			setIsValidLinkMedia(true); // Устанавливаем флаг валидности ссылки на медиа-файл
+			setIsValidLinkMedia(true);
 	} catch (err) {
 			alert('Неверная ссылка на медиа-файл');
-			setIsValidLinkMedia(false); // Устанавливаем флаг невалидности ссылки на медиа-файл в случае ошибки
+			setIsValidLinkMedia(false);
 	}
 	}
 

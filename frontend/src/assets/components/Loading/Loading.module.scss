@@ -1,6 +1,6 @@
 $main: #bea4f1;
 $sec:#7a4ad8;
-$little-cursor: white;
+$little-cursor: var(--bg);
 .outer{
   margin: auto;
   background-color: transparent;
@@ -25,7 +25,7 @@ $little-cursor: white;
   animation-timing-function: ease;
 }
 .inner{
-  background: #ffffff;
+  background: var(--bg);
   height: 88px;
   width: 88px;
   margin:auto;

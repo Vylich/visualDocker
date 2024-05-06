@@ -1,0 +1,44 @@
+:root {
+	--bg-theme-light: #ffffff;
+	--text-theme-light: #000000;
+	--modal-theme-light: rgba(255, 255, 255, 0.87);
+	--bg-sec-theme-light: #ffffff;
+	--search-theme-text-light: #000000;
+	--search-theme-bg-light: #e1e1e1;
+	--search-theme-bg-hover-light: #e1e1e15b;
+	--image-add-placeholder-light: #E1E1E1;
+	--input-bg-theme-light: #ffffff;
+	--input-text-theme-light: #000000;
+	--color-header-text-light: #7A4AD8;
+	--border-input-light: #e1e1e1;
+	--bg-input-light: #ffffff;
+
+
+
+	--bg-theme-dark: #1E1E3E;
+	--text-theme-dark: #ffffff;
+	--modal-theme-dark: rgba(0, 0, 0, 0.87);
+	--bg-sec-theme-dark: #131524;
+	--search-theme-text-dark: #ffffff;
+	--search-theme-bg-dark: #131524;
+	--search-theme-bg-hover-dark: #1315245b;
+	--image-add-placeholder-dark: #131524;
+	--input-bg-theme-dark: #131524;
+	--input-text-theme-dark: #ffffff;
+	--color-header-text-dark: #ffffff;
+	--border-input-dark: #ffffff;
+	--bg-input-dark: #131524;
+
+
+
+	--bg: var(--bg-theme-dark);
+	--text: var(--text-theme-dark);
+	--modal: var(--modal-theme-dark);
+	--bg-sec: var(--search-theme-dark);
+	--text-search: var(--search-theme-text-dark);
+	--bg-search: var(--bg-theme-text-dark);
+	--image-add: var(--image-add-placeholder-dark);
+	--header-text: var(--color-header-text-dark);
+	--bg-input: var(--bg-input-dark);
+	--border-input: var(--border-input-dark);
+}

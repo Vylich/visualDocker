@@ -6,6 +6,7 @@
 	border-top: 1px solid rgba(0, 0, 0, 0.137254902);
 	padding: 20px 0;
 
+
 	@include vp-1023 {
 		padding: 10px 0 ;
 	}
@@ -18,6 +19,7 @@
 		padding-left: 20px;
 		padding-right: 90px;
 		font-size: 16px;
+		color: var(--text);
 	}
 	button {
 		bottom: 20px;
