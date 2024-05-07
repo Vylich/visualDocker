@@ -166,7 +166,7 @@ const Search = ({
 											<span
 												onClick={() => {
 													setSearchedTextDesktop(obj)
-													// onClickSearch(obj)
+													onClickSearch(obj)
 												}}
 											>
 												{obj}

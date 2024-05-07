@@ -12,7 +12,9 @@
 	--color-header-text-light: #7A4AD8;
 	--border-input-light: #e1e1e1;
 	--bg-input-light: #ffffff;
-
+	--link-text-hover-light: #e1e1e1;
+	--link-settings-dark: #333333;
+	--icon-header-light: #5f5f5f;
 
 
 	--bg-theme-dark: #1E1E3E;
@@ -28,6 +30,9 @@
 	--color-header-text-dark: #ffffff;
 	--border-input-dark: #ffffff;
 	--bg-input-dark: #131524;
+	--link-text-hover-dark: #404040;
+	--link-settings-dark: #ffffff;
+	--icon-header-dark: #ffffff;
 
 
 
@@ -41,4 +46,7 @@
 	--header-text: var(--color-header-text-dark);
 	--bg-input: var(--bg-input-dark);
 	--border-input: var(--border-input-dark);
+	--hover-link: var(--link-text-hover-dark);
+	--link-settings: var(--link-settings-dark);
+	--icon-header: var(--icon-header-dark);
 }

@@ -71,10 +71,11 @@
 		height: 48px;
 		border-radius: 15px;
 		outline: none;
-		border: 2px solid #e1e1e1;
+		border: 2px solid var(--border-input);
+		background-color: var(--bg-input);
+		color: var(--text-search);
 		padding-left: 20px;
 		font-size: 16px;
-		background-color: #ffffff;
 
 		@include vp-1023 {
 			font-size: 14px;

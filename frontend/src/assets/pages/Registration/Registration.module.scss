@@ -53,8 +53,9 @@
 			width: 100%;
 			border-radius: 7px;
 			outline: none;
-			border: 2px solid #c2c2c2;
-			background-color: #ffffff;
+			border: 2px solid var(--border-input);
+			background-color: var(--bg-input);
+			color: var(--text-search);
 			padding: 10px 20px 10px 8px;
 			transition: all 0.3s;
 

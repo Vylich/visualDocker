@@ -109,7 +109,7 @@ const EditProfile = ({
 						/>
 					</div>
 					<div className={styles.field}>
-						<label htmlFor='name'>Фамилия</label>
+						<label htmlFor='surname'>Фамилия</label>
 						<input
 							type='text'
 							name='surname'
@@ -122,7 +122,7 @@ const EditProfile = ({
 				</div>
 				<div className={styles.fields}>
 					<div className={styles.field}>
-						<label htmlFor='upload-text'>Описание</label>
+						<label htmlFor='description'>Описание</label>
 						<textarea
 							name='description'
 							id='description'
@@ -133,7 +133,7 @@ const EditProfile = ({
 						/>
 					</div>
 					<div className={styles.field}>
-						<label htmlFor='name'>Веб-сайт</label>
+						<label htmlFor='web-site'>Веб-сайт</label>
 						<input
 							type='text'
 							name='web-site'
@@ -144,7 +144,7 @@ const EditProfile = ({
 						/>
 					</div>
 					<div className={styles.field}>
-						<label htmlFor='name'>Имя пользователя</label>
+						<label htmlFor='username'>Имя пользователя</label>
 						<input
 							type='text'
 							name='username'

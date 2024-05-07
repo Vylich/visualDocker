@@ -34,6 +34,11 @@ function ThemeMode() {
     const headerText = `var(--color-header-text-${theme})`;
     const borderInput = `var(--border-input-${theme})`;
     const bgInput = `var(--bg-input-${theme})`;
+    const hoverLink = `var(--link-text-hover-${theme})`;
+    const linkSettings = `var(--link-settings-${theme})`;
+    const iconHeader = `var(--icon-header-${theme})`;
+
+
 
 
 
@@ -53,6 +58,12 @@ function ThemeMode() {
 		document.body.style.setProperty('--header-text', headerText);
 		document.body.style.setProperty('--border-input', borderInput);
 		document.body.style.setProperty('--bg-input', bgInput);
+		document.body.style.setProperty('--hover-link', hoverLink);
+		document.body.style.setProperty('--link-settings', linkSettings);
+		document.body.style.setProperty('--icon-header', iconHeader);
+
+
+
 
 
 

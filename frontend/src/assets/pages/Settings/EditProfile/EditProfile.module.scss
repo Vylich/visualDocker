@@ -93,7 +93,9 @@
 		height: 48px;
 		border-radius: 15px;
 		outline: none;
-		border: 2px solid #e1e1e1;
+		border: 2px solid var(--border-input);
+		background-color: var(--bg-input);
+		color: var(--text-search);
 		padding-left: 20px;
 		font-size: 16px;
 
@@ -108,7 +110,9 @@
 		border-radius: 20px;
 		width: 100%;
 		outline: none;
-		border: 2px solid #e1e1e1;
+		border: 2px solid var(--border-input);
+		background-color: var(--bg-input);
+		color: var(--text-search);
 		padding-left: 20px;
 		font-size: 16px;
 		padding-top: 10px;
