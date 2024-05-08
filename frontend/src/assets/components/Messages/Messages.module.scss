@@ -142,6 +142,7 @@
 	@include vp-1023 {
 		-webkit-box-shadow: none;
 		-moz-box-shadow: none;
+		background-color: var(--bg);
 		box-shadow: none;
 		padding: 0;
 		height: 100%;

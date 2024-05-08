@@ -26,7 +26,7 @@ instance.interceptors.request.use(config => {
 				refresh: refresh,
 			}
 			axios
-				.post(`http://localhost/api/auth/refresh_token/`, value)
+				.post(`https://visualapp.ru/api/auth/refresh_token/`, value)
 				.then(res => {
 					window.localStorage.setItem('accessff', `fdsafhrwodddddddd${res.data.access}`)
 					const users = JSON.parse(localStorage.getItem('users')) || []

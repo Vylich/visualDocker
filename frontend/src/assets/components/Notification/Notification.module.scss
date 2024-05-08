@@ -10,7 +10,7 @@
 	}
 	@include vp-1023 {
 		border-radius: 16px;
-		background-color: #e1e1e1;
+		background-color: var(--bg-search);
 		padding: 20px;
 		height: auto;
 		width: 100%;

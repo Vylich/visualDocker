@@ -32,7 +32,6 @@ import {
 	WebSocketComponent
 } from '@components'
 
-
 function Header() {
 	const [searchedText, setSearchedText] = useState('')
 	const [itemsSearch, setItemsSearch] = useState([])
@@ -103,7 +102,6 @@ function Header() {
 		if (searchedText !== '') {
 			navigate(`/search/${searchedText}`)
 		}
-
 
 		if (uniqueItems.has(searchedText)) {
 			return
@@ -189,7 +187,6 @@ function Header() {
 			setMessagesOpened(true)
 		}
 	}, [isStartMessage])
-
 
 	return (
 		<div className={styles.root}>
@@ -312,6 +309,7 @@ function Header() {
 									setSearchedTextDesktop={setSearchedText}
 									onSubmit={onSubmit}
 									navigateToSearchedItems={navigateToSearchedItems}
+									removeDuplicatesByName={removeDuplicatesByName}
 								/>
 								<button
 									className={styles.clearBtn}

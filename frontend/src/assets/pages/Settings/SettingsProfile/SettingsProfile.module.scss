@@ -109,7 +109,7 @@
 	border-radius: 50%;
 	color: #7a4ad8;
 	border: 1px solid #7a4ad8;
-	background-color: #ffffff;
+	background-color: var(--bg);
 	transition: all 0.5s;
 
 	@include hover-focus {

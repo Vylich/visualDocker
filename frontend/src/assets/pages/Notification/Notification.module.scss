@@ -45,7 +45,7 @@
 
 .link {
 	text-decoration: none;
-	color: #333333;
+	color: var(--link-settings);
 	font-weight: 600;
 	position: relative;
 }
@@ -57,7 +57,7 @@
 		position: absolute;
 		width: 90%;
 		height: 3px;
-		background-color: #333333;
+		background-color: var(--link-settings);
 		left: 50%;
 		transform: translateX(-50%);
 		bottom: -5px;

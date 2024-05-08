@@ -20,6 +20,7 @@ const Search = ({
 	foundItems,
 	navigateToSearchedItems,
 	setSearchedTextDesktop,
+
 }) => {
 	const [foundItemsMobile, setFoundItemsMobile] = useState(null)
 	const [searchedText, setSearchedText] = useState('')
@@ -27,6 +28,18 @@ const Search = ({
 	const posts = useSelector(state => state.search.searchedItems)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
+
+	const removeDuplicatesByName = data => {
+		const uniqueNames = {}
+		const filteredPostTag = data.post_tag.filter(obj => {
+			if (!uniqueNames[obj.name]) {
+				uniqueNames[obj.name] = true
+				return true
+			}
+			return false
+		})
+		return { post_tag: filteredPostTag, user: data.user }
+	}
 
 	const onSubmit = e => {
 		e.preventDefault()
@@ -48,8 +61,7 @@ const Search = ({
 			setFoundItemsMobile(null)
 		} else {
 			axios.get(`/search/?search=${searchedText}`).then(res => {
-				setFoundItemsMobile(res.data)
-				console.log(res.data)
+				setFoundItemsMobile(removeDuplicatesByName(res.data))
 				dispatch(addSearch(res.data.post_tag))
 			})
 		}

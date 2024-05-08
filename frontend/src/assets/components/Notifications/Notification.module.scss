@@ -37,6 +37,7 @@
 	border-radius: 16px;
 
 	@include vp-1023 {
+		background-color: var(--bg);
 		padding: 0;
 		margin-top: 20px;
 		gap: 20px;
