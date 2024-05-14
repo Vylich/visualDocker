@@ -21,7 +21,7 @@ function App() {
 	const isAuth = useSelector(selectIsAuth)
 	const authStatus = useSelector(selectIsAuthStatus)
 	const myId = useSelector(state => state.auth)
-	const navigate = useNavigate()
+  const navigate = useNavigate()
 	// const socketRef = useRef()
 	// const [notificationMess, setNotificationMess] = useState([])
 
