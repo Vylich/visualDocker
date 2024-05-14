@@ -62,7 +62,3 @@ docs/_build/
 media
 
 data
-certbot
-letsencrypt
-media
-pgBackup

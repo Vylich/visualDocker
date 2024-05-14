@@ -1,0 +1,9 @@
+FROM postgres:alpine
+
+COPY pgbackup.sh /usr/local/bin/pgbackup.sh
+
+RUN chmod +x /usr/local/bin/pgbackup.sh
+
+RUN echo '0  0  *  *  *    /usr/local/bin/pgbackup.sh' > /etc/crontabs/root
+
+CMD ["crond", "-f", "-d", "0"]
