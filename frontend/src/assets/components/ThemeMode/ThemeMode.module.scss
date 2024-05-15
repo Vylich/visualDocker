@@ -1,0 +1,21 @@
+@import '../../scss/utils/mixins';
+
+.toggleTheme {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: var(--icon-header);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  @include hover {
+    background-color: var(--hover-link);
+  }
+}
