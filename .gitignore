@@ -59,6 +59,6 @@ nosetests.xml
 
 # Документация
 docs/_build/
-
+backup
 
 data
