@@ -60,5 +60,5 @@ nosetests.xml
 # Документация
 docs/_build/
 backup
-
+minio-data
 data
