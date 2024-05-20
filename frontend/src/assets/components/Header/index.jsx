@@ -1,6 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { isAction } from "@reduxjs/toolkit";
 import useOnclickOutside from "react-cool-onclickoutside";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -29,7 +28,6 @@ import {
   Search,
   Card,
   Notif,
-  WebSocketComponent,
 } from "@components";
 import { ThemeMode } from "../ThemeMode/ThemeMode";
 
@@ -40,7 +38,6 @@ function Header() {
   const [messagesOpened, setMessagesOpened] = useState(false);
   const [notificationsOpened, setNotificationsOpened] = useState(false);
   const [searchOpened, setSearchOpened] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [isNavVisible, setIsNavVisible] = useState(true);
   const isAuth = useSelector(selectIsAuth);
   const isUserDataLoaded = (state) => state.auth.data !== null;

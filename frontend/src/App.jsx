@@ -1,14 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import {
   fetchLogin,
-  fetchRefresh,
   selectIsAuth,
   selectIsAuthStatus,
 } from "./redux/slices/auth";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Header, Search, WebSocketComponent, ThemeMode } from "@components";
+import { Header, Search, WebSocketComponent } from "@components";
 import "./index.scss";
 
 import {
@@ -38,27 +37,8 @@ import { useNavigate } from "react-router-dom";
 
 function App() {
   const dispatch = useDispatch();
-  const isAuth = useSelector(selectIsAuth);
-  const authStatus = useSelector(selectIsAuthStatus);
   const myId = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  // const socketRef = useRef()
-  // const [notificationMess, setNotificationMess] = useState([])
-
-  // useEffect(() => {
-  // 	if (window.localStorage.getItem('access')) {
-  // 		socketRef.current = new WebSocket(
-  // 			`${
-  // 				import.meta.env.VITE_APP_WS_URL
-  // 			}/ws/notifications/?token=${window.localStorage.getItem('access')}`
-  // 		)
-
-  // 		socketRef.current.addEventListener('message', event => {
-  // 			const data = JSON.parse(event.data)
-  // 			setNotificationMess(prev => [data, ...prev])
-  // 		})
-  // 	}
-  // }, [])
 
   useEffect(() => {
     dispatch(fetchLogin()).then((res) => {

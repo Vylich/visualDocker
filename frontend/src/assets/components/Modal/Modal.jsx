@@ -1,27 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 
-import styles from './Modal.module.scss'
+import styles from "./Modal.module.scss";
 
-const Modal = ({isVisible = false, title, content, footer, onClose}) => {
-	const keydownHandler = ({ key }) => {
+const Modal = ({ isVisible = false, title, content, footer, onClose }) => {
+  const keydownHandler = ({ key }) => {
     switch (key) {
-      case 'Escape':
+      case "Escape":
         onClose();
         break;
       default:
     }
   };
 
-	useEffect(() => {
-    document.addEventListener('keydown', keydownHandler);
-    return () => document.removeEventListener('keydown', keydownHandler);
+  useEffect(() => {
+    document.addEventListener("keydown", keydownHandler);
+    return () => document.removeEventListener("keydown", keydownHandler);
   });
 
-
-
-	return !isVisible ? null : (
+  return !isVisible ? null : (
     <div className={styles.modal} onClick={onClose}>
-      <div className={styles.modal_dialog} onClick={e => e.stopPropagation()}>
+      <div className={styles.modal_dialog} onClick={(e) => e.stopPropagation()}>
         <div className={styles.modal_header}>
           <h3 className={styles.modal_title}>{title}</h3>
           <span className={styles.modal_close} onClick={onClose}>
@@ -31,10 +29,11 @@ const Modal = ({isVisible = false, title, content, footer, onClose}) => {
         <div className={styles.modal_body}>
           <div className={styles.modal_content}>{content}</div>
         </div>
-        {footer && <div className={styles.modal-footer}>{footer}</div>}
+        {footer && <div className={styles.modal - footer}>{footer}</div>}
       </div>
     </div>
   );
-}
+};
 
-export {Modal}
+export { Modal };
+
