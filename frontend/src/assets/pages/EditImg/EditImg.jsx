@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import styles from "./EditImg.module.scss";
 import Draggable from "react-draggable";
 import { Resizable } from "re-resizable";
@@ -7,7 +7,7 @@ import { Filters } from "@components";
 import useOnclickOutside from "react-cool-onclickoutside";
 import { v4 } from "uuid";
 
-const EditImg = ({ src, setIsFormat, setNewImg, setFile }) => {
+const EditImg = memo(({ src, setIsFormat, setNewImg, setFile }) => {
   const [orientation, setOrientation] = useState("vertical");
   const [bgColor, setBgColor] = useState("#ffffff");
   const [isTransform, setIsTransform] = useState(false);
@@ -140,9 +140,9 @@ const EditImg = ({ src, setIsFormat, setNewImg, setFile }) => {
     }
   }, [aspectRatio, isTransform, isFiltersOpen, canvasRef.current]);
 
-  const changeAspectRatio = (value) => {
+  const changeAspectRatio = useCallback((value) => {
     setAspectRatio(value);
-  };
+  }, []);
 
   const captureDiv = useCallback(() => {
     setIsTransform(false);
@@ -227,15 +227,15 @@ const EditImg = ({ src, setIsFormat, setNewImg, setFile }) => {
     },
   ];
 
-  const handleOrientationChange = (val) => {
+  const handleOrientationChange = useCallback((val) => {
     if (val !== "vertical") {
       setOrientation("horizontal");
     } else {
       setOrientation("vertical");
     }
-  };
+  }, []);
 
-  const checkFilter = (value, f) => {
+  const checkFilter = useCallback((value, f) => {
     console.log(value.replace(/\(.*?\)/g, ""));
     if (value === "none()") {
       setFilter([]);
@@ -257,15 +257,15 @@ const EditImg = ({ src, setIsFormat, setNewImg, setFile }) => {
         setIsSlider(true);
       }
     }
-  };
+  }, []);
 
-  const formatFilter = (filters) => {
+  const formatFilter = useCallback((filters) => {
     let res = "";
     if (filters.length) {
       res = filters.join(" ");
     }
     return res;
-  };
+  }, []);
 
   return (
     <div className={styles.root}>
@@ -444,6 +444,6 @@ const EditImg = ({ src, setIsFormat, setNewImg, setFile }) => {
       </div>
     </div>
   );
-};
+});
 
 export { EditImg };
