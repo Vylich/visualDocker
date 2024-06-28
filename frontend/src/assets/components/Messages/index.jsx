@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./Messages.module.scss";
@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 
 // import { removeReadMessage } from '../../../redux/slices/notification'
 
-const Messages = ({ id }) => {
+const Messages = memo(({ id }) => {
   const [isMessaging, setIsMessaging] = useState(false);
   const [isStartChat, setIsStartChat] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -38,7 +38,7 @@ const Messages = ({ id }) => {
 
   const socketRef = useRef();
 
-  const filterTalkers = (arrConvers) => {
+  const filterTalkers = useCallback((arrConvers) => {
     for (let i = 0; i < arrConvers.length; i++) {
       if (arrConvers[i].initiator.id !== id) {
         const obj = {
@@ -54,7 +54,7 @@ const Messages = ({ id }) => {
         setTalkers((prev) => [...prev, obj]);
       }
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (id) {
@@ -100,7 +100,7 @@ const Messages = ({ id }) => {
     }
   }, [searchValue]);
 
-  const sendMessage = (e) => {
+  const sendMessage = useCallback((e) => {
     e.preventDefault();
     const obj = {
       type: "chat_message",
@@ -109,9 +109,9 @@ const Messages = ({ id }) => {
     };
     socketRef.current.send(JSON.stringify(obj));
     setMessage("");
-  };
+  }, []);
 
-  const delDuplicate = (messages) => {
+  const delDuplicate = useCallback((messages) => {
     const result = messages;
     for (let i = 0; i < result.length; i++) {
       for (let j = i + 1; j < result.length; j++) {
@@ -132,9 +132,9 @@ const Messages = ({ id }) => {
       }
     }
     return result;
-  };
+  }, []);
 
-  const startChat = async (username) => {
+  const startChat = useCallback(async (username) => {
     const obj = {
       username: username,
     };
@@ -158,17 +158,17 @@ const Messages = ({ id }) => {
       setIdRoom(res.data.id);
       setHistory(delDuplicate(res.data.message_set));
     });
-  };
+  }, []);
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     setIsStartChat(false);
     setIdRoom(null);
     socketRef.current.close();
-  };
+  }, []);
 
-  const goUser = () => {
+  const goUser = useCallback(() => {
     navigate(`/profile/${userTalker.id}`);
-  };
+  }, []);
 
   useEffect(() => {
     if (isStartMessage !== "") {
@@ -191,16 +191,16 @@ const Messages = ({ id }) => {
               />
               <input
                 type="text"
-                onClick={() => {
+                onClick={useCallback(() => {
                   setIsMessaging(true);
-                }}
+                }, [])}
                 name="search"
                 placeholder="Поиск по имени или эл. адресу"
               />
             </div>
             <button
               className={styles.newMessage}
-              onClick={() => setIsMessaging(true)}
+              onClick={useCallback(() => setIsMessaging(true), [])}
             >
               <span>
                 <FontAwesomeIcon icon={faPenToSquare} />
@@ -212,11 +212,11 @@ const Messages = ({ id }) => {
                 talkers.map((talker, i) => (
                   <div
                     className={styles.talker}
-                    onClick={() => {
+                    onClick={useCallback(() => {
                       setIdReceiver(talker.user.id);
                       startChat(talker.user.username);
                       setUserTalker(talker.user);
-                    }}
+                    }, [])}
                     key={i}
                   >
                     <UserMessage
@@ -253,11 +253,14 @@ const Messages = ({ id }) => {
               />
               <input
                 type="text"
-                onClick={() => setIsMessaging(true)}
+                onClick={useCallback(() => setIsMessaging(true), [])}
                 name="search"
                 autoFocus
                 value={searchValue}
-                onChange={(e) => setSearchValue(e.target.value)}
+                onChange={useCallback(
+                  (e) => setSearchValue(e.target.value),
+                  [],
+                )}
                 placeholder="Поиск по имени или эл. адресу"
               />
             </div>
@@ -267,11 +270,11 @@ const Messages = ({ id }) => {
                   <button
                     key={i}
                     className={styles.linkUser}
-                    onClick={() => {
+                    onClick={useCallback(() => {
                       setSearchValue(user.username);
                       startChat(user.username);
                       setIdReceiver(user.id);
-                    }}
+                    }, [])}
                   >
                     <UserInfo
                       isSmall
@@ -321,7 +324,7 @@ const Messages = ({ id }) => {
                   value={message}
                   required
                   placeholder="Введите сообщение"
-                  onChange={(e) => setMessage(e.target.value)}
+                  onChange={useCallback((e) => setMessage(e.target.value), [])}
                 />
               </div>
               <button disabled={!message} type="submit">
@@ -333,6 +336,6 @@ const Messages = ({ id }) => {
       </div>
     </div>
   );
-};
+});
 
 export { Messages };

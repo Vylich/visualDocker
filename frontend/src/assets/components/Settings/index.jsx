@@ -3,17 +3,17 @@ import { UserInfo } from "@components";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchLogin, logout } from "../../../redux/slices/auth";
-import { useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import { clearMessages } from "../../../redux/slices/notification";
 import { removePostsState, updatePagePosts } from "../../../redux/slices/posts";
 import { jwtDecode } from "jwt-decode";
 
-const Settings = ({ user, handleSettings }) => {
+const Settings = memo(({ user, handleSettings }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [usersActive, setUsersActive] = useState([]);
 
-  const onClickLogout = () => {
+  const onClickLogout = useCallback(() => {
     if (window.confirm("Вы правда хотите выйти?")) {
       dispatch(logout());
       navigate("/login");
@@ -33,9 +33,9 @@ const Settings = ({ user, handleSettings }) => {
       handleSettings();
       dispatch(clearMessages());
     }
-  };
+  }, []);
 
-  const onSubmit = (username) => {
+  const onSubmit = useCallback((username) => {
     const obj = usersActive.find((ob) => ob.username === username);
     const refresh = obj.refresh;
     if (refresh) {
@@ -57,7 +57,7 @@ const Settings = ({ user, handleSettings }) => {
         navigate("/home");
       }
     }
-  };
+  }, []);
 
   useEffect(() => {
     const arrUsers = window.localStorage.getItem("users");
@@ -89,7 +89,7 @@ const Settings = ({ user, handleSettings }) => {
                 <button
                   key={i}
                   className={styles.link}
-                  onClick={() => onSubmit(item.username)}
+                  onClick={useCallback(() => onSubmit(item.username), [])}
                   style={{ display: item.username === user.username && "none" }}
                 >
                   <UserInfo
@@ -116,6 +116,6 @@ const Settings = ({ user, handleSettings }) => {
       </div>
     </div>
   );
-};
+});
 
 export { Settings };

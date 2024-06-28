@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { memo, useCallback, useEffect } from "react";
 
 import styles from "./Modal.module.scss";
 
-const Modal = ({ isVisible = false, title, content, footer, onClose }) => {
+const Modal = memo(({ isVisible = false, title, content, footer, onClose }) => {
   const keydownHandler = ({ key }) => {
     switch (key) {
       case "Escape":
@@ -19,7 +19,10 @@ const Modal = ({ isVisible = false, title, content, footer, onClose }) => {
 
   return !isVisible ? null : (
     <div className={styles.modal} onClick={onClose}>
-      <div className={styles.modal_dialog} onClick={(e) => e.stopPropagation()}>
+      <div
+        className={styles.modal_dialog}
+        onClick={useCallback((e) => e.stopPropagation(), [])}
+      >
         <div className={styles.modal_header}>
           <h3 className={styles.modal_title}>{title}</h3>
           <span className={styles.modal_close} onClick={onClose}>
@@ -33,7 +36,6 @@ const Modal = ({ isVisible = false, title, content, footer, onClose }) => {
       </div>
     </div>
   );
-};
+});
 
 export { Modal };
-

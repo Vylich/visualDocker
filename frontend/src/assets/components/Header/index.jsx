@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo, useCallback } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useOnclickOutside from "react-cool-onclickoutside";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,7 +31,7 @@ import {
 } from "@components";
 import { ThemeMode } from "../ThemeMode/ThemeMode";
 
-function Header() {
+const Header = memo(() => {
   const [searchedText, setSearchedText] = useState("");
   const [itemsSearch, setItemsSearch] = useState([]);
   const [settingsOpened, setSettingsOpened] = useState(false);
@@ -61,42 +61,42 @@ function Header() {
   const isPostsLoading = posts.status === "loading";
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const hideNavOnClick = () => {
+  const hideNavOnClick = useCallback(() => {
     if (window.innerWidth < 1024) {
       setIsNavVisible(false);
     }
     setIsNavVisible(true);
-  };
+  }, []);
 
   useEffect(() => {
     dispatch(fetchLogin());
   }, []);
 
-  const handleSettings = () => {
+  const handleSettings = useCallback(() => {
     setSettingsOpened(!settingsOpened);
-  };
+  }, []);
 
-  const handleMessages = () => {
+  const handleMessages = useCallback(() => {
     setMessagesOpened(!messagesOpened);
-  };
+  }, []);
 
-  const handleNotifications = () => {
+  const handleNotifications = useCallback(() => {
     setNotificationsOpened(!notificationsOpened);
-  };
+  }, []);
 
-  const handleSearch = () => {
+  const handleSearch = useCallback(() => {
     setSearchOpened(true);
     hideNavOnClick();
     setSearchedText("");
     setFoundItems(null);
-  };
+  }, []);
 
-  const onClickSearch = (obj) => {
+  const onClickSearch = useCallback((obj) => {
     navigate(`/search/${obj}`);
     setSearchOpened(false);
-  };
+  }, []);
 
-  const onSubmit = (e) => {
+  const onSubmit = useCallback((e) => {
     e.preventDefault();
     const uniqueItems = new Set(itemsSearch);
     if (searchedText !== "") {
@@ -109,13 +109,13 @@ function Header() {
 
     setItemsSearch([...uniqueItems, searchedText]);
     setSearchOpened(false);
-  };
+  }, []);
 
-  const onDelete = (obj) => {
+  const onDelete = useCallback((obj) => {
     const filteredItems = itemsSearch.filter((item) => item !== obj.obj);
     setItemsSearch(filteredItems);
     localStorage.removeItem("searchedItems");
-  };
+  }, []);
 
   useEffect(() => {
     const storageSearchedItems = JSON.parse(
@@ -130,7 +130,7 @@ function Header() {
     localStorage.setItem("searchedItems", JSON.stringify(itemsSearch));
   }, [itemsSearch]);
 
-  const renderItems = () => {
+  const renderItems = useCallback(() => {
     const filtredItems = posts.items.filter((item) =>
       item.name.toLowerCase().includes(searchedText.toLowerCase()),
     );
@@ -144,9 +144,9 @@ function Header() {
         />
       ),
     );
-  };
+  }, []);
 
-  const removeDuplicatesByName = (data) => {
+  const removeDuplicatesByName = useCallback((data) => {
     const uniqueNames = {};
     const filteredPostTag = data.post_tag.filter((obj) => {
       if (!uniqueNames[obj.name]) {
@@ -156,7 +156,7 @@ function Header() {
       return false;
     });
     return { post_tag: filteredPostTag, user: data.user };
-  };
+  }, []);
 
   useEffect(() => {
     if (searchedText) {
@@ -167,7 +167,7 @@ function Header() {
     }
   }, [searchedText]);
 
-  const navigateToSearchedItems = (item) => {
+  const navigateToSearchedItems = useCallback((item) => {
     const uniqueItems = new Set(itemsSearch);
 
     navigate(`/search/${item}`);
@@ -179,7 +179,7 @@ function Header() {
     }
 
     setItemsSearch((prev) => [...prev, item]);
-  };
+  }, []);
 
   useEffect(() => {
     if (isStartMessage !== "") {
@@ -192,10 +192,10 @@ function Header() {
       {searchOpened && (
         <div
           className={styles.overlay}
-          onClick={() => {
+          onClick={useCallback(() => {
             setSearchOpened(false);
             setFoundItems(null);
-          }}
+          }, [])}
         ></div>
       )}
       <header className={styles.header}>
@@ -283,15 +283,18 @@ function Header() {
               className={styles.iconSearch}
               icon={faMagnifyingGlass}
             />
-            <form onSubmit={(e) => onSubmit(e)}>
+            <form onSubmit={useCallback((e) => onSubmit(e), [])}>
               <input
                 type="text"
                 name="search"
                 autoComplete="off"
-                onClick={(e) => handleSearch(e)}
+                onClick={useCallback((e) => handleSearch(e), [])}
                 placeholder="Найти"
                 value={searchedText}
-                onChange={(e) => setSearchedText(e.target.value)}
+                onChange={useCallback(
+                  (e) => setSearchedText(e.target.value),
+                  [],
+                )}
               />
             </form>
 
@@ -312,10 +315,10 @@ function Header() {
                 />
                 <button
                   className={styles.clearBtn}
-                  onClick={() => {
+                  onClick={useCallback(() => {
                     setSearchedText("");
                     setFoundItems(null);
-                  }}
+                  }, [])}
                 >
                   <FontAwesomeIcon icon={faXmark} />
                 </button>
@@ -385,6 +388,6 @@ function Header() {
       </header>
     </div>
   );
-}
+});
 
 export { Header };

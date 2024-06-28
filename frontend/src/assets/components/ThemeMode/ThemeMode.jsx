@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo, useCallback } from "react";
 import styles from "./ThemeMode.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 
-function ThemeMode() {
+const ThemeMode = memo(() => {
   const [theme, setTheme] = useState("light");
 
-  const handleToggle = () => {
+  const handleToggle = useCallback(() => {
     localStorage.setItem("theme", theme === "light" ? "dark" : "light");
     setTheme(theme === "light" ? "dark" : "light");
-  };
+  }, []);
 
   useEffect(() => {
     if (localStorage.getItem("theme") === null) {
@@ -76,7 +76,6 @@ function ThemeMode() {
       </button>
     </div>
   );
-}
+});
 
 export { ThemeMode };
-

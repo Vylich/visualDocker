@@ -1,33 +1,33 @@
-import React, { useState } from "react";
+import React, { memo, useCallback, useState } from "react";
 
 import { CommentsBlock } from "@components";
 
 import styles from "./CommentsList.module.scss";
 
-const CommentsList = ({ comments, onSubmitChild, onDeleteComment }) => {
+const CommentsList = memo(({ comments, onSubmitChild, onDeleteComment }) => {
   const [arr, setArr] = useState(null);
   const [showMoreCount, setShowMoreCount] = useState(5);
   const [showBtnMore, setShowBtnMore] = useState(false);
 
-  const getChildrensRoot = (comments, rootEl) => {
+  const getChildrensRoot = useCallback((comments, rootEl) => {
     const arrChildComments = [];
     const firstLvl = comments.filter(
       (el) => Number(el.parent) === Number(rootEl.id),
     );
     const result = arrChildComments.push(firstLvl);
     return result;
-  };
+  }, []);
 
-  const getChildren = (obj, childrenArr) => {
+  const getChildren = useCallback((obj, childrenArr) => {
     if (obj.children && obj.children.length > 0) {
       for (let i = 0; i < obj.children.length; i++) {
         childrenArr.push(obj.children[i]);
         getChildren(obj.children[i], childrenArr);
       }
     }
-  };
+  }, []);
 
-  const extractChildren = (obj) => {
+  const extractChildren = useCallback((obj) => {
     const childrenArr = [];
     getChildren(obj, childrenArr);
 
@@ -48,9 +48,9 @@ const CommentsList = ({ comments, onSubmitChild, onDeleteComment }) => {
           paddingFromBtn={item.children.length > 0}
         />
       ));
-  };
+  }, []);
 
-  const handleToggleReplies = (clickedComment) => {
+  const handleToggleReplies = useCallback((clickedComment) => {
     if (arr && arr.id === clickedComment.id) {
       setArr(null);
       setShowMoreCount(5);
@@ -60,9 +60,9 @@ const CommentsList = ({ comments, onSubmitChild, onDeleteComment }) => {
       setShowMoreCount(5);
       setShowBtnMore(true);
     }
-  };
+  }, []);
 
-  const handleShowMore = (arr) => {
+  const handleShowMore = useCallback((arr) => {
     if (arr < Number(showMoreCount) + 5) {
       setShowMoreCount(0);
       setShowBtnMore(false);
@@ -70,7 +70,7 @@ const CommentsList = ({ comments, onSubmitChild, onDeleteComment }) => {
     } else {
       setShowMoreCount((prevCount) => prevCount + 5);
     }
-  };
+  }, []);
 
   return (
     <>
@@ -100,7 +100,7 @@ const CommentsList = ({ comments, onSubmitChild, onDeleteComment }) => {
               <div className={styles.btnsViewMore}>
                 <button
                   className={styles.btnViewMore}
-                  onClick={() => handleToggleReplies(com)}
+                  onClick={useCallback(() => handleToggleReplies(com), [])}
                 >
                   {arr && arr.id === com.id ? "Скрыть ответы" : "Ответы"}
                 </button>
@@ -110,9 +110,10 @@ const CommentsList = ({ comments, onSubmitChild, onDeleteComment }) => {
                   arr.id === com.id && (
                     <button
                       className={styles.btnViewMore}
-                      onClick={() =>
-                        handleShowMore(extractChildren(com).length + 5)
-                      }
+                      onClick={useCallback(
+                        () => handleShowMore(extractChildren(com).length + 5),
+                        [],
+                      )}
                     >
                       {Number(showMoreCount) > extractChildren(com).length
                         ? "Скрыть"
@@ -126,6 +127,6 @@ const CommentsList = ({ comments, onSubmitChild, onDeleteComment }) => {
       ))}
     </>
   );
-};
+});
 
 export { CommentsList };

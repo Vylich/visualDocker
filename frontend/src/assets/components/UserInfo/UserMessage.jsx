@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import styles from "./userMessage.module.scss";
 import avatarDefault from "../../../img/avatar-default.svg";
 
-const UserMessage = ({ username, avatar, text, isUnread }) => {
+const UserMessage = memo(({ username, avatar, text, isUnread }) => {
   return (
     <div className={styles.root}>
       <img
@@ -17,6 +17,6 @@ const UserMessage = ({ username, avatar, text, isUnread }) => {
       {isUnread && <span className={styles.notif}></span>}
     </div>
   );
-};
+});
 
 export { UserMessage };
