@@ -8,10 +8,6 @@ const Buffer = memo(() => {
   const [newImg, setNewImg] = useState(null);
   const [file, setFile] = useState(null);
 
-  useEffect(() => {
-    console.log(file);
-  }, [file]);
-
   const src = useSelector((state) => state.img.img);
   console.log(src);
   return (

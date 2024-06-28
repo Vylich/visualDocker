@@ -54,7 +54,7 @@ const Columns = memo(({ posts }) => {
     (a, b) => new Date(b.created_date) - new Date(a.created_date),
   );
 
-  const renderComponents = () => {
+  const renderComponents = useCallback(() => {
     const components = sortedPosts.map((obj, i) => (
       <Post
         key={i}
@@ -78,7 +78,7 @@ const Columns = memo(({ posts }) => {
       ),
     );
     return distributedComponents;
-  };
+  }, []);
 
   return <>{renderComponents()}</>;
 });
@@ -132,7 +132,7 @@ const Home = memo(() => {
 
   const [nonePosts, setNonePosts] = useState(false);
 
-  const getNextPage = (link) => {
+  const getNextPage = useCallback((link) => {
     if (link) {
       const queryString = link.split("?")[1];
       if (queryString) {
@@ -141,7 +141,7 @@ const Home = memo(() => {
         return "";
       }
     }
-  };
+  }, []);
 
   const { ref, inView, entry } = useInView({
     threshold: 0,

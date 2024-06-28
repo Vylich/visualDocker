@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./UserProfile.module.scss";
@@ -27,7 +27,7 @@ import {
 import { Columns } from "@pages";
 import { openMessages } from "../../../redux/slices/notification";
 
-function UserProfile() {
+const UserProfile = memo(() => {
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
   const posts = useSelector((state) => state.posts.userPosts);
@@ -109,7 +109,7 @@ function UserProfile() {
 
   const isPostsLoading = posts.status === "loading";
 
-  const handleSubscribe = async () => {
+  const handleSubscribe = useCallback(async () => {
     try {
       const params = {
         author: Number(id),
@@ -127,7 +127,7 @@ function UserProfile() {
       console.warn(err);
       alert("Bad create comment");
     }
-  };
+  }, []);
 
   const messageUser = () => {};
 
@@ -182,6 +182,6 @@ function UserProfile() {
       </div>
     </div>
   );
-}
+});
 
 export { UserProfile };
