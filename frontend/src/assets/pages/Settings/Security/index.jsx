@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { memo } from "react";
 
-const Security = () => {
-	return (
-		<div>Security</div>
-	)
-}
+const Security = memo(() => {
+  return <div>Security</div>;
+});
 
-export {Security}
+export { Security };
+

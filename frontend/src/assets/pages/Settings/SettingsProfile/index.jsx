@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { memo, useCallback, useEffect } from "react";
 import styles from "./SettingsProfile.module.scss";
 
 import {
@@ -27,7 +27,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "../../../../axios";
 import { fetchLogin } from "../../../../redux/slices/auth";
 
-const SettingsProfile = () => {
+const SettingsProfile = memo(() => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const [isShow, setIsShow] = useState(false);
@@ -50,7 +50,7 @@ const SettingsProfile = () => {
   const [birthday, setBirthday] = useState("");
   const [gender, setGender] = useState("");
 
-  const onSubmit = () => {
+  const onSubmit = useCallback(() => {
     const formData = new FormData();
     if (image) {
       formData.append("avatar", image);
@@ -100,44 +100,22 @@ const SettingsProfile = () => {
     users.push(obj);
     window.localStorage.setItem("users", JSON.stringify(users));
     dispatch(fetchLogin());
-  };
+  }, []);
 
-  //	const onSubmits = async () => {
-  //	try {
-  //	setLoading(true);
-  //const formData = new FormData();
-  //const arrTags = tags.split(",").map((tag) => tag.trim());
-  //		formData.append("image", image);
-  //	formData.append("name", title);
-  //	arrTags.forEach((Tag) => {
-  //		formData.append("tags", Tag);
-  //	});
-  //	formData.append("text", text);
-  //	formData.append("author", userdata.username);
-  //	const { data } = isEditing
-  //		? await axios.patch(`/posts/${id}/`, formData)
-  //		: await axios.post("/posts/", formData);
-  //
-  //		navigate(`/posts/${data.slug}`);
-  //	} catch (err) {
-  //		console.warn(err);
-  //		alert("Не удалось создать пост");
-  //	}
-  //	};
-  const onReset = () => {
+  const onReset = useCallback(() => {
     dispatch(fetchLogin());
-  };
+  }, []);
 
-  const hideNavOnClick = () => {
+  const hideNavOnClick = useCallback(() => {
     if (width < 1024) {
       setIsNavVisibleOnClick(false);
     }
     if (width > 1024) {
       setIsNavVisibleOnClick(true);
     }
-  };
+  }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (width < 1024) {
       setIsNavVisible(true);
       navigate("/settings");
@@ -148,10 +126,10 @@ const SettingsProfile = () => {
     }
   }, [width]);
 
-  React.useEffect(() => {
-    const handleResize = (event) => {
+  useEffect(() => {
+    const handleResize = useCallback((event) => {
       setWidth(event.target.innerWidth);
-    };
+    }, []);
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -259,6 +237,6 @@ const SettingsProfile = () => {
       </div>
     </div>
   );
-};
+});
 
 export { SettingsProfile };

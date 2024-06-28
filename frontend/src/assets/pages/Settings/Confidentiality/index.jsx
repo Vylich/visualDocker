@@ -1,10 +1,9 @@
-import React from 'react'
-import styles from './Confidentiality.module.scss'
+import React, { memo } from "react";
+import styles from "./Confidentiality.module.scss";
 
-const Confidentiality = () => {
-	return (
-		<div>Confidentiality</div>
-	)
-}
+const Confidentiality = memo(() => {
+  return <div>Confidentiality</div>;
+});
 
-export {Confidentiality}
+export { Confidentiality };
+
