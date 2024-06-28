@@ -1,0 +1,276 @@
+@import '../../scss/utils/mixins';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 78px);
+}
+
+.rootWrap {
+  display: flex;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 12px;
+  padding-left: 30px;
+  align-items: center;
+  border-top: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+  height: 81px;
+}
+
+.header h2 {
+  margin: 0;
+}
+
+.header button {
+  padding: 0 16px;
+  border-radius: 30px;
+  height: 48px;
+  border: none;
+  outline: none;
+  background-color: #7a4ad8;
+  font-size: 16px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+@media (hover: hover) {
+  .header button:hover {
+    opacity: 0.8;
+  }
+}
+
+
+.canvasWrap {
+  flex: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eeeeee;
+  overflow: hidden;
+  position: relative;
+
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.settings {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border-left: 1px solid #e1e1e1;
+  gap: 20px;
+}
+
+.imgBlock {
+  width: 100%;
+  height: 100%;
+
+}
+
+.border {
+  position: relative;
+  max-width: 350px;
+  min-width: 350px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px dashed black;
+    background-color: transparent;
+    pointer-events: none;
+    z-index: 10;
+  }
+}
+
+.canvas {
+  overflow: hidden;
+  object-fit: cover;
+  border: 1px solid;
+
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    position: relative;
+    resize: both;
+    pointer-events: none;
+    transition: all 0.3s;
+  }
+}
+
+.decoratorRound {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  border: 1px solid red;
+  z-index: 10;
+  pointer-events: none;
+
+}
+
+.decoratorSquircle {
+  position: absolute;
+  width: 16px;
+  height: 8px;
+  background-color: #ffffff;
+  border-radius: 30%;
+  border: 1px solid red;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.decoratorsWrapp {
+  .decoratorRound:nth-child(2) {
+    top: -2px;
+    left: -2px;
+  }
+
+  .decoratorRound:nth-child(3) {
+    top: -2px;
+    right: -2px;
+  }
+
+  .decoratorRound:nth-child(4) {
+    bottom: -2px;
+    left: -2px;
+  }
+
+  .decoratorRound:nth-child(1) {
+    bottom: -2px;
+    right: -2px;
+  }
+
+  .decoratorSquircle:nth-child(5) {
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .decoratorSquircle:nth-child(6) {
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .decoratorSquircle:nth-child(7) {
+    top: 50%;
+    left: -8px;
+    transform: translateY(-50%) rotate(90deg);
+  }
+
+  .decoratorSquircle:nth-child(8) {
+    top: 50%;
+    right: -8px;
+    transform: translateY(-50%) rotate(90deg);
+  }
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  h3 {
+    margin: 0;
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+
+  button {
+    height: 40px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+
+    @include vp-1023 {
+      font-size: 14px;
+    }
+
+  }
+}
+
+.active {
+  background-color: #7a4ad8;
+  color: #ffffff;
+}
+
+.btnFilters {
+  height: 40px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+
+  @include vp-1023 {
+    font-size: 14px;
+  }
+
+}
+
+.aspectRatio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+
+  button {
+    height: 40px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+
+    @include vp-1023 {
+      font-size: 14px;
+    }
+
+  }
+}
+
+input[type="color"] {
+  height: 40px;
+  width: 80px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
+  border-radius: 30px;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}

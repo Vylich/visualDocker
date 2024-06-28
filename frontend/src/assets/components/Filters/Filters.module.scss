@@ -1,0 +1,89 @@
+@import '../../scss/utils/mixins';
+
+.root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  padding: 0 30px;
+  border-left: 1px solid #e1e1e1;
+}
+
+.filtersWrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.filter {
+  width: 115px;
+  height: 120px;
+  border-radius: 10px;
+  border: 3px solid;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  span {
+    font-size: 12px;
+    font-weight: 600;
+    width: 100%;
+    background-color: var(--bg);
+    color: var(--text);
+    padding: 3px;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  svg {
+    height: 24px;
+    width: auto;
+  }
+
+  @include hover {
+    background-color: var(--hover-link);
+  }
+}
+
+.header {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px
+}
+
+.filterDepth {
+  width: 100%;
+}

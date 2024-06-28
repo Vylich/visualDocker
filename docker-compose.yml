@@ -19,14 +19,14 @@ services:
       start_period: 30s
     networks:
       - visual
-  db-backup:
-    image: localhost:5000/cron
-    environment:
-      PGPASSWORD: w^wHcf+M9HtN@r
-    volumes:
-      - './backup:/backup'
-    networks:
-      - visual
+  # db-backup:
+  #   image: localhost:5000/cron
+  #   environment:
+  #     PGPASSWORD: w^wHcf+M9HtN@r
+  #   volumes:
+  #     - './backup:/backup'
+  #   networks:
+  #     - visual
 
 
   frontend:

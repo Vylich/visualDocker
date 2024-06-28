@@ -31,6 +31,8 @@ function UserInfo({
   userId,
   posts,
   isContinue,
+  url,
+  description,
 }) {
   const [isFollow, setIsFollow] = useState(false);
   const [isMe, setIsMe] = useState(false);
@@ -146,10 +148,14 @@ function UserInfo({
             <span className={styles.userName}>@{username}</span>
           </Link>
         ) : (
-          <>
+          <div className={styles.userData}>
             <span className={styles.userName}>@{username}</span>
             <span className={styles.fullname}>{fullname}</span>
-          </>
+            <Link to={url} target="_blank" className={styles.userLink}>
+              {url}
+            </Link>
+            <span className={styles.userDescription}>{description}</span>
+          </div>
         )}
         {posts && (
           <div className={styles.additionals}>

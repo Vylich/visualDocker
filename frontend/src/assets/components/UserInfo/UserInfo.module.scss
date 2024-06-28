@@ -1,190 +1,202 @@
 @import '../../scss/utils/mixins';
 
 .root {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-	img {
-		width: 300px;
-		height: 300px;
-		object-fit: cover;
-		border-radius: 50%;
-		overflow: hidden;
-		flex-shrink: 0;
+  img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
 
-		@include vp-1023 {
-			width: 150px;
-			height: 150px;
-		}
-	}
+    @include vp-1023 {
+      width: 150px;
+      height: 150px;
+    }
+  }
 }
 
 .buttonList {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .rootContinue {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	gap: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
 
-	img {
-		width: 30px;
-		height: 30px;
-		border-radius: 50%;
-	}
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
 
-	.userName {
-		font-size: 16px;
-	}
+  .userName {
+    font-size: 16px;
+  }
 
-	.userDetails {
-		margin: 0;
-	}
+  .userDetails {
+    margin: 0;
+  }
 }
 
 .rootSmall {
-	display: flex;
-	flex-direction: row;
-	align-items: start;
-	gap: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  gap: 10px;
 
-	img {
-		width: 60px;
-		height: 60px;
-		border-radius: 50%;
-	}
+  img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
 
-	.email {
-		padding: 0;
-		color: #5f5f5f;
-	}
+  .email {
+    padding: 0;
+    color: #5f5f5f;
+  }
 
-	.userName {
-		align-self: start;
-		padding: 0;
-	}
+  .userName {
+    align-self: start;
+    padding: 0;
+  }
 
-	.userDetails {
-		height: 60px;
-		margin-top: 0;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		align-items: flex-start;
-	}
+  .userDetails {
+    height: 60px;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
 
-	a {
-		height: auto;
-		padding: 0 !important;
-	}
+  a {
+    height: auto;
+    padding: 0 !important;
+  }
 }
 
 .rootFull {
-	flex-direction: row;
-	align-items: center;
-	gap: 20px;
-	padding: 15px;
-	width: 100%;
-	border-bottom: 1px solid #00000023;
-	position: relative;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  padding: 15px;
+  width: 100%;
+  border-bottom: 1px solid #00000023;
+  position: relative;
 
-	@include vp-1023 {
-		padding: 8px 20px;
-	}
+  @include vp-1023 {
+    padding: 8px 20px;
+  }
 
-	.additionals {
-		display: none;
-	}
+  .additionals {
+    display: none;
+  }
 
-	.userName {
-		font-size: 16px;
-		color: var(--text)
-	}
+  .userName {
+    font-size: 16px;
+    color: var(--text)
+  }
 
-	.userDetails {
-		margin-top: 0;
-	}
+  .userDetails {
+    margin-top: 0;
+  }
 
-	img {
-		width: 50px;
-		height: 50px;
-		border-radius: 50%;
-	}
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
 }
 
 .userName {
-	font-size: 40px;
-	font-weight: 600;
+  font-size: 40px;
+  font-weight: 600;
 }
 
 .userDetails {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
 
-	@include vp-1023 {
-		margin-top: 15px;
-	}
+  @include vp-1023 {
+    margin-top: 15px;
+  }
 
-	a {
-		text-decoration: none;
-		color: #000000;
-	}
+  a {
+    text-decoration: none;
+    color: #000000;
+  }
 }
 
 .additionals {
-	display: flex;
-	gap: 10px;
-	margin-top: 20px;
-	font-size: 20px;
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  font-size: 20px;
 
-	@include vp-1023 {
-		gap: 15px;
-		margin-top: 15px;
-		font-weight: 600;
-		font-size: 14px;
-	}
+  @include vp-1023 {
+    gap: 15px;
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 14px;
+  }
 }
 
 .manageBtns {
-	position: absolute;
-	right: 20px;
-	bottom: 5px;
-	display: flex;
-	flex-direction: column;
-	gap: 5px;
-	align-items: end;
+  position: absolute;
+  right: 20px;
+  bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: end;
 
-	@include vp-1023 {
-		bottom: 0;
-	}
+  @include vp-1023 {
+    bottom: 0;
+  }
 }
 
 .btnSub {
-	position: absolute;
-	right: 20px;
-	bottom: 20px;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
 }
 
 .btnManage {
-	a,
-	button {
-		text-decoration: none;
-		color: #ffffff;
-		background-color: #7a4ad8;
-		outline: none;
-		border: none;
-		padding: 5px 10px;
-		border-radius: 30px;
-		cursor: pointer;
-	}
+
+  a,
+  button {
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #7a4ad8;
+    outline: none;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 30px;
+    cursor: pointer;
+  }
 }
 
 .fullname {
-	font-size: 16px;
-	font-weight: 600;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.userLink {
+  font-size: 14px;
+}
+
+.userData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }

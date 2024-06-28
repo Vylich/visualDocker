@@ -1,445 +1,478 @@
 @import '../../scss/utils/mixins';
-.root {
-	display: flex;
-	flex-direction: column;
 
-	@include vp-1023 {
-		width: 100%;
-	}
+.root {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: #ffffff;
+
+  @include vp-1023 {
+    width: 100%;
+  }
 }
 
 .error {
-	color: red;
-	position: absolute;
-	bottom: -20px;
-	left: 10px;
+  color: red;
+  position: absolute;
+  bottom: -20px;
+  left: 10px;
 }
 
 .slide {
-	height: 100%;
-	img {
-		border-radius: 30px;
-	}
+  height: 100%;
+
+  img {
+    border-radius: 30px;
+  }
 }
 
 .slideVideo {
-	height: 100%;
-	padding-bottom: 35px;
+  height: 100%;
+  padding-bottom: 35px;
 }
 
 .sliderWrap {
-	max-height: 600px;
-	height: min-content;
+  max-height: 600px;
+  height: min-content;
 }
 
 .wrap {
-	align-self: center;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	width: 100%;
+  align-self: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
 
-	@include vp-1023 {
-		flex-direction: column;
-		padding: 0 20px 110px;
-	}
+  @include vp-1023 {
+    flex-direction: column;
+    padding: 0 20px 110px;
+  }
 }
 
 .headerAddPost {
-	display: flex;
-	justify-content: space-between;
-	padding-right: 12px;
-	padding-left: 30px;
-	align-items: center;
-	border-top: 1px solid #e1e1e1;
-	border-bottom: 1px solid #e1e1e1;
-	height: 81px;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 12px;
+  padding-left: 30px;
+  align-items: center;
+  border-top: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+  height: 81px;
 
 
-	h2 {
-		margin: 0;
-	}
+  h2 {
+    margin: 0;
+  }
 
-	button {
-		padding: 0 16px;
-		border-radius: 30px;
-		height: 48px;
-		border: none;
-		outline: none;
-		background-color: #7a4ad8;
-		font-size: 16px;
-		color: #ffffff;
-		cursor: pointer;
-		transition: all 0.3s;
+  button {
+    padding: 0 16px;
+    border-radius: 30px;
+    height: 48px;
+    border: none;
+    outline: none;
+    background-color: #7a4ad8;
+    font-size: 16px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s;
 
-		@include hover {
-			opacity: 0.8;
-		}
-	}
+    @include hover {
+      opacity: 0.8;
+    }
+  }
 }
 
 .imageBlockWrap {
-	margin-bottom: 30px;
-	position: relative;
+  margin-bottom: 30px;
+  position: relative;
 }
 
 .imageBlock {
-	width: 350px;
-	height: auto;
-	max-height: 600px;
-	border-bottom: 1px solid #e1e1e1;
-	position: relative;
-	overflow: hidden;
-	border: 1px dashed var(--text);
-	border-radius: 30px;
-	align-items: stretch;
+  width: 350px;
+  height: auto;
+  max-height: 600px;
+  border-bottom: 1px solid #e1e1e1;
+  position: relative;
+  overflow: hidden;
+  border: 1px dashed var(--text);
+  border-radius: 30px;
+  align-items: stretch;
 
-	@include vp-1023 {
-		width: 100%;
-	}
+  @include vp-1023 {
+    width: 100%;
+  }
 
-	img {
-		top: 0;
-		left: 0;
-		background-color: #ffffff;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
+  img {
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .buttonImageDel {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	border: 0;
-	height: 40px;
-	z-index: 1000;
-	background-color: #c2c2c28e;
-	cursor: pointer;
-	transition: all 0.3s;
-	font-weight: 600;
-	backdrop-filter: blur(5px);
-	border-bottom-right-radius: 30px;
-	border-bottom-left-radius: 30px;
-	@include hover-focus {
-		background-color: #c2c2c2b9;
-	}
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  border: 0;
+  height: 40px;
+  z-index: 2;
+  background-color: #c2c2c28e;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 600;
+  backdrop-filter: blur(5px);
+  border-bottom-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+
+  @include hover-focus {
+    background-color: #c2c2c2b9;
+  }
 }
 
 .buttonAddMore {
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 60px;
-	border: 0;
-	height: 60px;
-	z-index: 1000;
-	background-color: #c2c2c28e;
-	cursor: pointer;
-	transition: all 0.3s;
-	font-weight: 600;
-	backdrop-filter: blur(5px);
-	border-bottom-left-radius: 30px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  border: 0;
+  height: 60px;
+  z-index: 2;
+  background-color: #c2c2c28e;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 600;
+  backdrop-filter: blur(5px);
+  border-bottom-left-radius: 30px;
 
-	svg {
-		width: 30px;
-		height: 30px;
-		color: #7a4ad8;
-	}
-	@include hover-focus {
-		background-color: #c2c2c2b9;
-	}
+  svg {
+    width: 30px;
+    height: 30px;
+    color: #7a4ad8;
+  }
+
+  @include hover-focus {
+    background-color: #c2c2c2b9;
+  }
+}
+
+.buttonEditImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  border: 0;
+  height: 60px;
+  z-index: 2;
+  background-color: #c2c2c28e;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 600;
+  backdrop-filter: blur(5px);
+  border-bottom-right-radius: 30px;
+
+  svg {
+    width: 30px;
+    height: 30px;
+    color: #7a4ad8;
+  }
+
+  @include hover-focus {
+    background-color: #c2c2c2b9;
+  }
 }
 
 .buttonImage {
-	width: 100%;
-	height: 450px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	position: relative;
-	cursor: pointer;
-	border: 0;
+  width: 100%;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  border: 0;
 
-	background-color: var(--image-add);
-	transition: all 0.3s;
+  background-color: var(--image-add);
+  transition: all 0.3s;
 
-	@include hover {
-		opacity: 0.8;
-	}
+  @include hover {
+    opacity: 0.8;
+  }
 
-	span, svg {
-		color: var(--text);
-	}
+  span,
+  svg {
+    color: var(--text);
+  }
 
-	svg {
-		height: 40px;
-	}
+  svg {
+    height: 40px;
+  }
 
-	span:nth-child(2) {
-		margin-top: 30px;
-		font-size: 18px;
-	}
+  span:nth-child(2) {
+    margin-top: 30px;
+    font-size: 18px;
+  }
 
-	span:nth-child(3) {
-		position: absolute;
-		font-size: 14px;
-		bottom: 40px;
-	}
+  span:nth-child(3) {
+    position: absolute;
+    font-size: 14px;
+    bottom: 40px;
+  }
 }
 
 .fileWrapper {
-	margin-top: 20px;
-	margin-bottom: 16px;
-	margin-right: 48px;
-	position: relative;
+  margin-top: 20px;
+  margin-bottom: 16px;
+  margin-right: 48px;
+  position: relative;
 
-	@include vp-1023 {
-		margin-right: 0;
-	}
+  @include vp-1023 {
+    margin-right: 0;
+  }
 }
 
 .buttonLink {
-	width: 100%;
-	height: 40px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-decoration: none;
-	border-radius: 30px;
-	background-color: var(--image-add);
-	color: var(--text);
-	font-weight: 600;
-	transition: all 0.3s;
-	border: 0;
-	cursor: pointer;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 30px;
+  background-color: var(--image-add);
+  color: var(--text);
+  font-weight: 600;
+  transition: all 0.3s;
+  border: 0;
+  cursor: pointer;
 
-	@include hover {
-		opacity: 0.8;
-	}
+  @include hover {
+    opacity: 0.8;
+  }
 }
 
 .addWrapper {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	margin-top: 24px;
-	gap: 20px;
-	max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 24px;
+  gap: 20px;
+  max-width: 600px;
 
-	@include vp-1023 {
-		max-width: 100%;
-	}
+  @include vp-1023 {
+    max-width: 100%;
+  }
 
-	input {
-		height: 48px;
-		border-radius: 15px;
-		outline: none;
-		border: 2px solid var(--border-input);
-		background-color: var(--bg-input);
-		color: var(--text-search);
-		padding-left: 20px;
-		font-size: 16px;
-		transition: all 0.3s;
+  input {
+    height: 48px;
+    border-radius: 15px;
+    outline: none;
+    border: 2px solid var(--border-input);
+    background-color: var(--bg-input);
+    color: var(--text-search);
+    padding-left: 20px;
+    font-size: 16px;
+    transition: all 0.3s;
 
-		@include hover-focus {
-			border: 2px solid #7a4ad8;
-			background-color: #794ad823;
-		}
-	}
+    @include hover-focus {
+      border: 2px solid #7a4ad8;
+      background-color: #794ad823;
+    }
+  }
 
-	textarea {
-		margin: 0;
-		padding: 0;
-		border-radius: 20px;
-		width: 100%;
-		outline: none;
-		border: 2px solid var(--border-input);
-		background-color: var(--bg-input);
-		color: var(--text-search);
-		padding-left: 20px;
-		font-size: 16px;
-		padding-top: 10px;
-		resize: none;
-		transition: all 0.3s;
+  textarea {
+    margin: 0;
+    padding: 0;
+    border-radius: 20px;
+    width: 100%;
+    outline: none;
+    border: 2px solid var(--border-input);
+    background-color: var(--bg-input);
+    color: var(--text-search);
+    padding-left: 20px;
+    font-size: 16px;
+    padding-top: 10px;
+    resize: none;
+    transition: all 0.3s;
 
-		@include hover-focus {
-			border: 2px solid #7a4ad8;
-			background-color: #794ad823;
-		}
-	}
+    @include hover-focus {
+      border: 2px solid #7a4ad8;
+      background-color: #794ad823;
+    }
+  }
 }
 
 .field {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 
-	label {
-		font-size: 12px;
-		margin-bottom: 7px;
-	}
+  label {
+    font-size: 12px;
+    margin-bottom: 7px;
+  }
 }
 
 .select {
-	display: flex;
-	flex-wrap: nowrap;
-	align-items: center;
-	cursor: pointer;
-	font-weight: 600;
-	color: #7a4ad8;
-	width: min-content;
-	transition: all 0.3s;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 600;
+  color: #7a4ad8;
+  width: min-content;
+  transition: all 0.3s;
 
-	@include hover {
-		opacity: 0.8;
-	}
+  @include hover {
+    opacity: 0.8;
+  }
 
-	p {
-		margin: 0;
-		margin-right: 5px;
-		white-space: nowrap;
-	}
+  p {
+    margin: 0;
+    margin-right: 5px;
+    white-space: nowrap;
+  }
 }
 
 .options {
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
-	margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 15px;
 
-	input {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		margin: -1px;
-		padding: 0;
-		overflow: hidden;
-		white-space: nowrap;
-		border: 0;
-		clip: rect(0 0 0 0);
-		-webkit-clip-path: inset(100%);
-		clip-path: inset(100%);
-	}
+  input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    border: 0;
+    clip: rect(0 0 0 0);
+    -webkit-clip-path: inset(100%);
+    clip-path: inset(100%);
+  }
 }
 
 .optionsClose {
-	display: none;
+  display: none;
 }
 
 input[type='checkbox'] {
-	@include focus {
-		& + .container__checkbox {
-			outline: none;
-			border-color: #ffffff;
-			background-color: rgba(255, 255, 255, 0);
+  @include focus {
+    &+.container__checkbox {
+      outline: none;
+      border-color: #ffffff;
+      background-color: rgba(255, 255, 255, 0);
 
-			&::after {
-				background-color: #ffffff;
-			}
-		}
-	}
+      &::after {
+        background-color: #ffffff;
+      }
+    }
+  }
 }
 
 .container__checkbox {
-	display: block;
-	border-radius: 2px;
-	width: 20px;
-	height: 20px;
-	background-color: #f2f2f2;
-	border: 1px solid #7a4ad8;
-	cursor: pointer;
-	transition: all 0.5s;
+  display: block;
+  border-radius: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: #f2f2f2;
+  border: 1px solid #7a4ad8;
+  cursor: pointer;
+  transition: all 0.5s;
 
-	&:disabled {
-		border-color: #ffffff;
-		background-color: #ffffff;
-	}
+  &:disabled {
+    border-color: #ffffff;
+    background-color: #ffffff;
+  }
 
-	@include hover {
-		outline: none;
-		border-color: #7a4ad8;
-		background-color: #7a4ad8;
-	}
+  @include hover {
+    outline: none;
+    border-color: #7a4ad8;
+    background-color: #7a4ad8;
+  }
 }
 
-input[type='checkbox']:checked + .container__checkbox {
-	background-color: #ffffff;
-	border: 1px solid #7a4ad8;
-	position: relative;
+input[type='checkbox']:checked+.container__checkbox {
+  background-color: #ffffff;
+  border: 1px solid #7a4ad8;
+  position: relative;
 
-	&:disabled {
-		border-color: #c2c2c2;
-		background-color: #c2c2c2;
+  &:disabled {
+    border-color: #c2c2c2;
+    background-color: #c2c2c2;
 
-		&::after {
-			background-color: #ffffff;
-		}
-	}
+    &::after {
+      background-color: #ffffff;
+    }
+  }
 
-	@include hover {
-		background-color: #7a4ad8;
-		border-color: #7a4ad8;
+  @include hover {
+    background-color: #7a4ad8;
+    border-color: #7a4ad8;
 
-		&::after {
-			background-color: #ffffff;
-		}
-	}
+    &::after {
+      background-color: #ffffff;
+    }
+  }
 
-	&::after {
-		content: '';
-		position: absolute;
-		width: 12px;
-		height: 10px;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		mask-image: url('../../../img/icons/icon-check.svg');
-		background-color: #7a4ad8;
-		mask-repeat: no-repeat;
-		mask-size: contain;
-	}
+  &::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    mask-image: url('../../../img/icons/icon-check.svg');
+    background-color: #7a4ad8;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+  }
 }
 
 .disabled {
-	background-color: #c2c2c2 !important;
-	border-color: #c2c2c2 !important;
-	pointer-events: none;
+  background-color: #c2c2c2 !important;
+  border-color: #c2c2c2 !important;
+  pointer-events: none;
 }
 
 .option {
-	label {
-		display: flex;
-		align-items: center;
-		gap: 5px;
-	}
+  label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
 }
 
 .addLink {
-	top: 25px;
-	right: 0;
-	background-color: #7a4ad8;
-	padding: 0 13px;
-	height: 48px;
-	border-radius: 13px;
-	font-size: 16px;
-	border: 0;
-	align-self: flex-end;
-	margin: 10px 0;
-	color: #ffffff;
-	cursor: pointer;
-	transition: all 0.3s;
+  top: 25px;
+  right: 0;
+  background-color: #7a4ad8;
+  padding: 0 13px;
+  height: 48px;
+  border-radius: 13px;
+  font-size: 16px;
+  border: 0;
+  align-self: flex-end;
+  margin: 10px 0;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s;
 
-	@include hover-focus {
-		opacity: 0.8;
-	}
+  @include hover-focus {
+    opacity: 0.8;
+  }
 }
 
 .video {
-	width: 100%;
-	height: 100%;
-	object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }

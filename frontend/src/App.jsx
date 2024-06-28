@@ -31,6 +31,8 @@ import {
   Subs,
   SuccessfulPage,
   ErrorPage,
+  EditImg,
+  Buffer,
 } from "@pages";
 
 import { useNavigate } from "react-router-dom";
@@ -61,7 +63,7 @@ function App() {
           <Route path="/login/reg" element={<Registration />} />
           <Route path="/profile/:id" element={<UserProfile myId={myId} />} />
           <Route path="/posts/:id" element={<FullPost />} />
-          <Route path="/post-add" element={<AddPost />} />
+          <Route path="/post-add" element={<Buffer />} />
           <Route path="/posts/:id/edit" element={<AddPost />} />
           <Route path="/settings" element={<SettingsProfile />}>
             <Route path="edit-profile" element={<EditProfile />} />
@@ -83,6 +85,8 @@ function App() {
           <Route path="/subs" element={<Subs />} />
           <Route path="/subs/successful" element={<SuccessfulPage />} />
           <Route path="/error" element={<ErrorPage />} />
+
+          <Route path="/edit-img" element={<EditImg />} />
         </Routes>
       </div>
     </>
