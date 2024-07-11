@@ -22,13 +22,13 @@ const Filters = memo(
     const [currentFilter, setCurrentFIlter] = useState("");
     const [currentSymbol, setCurrentSymbol] = useState("");
 
-    const updateSlider = useCallback((val) => {
+    const updateSlider = (val) => {
       if (val !== "") {
         setSliderValues(val);
       }
-    }, []);
+    };
 
-    const updateValue = useCallback((filters, filterName, newValue, symbol) => {
+    const updateValue = (filters, filterName, newValue, symbol) => {
       const newFilters = filters.map((filter) =>
         filter.includes(filterName)
           ? filter.replace(/\(([^)]+)\)/, `(${newValue}${symbol})`)
@@ -36,12 +36,12 @@ const Filters = memo(
       );
       setFilterOld(newFilters);
       // console.log(filters, filterOld, filterName, newValue, newFilters);
-    }, []);
+    };
 
-    const onUpdate = useCallback((index) => {
+    const onUpdate = (index) => {
       setValue(Number(index));
       updateValue(filterOld, currentFilter, Number(index), currentSymbol);
-    }, []);
+    };
 
     useEffect(() => {
       console.log(currentFilter);
@@ -51,56 +51,58 @@ const Filters = memo(
       <div className={styles.root}>
         <div className={styles.header}>
           <span
-            onClick={useCallback(() => {
+            onClick={() => {
               setIsFiltersOpen(false);
               setIsSlider(false);
-            }, [])}
+            }}
             className={styles.backBtn}
           >
             <FontAwesomeIcon icon={faChevronLeft} />
           </span>
           <h3>Фильтры</h3>
         </div>
-        <div className={styles.filtersWrap}>
-          {filters.map((item, i) => (
-            <div
-              onClick={useCallback(() => {
-                setIsSlider(false);
-                updateSlider(item.max);
-                checkFilter(
-                  `${item.value}(${item.max}${item.symbol})`,
-                  item.value,
-                );
-                setCurrentFIlter(item.value);
-                setCurrentSymbol(item.symbol);
-              }, [])}
-              style={{ borderColor: item.on ? "#7a4ad8" : "transparent" }}
-              key={i}
-              className={styles.filter}
-            >
-              <img
-                src={src}
-                alt="filter"
-                style={{
-                  filter: `${item.value}(${item.preview}${item.symbol})`,
+        <div className={styles.wrapper}>
+          <div className={styles.filtersWrap}>
+            {filters.map((item, i) => (
+              <div
+                onClick={() => {
+                  setIsSlider(false);
+                  updateSlider(item.max);
+                  checkFilter(
+                    `${item.value}(${item.max}${item.symbol})`,
+                    item.value,
+                  );
+                  setCurrentFIlter(item.value);
+                  setCurrentSymbol(item.symbol);
                 }}
+                style={{ borderColor: item.on ? "#7a4ad8" : "transparent" }}
+                key={i}
+                className={styles.filter}
+              >
+                <img
+                  src={src}
+                  alt="filter"
+                  style={{
+                    filter: `${item.value}(${item.preview}${item.symbol})`,
+                  }}
+                />
+                <span>{item.name}</span>
+              </div>
+            ))}
+          </div>
+          <div className={styles.filterDepth}>
+            {isSlider && (
+              <Nouislider
+                range={{
+                  min: 0,
+                  max: sliderValues !== 0 && Number(sliderValues),
+                }}
+                start={Number(sliderValues)}
+                connect={[true, false]}
+                onSlide={(index) => onUpdate(index)}
               />
-              <span>{item.name}</span>
-            </div>
-          ))}
-        </div>
-        <div className={styles.filterDepth}>
-          {isSlider && (
-            <Nouislider
-              range={{
-                min: 0,
-                max: sliderValues !== 0 && Number(sliderValues),
-              }}
-              start={Number(sliderValues)}
-              connect={[true, false]}
-              onSlide={useCallback((index) => onUpdate(index), [])}
-            />
-          )}
+            )}
+          </div>
         </div>
       </div>
     );

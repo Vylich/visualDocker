@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if ! [[ -f swarm.$1.yml ]]
+  then
+    echo "Unknown swarm $1"
+    exit 1
+  fi
+
+./scripts/swarm_init $1
+./scripts/build_images
+
+echo "Deploy swarm"
+docker stack deploy -c ./swarm.$1.yml visual 

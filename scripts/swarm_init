@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [[ ! $(docker info -f '{{.Swarm.LocalNodeState}}' | grep inactive) ]]
+then
+    echo "Swarm is active"
+else
+    echo "Swarm initialization"
+    docker swarm init
+    docker swarm update --task-history-limit=1
+fi
+
+
+if [[ ! $(docker container list | grep portainer) ]]
+then 
+    if ! [[ -f portainer-$1.yml ]]
+    then
+        echo "Unknown portainer deploy"
+        exit 1
+    fi
+    
+    echo "Install $1 portainer"
+    docker stack deploy -c ./portainer-$1-agent-stack.yml portainer
+fi 
+
+if [[ ! $(docker container list | grep registry) ]]
+then 
+    echo "Install registry"
+    docker service create --name registry --publish published=5000,target=5000 registry:2
+fi

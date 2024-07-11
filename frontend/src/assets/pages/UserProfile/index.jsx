@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./UserProfile.module.scss";

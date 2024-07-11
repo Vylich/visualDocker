@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo, useCallback } from "react";
+import React, { useState, useEffect, memo } from "react";
 import styles from "./ThemeMode.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
@@ -6,10 +6,10 @@ import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 const ThemeMode = memo(() => {
   const [theme, setTheme] = useState("light");
 
-  const handleToggle = useCallback(() => {
+  const handleToggle = () => {
     localStorage.setItem("theme", theme === "light" ? "dark" : "light");
     setTheme(theme === "light" ? "dark" : "light");
-  }, []);
+  };
 
   useEffect(() => {
     if (localStorage.getItem("theme") === null) {

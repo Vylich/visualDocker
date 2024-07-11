@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "Building images"
+docker build --tag 127.0.0.1:5000/api:latest ./api && docker build --tag 127.0.0.1:5000/frontend:latest ./frontend
+docker push 127.0.0.1:5000/api:latest && docker push 127.0.0.1:5000/frontend:latest

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "Update service $1"
+docker service update $1
